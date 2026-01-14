@@ -1,0 +1,1261 @@
+prediction_date,product_type,predicted_price,confidence,model_name,status
+2026-02-09,Huile d'olive,3985,29,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2392,26,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1902,31,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1910,89,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1157,08,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3321,32,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2880,85,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1731,13,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1288,11,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1385,29,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,4060,60,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2519,46,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1823,59,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1383,81,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1254,40,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3967,52,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2287,41,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1538,38,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1611,99,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,960,15,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3420,02,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2539,57,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1864,07,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1160,50,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1137,21,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3298,44,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2317,94,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1676,76,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1302,65,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1371,02,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3758,70,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2801,39,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1986,77,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1508,41,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1055,92,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3453,08,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2026,96,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1500,78,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1494,63,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1293,73,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3347,75,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2175,88,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1676,20,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1660,59,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1142,08,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3821,63,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2257,15,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1782,89,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1369,27,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1112,48,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2990,07,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2450,96,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2125,97,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1216,84,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1327,35,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,4008,24,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2616,26,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1508,17,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1274,89,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1309,29,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3369,53,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2558,82,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1517,25,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1255,85,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1498,77,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,4255,07,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2168,04,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1758,19,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1365,74,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1154,14,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3378,50,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2201,51,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1487,34,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1569,61,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1310,31,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2994,40,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2769,46,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1409,49,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1198,74,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1025,76,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3490,62,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2502,74,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2036,95,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1287,62,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1207,53,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3034,56,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2303,57,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1460,94,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1272,76,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1085,56,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3855,35,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,1857,66,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2039,80,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1435,73,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1023,47,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3283,73,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2857,58,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1353,61,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1438,05,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1078,67,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,4109,74,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2000,85,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2012,37,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1453,21,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1214,68,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2819,08,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2137,31,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1657,54,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1781,52,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1156,84,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,4341,55,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2607,07,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1579,43,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1435,74,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1436,99,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2870,68,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2356,45,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1754,26,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1753,18,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1276,01,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2975,84,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2429,05,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1808,69,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1398,86,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1016,51,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3356,93,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2578,22,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2108,28,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1783,28,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1065,01,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3598,15,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2230,26,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1640,89,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1368,32,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1192,25,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3818,90,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2602,88,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1481,37,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1538,91,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1233,58,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3604,27,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2238,96,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1590,43,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1675,91,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,931,23,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3148,36,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2384,30,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1443,29,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1500,51,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1120,25,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3087,25,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2390,78,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1322,64,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1146,45,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,992,02,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3544,84,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,1903,92,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1697,54,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1481,20,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1070,50,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3259,26,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,3016,98,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1514,84,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1513,99,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1143,10,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3854,07,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2439,64,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1807,25,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1762,19,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1231,97,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3990,86,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2059,85,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1826,51,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1400,97,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1108,78,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3854,51,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2305,03,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1812,99,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1570,45,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1184,84,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,4172,94,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2912,20,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1716,78,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1643,73,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1214,13,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3809,09,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,1966,21,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1849,79,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1281,80,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1318,89,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2821,87,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2496,42,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1999,87,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1634,10,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1148,67,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2924,61,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2502,00,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1926,15,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1543,41,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1176,92,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3269,78,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2594,11,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1952,36,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1750,75,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1127,30,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3695,13,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2715,99,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1808,95,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1637,20,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1024,50,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3152,43,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2414,73,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1583,46,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1411,54,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1023,22,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3166,97,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2442,48,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1449,50,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1582,61,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1049,11,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3654,49,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2620,47,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1639,10,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1500,64,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1062,90,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3476,08,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2632,45,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1720,26,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1531,83,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1317,50,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3119,16,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2356,52,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1885,62,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1609,29,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1164,68,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3443,86,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2696,10,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1519,15,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1668,89,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1248,85,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3645,99,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2407,87,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1674,93,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1479,42,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1354,20,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3823,88,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2600,88,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2206,07,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1487,89,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1437,49,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,4097,03,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2102,26,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1656,26,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1754,29,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1203,87,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3468,48,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2527,73,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1665,20,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1505,21,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,998,69,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3256,47,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2858,89,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1945,50,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1533,29,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1068,56,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2932,12,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2557,69,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1603,67,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1468,18,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,962,40,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3312,92,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,1758,07,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1499,23,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1302,26,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1267,39,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3424,49,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2065,72,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1623,20,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1665,41,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1148,52,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3575,81,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2197,12,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2144,55,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1439,18,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1116,43,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3335,30,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2360,45,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2101,83,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1303,20,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1275,34,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3307,77,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2207,55,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2044,59,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1536,47,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1361,27,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,4041,55,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2323,04,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1651,02,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1256,22,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1266,13,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,4443,18,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2579,39,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1953,70,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1631,02,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1342,71,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2992,60,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2461,32,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1827,84,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1506,95,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1215,90,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3055,26,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2275,41,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1585,45,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1460,69,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1437,86,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,4027,19,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2185,35,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1655,32,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1504,14,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1033,05,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3278,02,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2211,34,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1460,11,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1541,19,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1203,89,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2767,63,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2366,48,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1386,45,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1536,82,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1004,62,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3405,71,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2121,17,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2031,93,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1742,25,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,917,21,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2863,06,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2927,84,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1563,83,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1748,35,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1233,56,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3465,81,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2478,32,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1580,12,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1786,70,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1057,52,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3476,49,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2233,69,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1734,96,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1466,88,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1177,43,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3094,15,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2383,00,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1563,39,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1747,23,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1133,94,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2746,44,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2657,61,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2203,90,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1609,20,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1405,36,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3856,48,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2245,18,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2278,02,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1414,05,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1102,15,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,4060,85,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2206,71,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1756,69,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1540,30,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1375,89,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3474,51,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2335,01,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2098,21,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1656,50,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1284,00,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2839,16,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2610,93,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1804,46,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1694,06,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1050,41,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2995,70,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,1904,83,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2090,25,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1424,41,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1343,55,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3216,19,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2647,76,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1488,66,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1130,66,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1344,37,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2477,40,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2221,53,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1500,52,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1503,47,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1103,69,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3548,23,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2466,89,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1451,74,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1326,82,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1246,74,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3402,14,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,1989,90,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1619,80,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1411,56,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1357,57,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2835,26,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2495,88,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2118,11,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1152,34,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1062,24,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3823,74,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2904,84,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1485,48,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1495,26,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1078,27,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3937,44,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2494,96,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2126,58,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1320,42,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1317,77,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3231,41,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2245,25,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1755,33,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1410,61,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1266,71,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3886,75,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2554,02,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2139,02,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1342,54,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1174,42,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3804,74,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2631,87,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1782,85,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1335,07,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1268,64,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3111,41,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2031,62,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1841,78,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1567,73,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1357,64,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2741,72,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2396,42,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1589,45,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1434,55,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1389,65,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2746,33,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2768,30,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1432,25,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1424,31,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1018,56,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3592,54,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2168,37,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1799,32,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1295,42,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,912,99,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3133,77,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2177,43,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1699,81,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1199,40,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1172,75,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3142,38,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2745,56,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1560,76,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1778,57,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1231,14,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3712,12,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2128,88,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2257,53,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1787,69,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1232,58,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3458,12,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2307,61,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1905,59,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1551,37,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1231,40,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3553,31,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2585,32,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1750,06,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1677,85,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1351,01,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3406,58,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2450,18,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1574,13,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1330,68,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1300,82,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3110,00,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2128,96,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1479,96,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1505,12,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1226,34,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3232,93,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,3010,95,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1917,02,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1475,44,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1292,37,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,4170,60,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2373,95,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1695,71,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1176,64,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1141,20,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3280,19,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2405,53,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1681,59,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1431,75,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1267,02,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3133,56,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2283,54,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1761,33,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1538,98,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1249,07,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3203,40,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2473,23,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1505,13,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1414,54,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1040,65,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3357,55,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2198,05,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1357,38,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1309,05,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1097,67,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3374,93,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2539,65,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1802,75,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1344,95,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1149,57,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3538,14,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2179,82,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1751,82,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1272,81,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1150,05,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2763,65,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2804,69,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1893,21,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1691,13,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1291,93,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3865,85,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2612,77,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2212,60,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1247,48,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1256,87,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3931,30,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2240,43,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2256,91,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1635,23,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1588,82,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2919,13,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2989,00,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2061,66,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1472,03,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1446,46,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3603,50,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2562,76,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1918,55,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1261,71,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1094,14,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3230,63,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2477,14,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1778,07,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1438,44,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1166,02,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3151,30,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2235,54,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1704,18,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1354,87,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1216,12,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3083,88,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2819,74,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2010,75,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1295,15,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1162,09,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3087,57,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2849,41,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1660,45,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1349,77,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1097,29,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3416,03,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2422,54,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1672,26,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1492,97,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,994,51,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2985,74,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2381,64,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1767,85,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1497,01,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1049,02,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3279,05,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2525,41,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1857,34,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1843,84,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,902,53,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3662,49,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2185,58,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1775,43,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1456,71,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1115,94,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3550,16,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2855,10,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1765,87,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1461,48,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1511,97,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3926,72,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2123,84,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1748,98,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1825,71,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1201,67,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2960,05,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2047,94,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1766,91,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1521,80,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1336,11,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3445,20,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2620,64,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1890,68,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1340,48,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1081,12,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,4028,26,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2480,33,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1744,42,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1570,00,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,943,77,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3117,34,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,1930,26,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1439,45,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1622,40,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1233,31,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3062,78,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2060,82,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1940,77,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1320,70,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,976,03,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2786,89,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2053,77,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2039,74,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1237,93,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,948,45,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2610,41,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,1940,89,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1480,24,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1424,08,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1125,14,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3536,84,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2295,33,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1588,23,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1580,21,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1174,22,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3119,89,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2693,22,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1684,85,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1403,94,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1118,01,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3615,97,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2107,84,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1579,43,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1851,81,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1096,45,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3049,59,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2621,89,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1552,51,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1342,27,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1279,16,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3735,20,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,3089,74,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1915,93,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1295,05,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1174,79,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3789,73,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2501,82,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1786,91,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1497,48,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1011,39,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3459,91,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2742,52,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2027,54,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1467,70,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1289,76,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3253,95,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2597,46,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1772,99,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1407,64,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1203,81,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2881,29,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2078,90,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1622,00,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1398,55,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1299,02,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2665,07,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2986,28,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1387,67,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1140,45,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1087,85,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3316,11,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2365,62,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1659,59,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1197,29,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1055,41,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3460,23,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2029,69,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1609,24,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1370,08,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1080,26,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3723,04,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2373,28,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1694,05,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1172,31,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1104,07,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3336,48,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2419,25,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1618,59,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1256,35,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,956,83,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3813,66,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2395,96,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1898,81,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1666,00,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1333,41,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3426,02,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2542,13,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1827,83,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1745,18,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1173,12,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3083,63,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2814,31,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2017,60,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1532,48,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1136,04,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3409,84,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2752,96,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1810,75,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1495,45,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1514,77,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3473,42,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2372,66,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1848,41,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1312,98,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1224,49,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3699,41,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2260,55,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1905,73,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1350,92,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1032,04,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3412,05,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2333,12,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1908,45,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1188,02,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1178,32,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2875,89,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2455,11,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1582,03,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1258,40,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1088,51,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2831,79,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,1905,47,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1531,19,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1097,29,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1104,92,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3107,19,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2267,67,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1759,76,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1754,51,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1014,11,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3180,94,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2322,28,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1542,80,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1389,24,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1241,00,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3734,63,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2121,34,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1621,47,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1702,38,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,957,48,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3418,80,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2564,82,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1709,16,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1288,18,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1275,13,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3516,66,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2434,04,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1730,39,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1482,42,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1165,34,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,4279,22,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2628,91,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1912,73,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1682,26,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1292,83,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,4005,87,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2207,45,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2222,20,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1374,71,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1129,67,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3247,17,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2428,55,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1476,33,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1628,94,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1235,14,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3321,96,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2014,30,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1815,57,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1836,26,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,928,74,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3034,67,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2028,90,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1675,23,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1270,00,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,901,02,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3044,45,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2218,33,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1630,53,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1423,96,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1124,34,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3003,78,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2612,64,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1841,78,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1534,85,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1016,43,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3160,55,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2604,25,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1528,22,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1418,20,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1150,15,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3711,75,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2729,09,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1641,04,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1398,58,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1238,20,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3812,02,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2464,48,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1795,91,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1605,49,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1335,99,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3342,32,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2848,12,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1654,77,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1310,27,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1256,69,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3167,39,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2177,67,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1602,60,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1201,34,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1199,59,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3285,27,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2598,09,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1861,18,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1810,64,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1234,46,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3805,10,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2275,77,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1693,16,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1647,52,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1089,13,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3300,09,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2477,97,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1758,74,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1473,25,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,982,18,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2978,35,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2047,70,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1587,19,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1336,16,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1292,19,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3200,16,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2710,24,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1613,58,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1413,21,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1014,94,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3710,10,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,1849,24,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1847,56,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1473,79,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1065,98,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2817,12,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2378,50,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1557,55,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1397,22,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,963,73,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3550,15,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2387,62,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1539,11,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1742,92,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1021,89,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3736,50,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2891,95,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1810,86,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1549,08,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1137,31,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2920,87,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2667,48,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1865,66,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1750,90,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1002,92,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3539,29,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2178,96,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1597,53,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1784,77,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1265,92,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3797,80,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2560,03,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2287,88,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1425,61,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1038,65,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3903,97,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,3040,91,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2075,25,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1685,70,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1304,14,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3303,92,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2830,47,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1673,37,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1423,62,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1201,88,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,4124,93,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2300,80,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1862,37,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1451,83,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1306,36,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3570,79,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2184,87,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1539,90,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1488,57,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1145,21,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3658,15,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2377,73,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1847,66,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1424,26,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1050,94,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3211,78,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2634,70,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1779,98,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1434,84,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1127,06,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3767,41,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2277,86,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1544,72,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1745,91,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1128,22,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3207,42,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2027,72,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1626,77,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1403,25,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1219,89,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2980,04,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2279,70,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1854,18,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1368,10,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1039,57,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3001,47,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,1973,15,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1712,00,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1447,19,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1097,79,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3712,96,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2370,19,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1731,24,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1764,86,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1275,09,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3710,56,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2419,39,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1537,79,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1632,76,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1223,37,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3937,79,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2749,57,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2005,38,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1550,30,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1120,79,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3721,48,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2157,18,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1823,37,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1539,92,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1129,84,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3442,06,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2117,49,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1485,85,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1530,14,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1309,19,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3520,29,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2186,81,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1912,15,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1510,81,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1129,56,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3287,68,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2552,13,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2033,76,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1301,02,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1267,12,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3649,63,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2695,00,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1477,75,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1338,98,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,955,61,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2642,30,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2090,60,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1577,48,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1286,47,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1149,74,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3422,95,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2242,75,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1475,49,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1604,90,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1086,91,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2941,24,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2635,55,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2069,18,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1403,61,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1313,04,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3366,85,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2248,03,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1880,66,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1439,78,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1008,56,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3367,17,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2619,84,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1794,77,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1576,78,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1045,39,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3894,02,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2762,38,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2104,50,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1655,95,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1019,49,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3486,04,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2284,77,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1810,64,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1461,85,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1027,40,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3479,25,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2581,96,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1578,98,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1557,49,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1240,95,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3692,79,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2930,19,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1947,83,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1604,93,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,939,45,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3365,05,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2215,63,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1460,53,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1369,61,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,976,70,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3666,02,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2297,93,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1413,87,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1599,32,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1121,43,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3124,82,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2218,25,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1722,65,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1552,05,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1309,55,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3306,43,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2227,62,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1535,37,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1428,26,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1143,71,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3252,17,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2266,82,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1656,43,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1463,77,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,962,67,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3334,50,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2019,90,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1782,96,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1559,73,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1244,96,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3272,95,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2292,77,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1932,89,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1745,70,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1027,88,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3625,23,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,3041,89,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2059,13,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1488,73,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1338,79,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3469,39,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2583,70,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2239,44,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1863,78,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1331,81,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3720,45,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2728,48,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1727,05,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1650,81,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1216,28,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,4436,82,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2655,44,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1753,48,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1576,09,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1483,00,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3656,76,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2085,43,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1785,35,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1541,07,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1217,31,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2818,37,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2380,77,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1781,71,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1487,88,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,940,04,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3185,92,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2490,09,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1639,00,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1648,72,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1080,48,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3457,24,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2102,11,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1527,00,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1304,38,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1254,47,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3106,42,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2333,04,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1307,26,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1180,20,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1382,95,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2763,45,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2626,32,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1849,57,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1411,68,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1052,35,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2756,86,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2572,03,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1743,96,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1108,11,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1234,84,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3169,17,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2606,57,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1786,54,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1735,93,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1398,08,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3818,04,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2554,54,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1570,33,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1740,09,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1131,61,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3732,01,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2920,41,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1776,48,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1471,28,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1025,63,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3026,25,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2764,32,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1815,34,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1605,37,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1221,22,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3635,83,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2466,65,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1661,50,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1523,35,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1226,67,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3309,66,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,3016,31,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1828,72,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1265,14,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1208,95,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3712,95,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2396,75,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1548,18,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1830,81,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1099,95,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3468,03,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2467,83,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1452,80,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1192,44,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,903,77,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3547,60,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2328,10,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1872,08,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1772,40,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1098,72,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3397,33,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,1869,17,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1410,71,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1384,00,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1071,05,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2906,26,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2500,55,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1421,85,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1156,66,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1046,17,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3370,70,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2040,13,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2072,40,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1364,16,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1124,24,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3402,26,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2247,73,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1719,40,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1226,14,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1177,35,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3111,55,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2795,33,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1437,97,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1622,25,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1390,54,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2777,33,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2471,72,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2026,94,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1520,68,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1208,77,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3684,64,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2281,98,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1807,62,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1793,93,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1035,18,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3428,12,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2470,31,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2211,59,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1271,63,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1529,37,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3147,32,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2435,37,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1498,73,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1325,62,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1276,41,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3441,46,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2170,91,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1889,90,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1610,85,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1175,20,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2947,58,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,1949,02,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1313,15,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1696,57,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1111,21,0,88,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2552,00,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,1995,94,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1468,28,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1535,46,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1075,90,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3967,41,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2279,13,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1908,08,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1448,57,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1112,14,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,2620,72,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2315,04,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1489,54,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1686,31,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1210,72,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3574,91,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2189,62,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1557,36,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1531,50,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1117,10,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3611,30,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,3081,80,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1735,28,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1492,37,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1070,01,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3555,74,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2407,60,0,85,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,1841,24,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1197,57,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1483,05,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Huile d'olive,3738,91,0,93,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Dattes,2818,38,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Agrumes,2010,59,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Blé,1828,30,0,90,DJL-Price-Predictor,✅ COMPLETED
+2026-02-09,Tomates,1148,11,0,93,DJL-Price-Predictor,✅ COMPLETED
