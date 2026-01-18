@@ -8,7 +8,12 @@ import tn.sesame.economics.exception.ModelException;
 import tn.sesame.economics.exception.PredictionException;
 import tn.sesame.economics.util.DataLoader;
 import tn.sesame.economics.integration.TinyLlamaService;
+import tn.sesame.economics.ai.DJLRealModel;
+import tn.sesame.economics.ai.SimpleLinearModel;
+import tn.sesame.economics.ai.SimpleLinearPredictionService;
+import tn.sesame.economics.ai.ONNXRuntimeService;
 
+import java.util.Random;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.logging.Level;
@@ -17,7 +22,7 @@ import java.util.stream.Collectors;
 
 /**
  * Classe principale de l'application d'intelligence économique tunisienne.
- * Orchestre tous les services d'IA et fournit une interface utilisateur en ligne de commande.
+ * Utilise DJL Réel pour les prédictions deep learning.
  *
  * @since Java 25
  */
@@ -44,6 +49,12 @@ public class Main {
             // Initialisation des services
             initializeServices();
 
+            // Message spécial pour DJL Réel
+            System.out.println("\n" + "🎉" + "=".repeat(58) + "🎉");
+            System.out.println("  🚀 DJL RÉEL ACTIVÉ - MODÈLE DEEP LEARNING EN FONCTIONNEMENT");
+            System.out.println("  📊 Prêt à analyser vos données CSV avec un vrai réseau de neurones");
+            System.out.println("🎉" + "=".repeat(58) + "🎉\n");
+
             // Menu principal
             boolean running = true;
             while (running) {
@@ -54,11 +65,12 @@ public class Main {
                     case 1 -> analyzeHistoricalData();
                     case 2 -> performCustomAnalysis();
                     case 3 -> trainAIModel();
-                    case 4 -> generateMarketReport();      // Utilisera TinyLlama
-                    case 5 -> generateExecutiveSummary();  // Nouvelle option
-                    case 6 -> testTinyLlama();             // Test de connexion
+                    case 4 -> generateMarketReport();
+                    case 5 -> generateExecutiveSummary();
+                    case 6 -> testTinyLlama();
                     case 7 -> displaySystemInfo();
                     case 8 -> exportPredictions();
+                    case 9 -> changeAIModel();
                     case 0 -> {
                         running = false;
                         cleanupServices();
@@ -91,11 +103,11 @@ public class Main {
     }
 
     /**
-     * Initialise les services d'IA.
+     * Initialise les services d'IA avec DJL Réel par défaut.
      */
     private static void initializeAIServices() throws ModelException {
         System.out.println("\n=== SÉLECTION DU MODÈLE D'IA ===");
-        System.out.println("1. DJL (Deep Learning - PyTorch)");
+        System.out.println("1. DJL Réel (Deep Learning - Modèle principal)");
         System.out.println("2. ONNX Runtime (Optimisé production)");
         System.out.println("3. Modèle simple (régression linéaire)");
         System.out.println("4. Utiliser TinyLlama pour les rapports");
@@ -105,10 +117,6 @@ public class Main {
         BaseAIModel predictionService;
 
         switch (aiModelChoice) {
-            case "1" -> {
-                System.out.println("Initialisation DJL (Deep Learning)...");
-                predictionService = new DJLPredictionService();
-            }
             case "2" -> {
                 System.out.println("Initialisation ONNX Runtime...");
                 predictionService = new ONNXRuntimeService();
@@ -122,20 +130,171 @@ public class Main {
                 predictionService = new SimpleLinearPredictionService(); // Fallback
             }
             default -> {
-                System.out.println("Utilisation de DJL par défaut...");
-                predictionService = new DJLPredictionService();
+                System.out.println("🚀 Initialisation DJL Réel (Deep Learning)...");
+                predictionService = new DJLRealModel();
             }
+        }
+
+        // Vérifier les fichiers CSV pour DJL Réel
+        if (predictionService instanceof DJLRealModel) {
+            System.out.println("\n🔍 Vérification des fichiers CSV pour l'entraînement...");
+            checkCSVFiles();
         }
 
         // Chargement du modèle
         LOGGER.info("Chargement du modèle: " + predictionService.getModelName());
-        predictionService.loadModel();
+        try {
+            predictionService.loadModel();
+            System.out.println("✅ Modèle chargé avec succès!");
+
+            // Afficher les informations du modèle si c'est DJL Réel
+            if (predictionService instanceof DJLRealModel) {
+                ((DJLRealModel) predictionService).printModelInfo();
+            }
+        } catch (ModelException e) {
+            System.out.println("❌ Erreur lors du chargement du modèle: " + e.getMessage());
+            System.out.println("🔄 Tentative avec ONNX Runtime comme fallback...");
+
+            // Fallback vers ONNX Runtime
+            predictionService = new ONNXRuntimeService();
+            predictionService.loadModel();
+            System.out.println("✅ ONNX Runtime chargé comme fallback");
+        }
 
         // Initialisation du service LLM
         LOGGER.info("Initialisation du service LLM (TinyLlama)...");
         ReportGenerator reportService = new TinyLlamaService();
 
         intelligenceService = new EconomicIntelligenceService(predictionService, reportService);
+    }
+
+    /**
+     * Permet de changer de modèle d'IA pendant l'exécution.
+     */
+    private static void changeAIModel() {
+        System.out.println("\n🔄 CHANGEMENT DE MODÈLE D'IA");
+        System.out.println("=".repeat(40));
+
+        String currentModelName = intelligenceService.getPredictionModel().getModelName();
+        System.out.println("Modèle actuel: " + currentModelName);
+
+        System.out.println("\nChoisissez le nouveau modèle:");
+        System.out.println("1. DJL Réel (Deep Learning - recommandé)");
+        System.out.println("2. ONNX Runtime");
+        System.out.println("3. Modèle simple (régression linéaire)");
+        System.out.println("4. Annuler");
+        System.out.print("Votre choix: ");
+
+        int choice = readIntInput("");
+
+        if (choice == 4) {
+            System.out.println("Changement annulé.");
+            return;
+        }
+
+        try {
+            // Décharger l'ancien modèle
+            System.out.println("\n🔧 Déchargement de l'ancien modèle...");
+            if (intelligenceService.getPredictionModel() != null) {
+                intelligenceService.getPredictionModel().unloadModel();
+            }
+
+            // Créer le nouveau modèle
+            BaseAIModel newModel;
+            switch (choice) {
+                case 2:
+                    newModel = new ONNXRuntimeService();
+                    System.out.println("🔄 Passage à ONNX Runtime...");
+                    break;
+                case 3:
+                    newModel = new SimpleLinearPredictionService();
+                    System.out.println("🔄 Passage au modèle simple...");
+                    break;
+                default:
+                    newModel = new DJLRealModel();
+                    System.out.println("🚀 Passage à DJL Réel...");
+                    if (newModel instanceof DJLRealModel) {
+                        checkCSVFiles();
+                    }
+                    break;
+            }
+
+            // Charger le nouveau modèle
+            newModel.loadModel();
+
+            // Mettre à jour le service
+            intelligenceService = new EconomicIntelligenceService(
+                    newModel,
+                    new TinyLlamaService()
+            );
+
+            System.out.println("✅ Modèle changé avec succès!");
+            System.out.println("Nouveau modèle: " + newModel.getModelName());
+
+        } catch (Exception e) {
+            System.out.println("❌ Erreur lors du changement: " + e.getMessage());
+            System.out.println("Retour au modèle précédent...");
+        }
+    }
+
+    /**
+     * Vérifie la présence des fichiers CSV nécessaires.
+     */
+    private static void checkCSVFiles() {
+        String[] requiredFiles = {
+                "exports_historical.csv",
+                "exports_training.csv",
+                "exports_test.csv"
+        };
+
+        System.out.println("📂 Vérification des fichiers CSV...");
+
+        boolean allFilesFound = true;
+        for (String file : requiredFiles) {
+            boolean found = false;
+            String foundLocation = "";
+
+            // Chercher dans plusieurs emplacements
+            String[] locations = {
+                    file,
+                    "data/" + file,
+                    "src/main/resources/data/" + file,
+                    "src/main/resources/" + file
+            };
+
+            for (String location : locations) {
+                java.nio.file.Path path = java.nio.file.Paths.get(location);
+                if (java.nio.file.Files.exists(path)) {
+                    found = true;
+                    foundLocation = location;
+                    break;
+                }
+            }
+
+            if (found) {
+                System.out.println("✅ " + file + " trouvé: " + foundLocation);
+
+                // Afficher le nombre de lignes si possible
+                try {
+                    List<String> lines = java.nio.file.Files.readAllLines(java.nio.file.Paths.get(foundLocation));
+                    int dataLines = Math.max(0, lines.size() - 1); // Exclure l'en-tête
+                    System.out.println("   📊 " + dataLines + " enregistrements");
+                } catch (Exception e) {
+                    // Ignorer l'erreur de lecture
+                }
+            } else {
+                System.out.println("❌ " + file + " NON TROUVÉ");
+                System.out.println("   Placez-le dans: src/main/resources/data/ ou data/");
+                allFilesFound = false;
+            }
+        }
+
+        if (!allFilesFound) {
+            System.out.println("\n⚠️  ATTENTION: Certains fichiers CSV sont manquants.");
+            System.out.println("DJL Réel va générer des données d'entraînement synthétiques.");
+            System.out.println("Appuyez sur Entrée pour continuer...");
+            scanner.nextLine();
+        }
     }
 
     private static void generateExecutiveSummary() {
@@ -169,7 +328,6 @@ public class Main {
             List<PricePrediction> predictions = intelligenceService.analyzeExports(data);
 
             // Générer le résumé exécutif
-            // Use the intelligence service's method instead
             String report = intelligenceService.generateIntelligenceReport(predictions);
 
             System.out.println("\n" + "=".repeat(60));
@@ -199,8 +357,14 @@ public class Main {
      * Affiche le menu principal amélioré.
      */
     private static void displayMainMenu() {
+        String currentModel = "DJL Simulé";
+        if (intelligenceService != null && intelligenceService.getPredictionModel() != null) {
+            currentModel = intelligenceService.getPredictionModel().getModelName();
+        }
+
         System.out.println("\n" + "=".repeat(60));
         System.out.println("           🤖 INTELLIGENCE ÉCONOMIQUE TUNISIENNE");
+        System.out.println("           Modèle actuel: " + currentModel);
         System.out.println("=".repeat(60));
         System.out.println("1.  Analyser les données historiques");
         System.out.println("2.  Effectuer une analyse personnalisée");
@@ -210,6 +374,7 @@ public class Main {
         System.out.println("6.  Tester TinyLlama");
         System.out.println("7.  Informations système");
         System.out.println("8.  Exporter les prédictions");
+        System.out.println("9.  Changer de modèle d'IA");
         System.out.println("0.  Quitter");
         System.out.print("Votre choix: ");
     }
@@ -314,7 +479,6 @@ public class Main {
 
                 System.out.println("\n🧪 Test 3: Rapport formaté (Markdown)");
                 System.out.println("-".repeat(30));
-                // Use the enum here
                 String formatted = tinyLlama.generateReport(testData, ReportGenerator.ReportFormat.MARKDOWN);
                 System.out.println(formatted.substring(0, Math.min(150, formatted.length())) + "...");
             }
@@ -332,20 +496,20 @@ public class Main {
         System.out.println("\n🔍 Recherche du fichier: " + fileName);
 
         // First, try to load directly without any path prefix
-        System.out.println("Essai direct: " + fileName + "... ");
+        System.out.print("Essai direct: " + fileName + "... ");
         try {
             List<ExportData> directData = DataLoader.loadCSVData(fileName);
             if (!directData.isEmpty()) {
-                System.out.println("SUCCÈS DIRECT (" + directData.size() + " enregistrements)");
+                System.out.println("SUCCÈS (" + directData.size() + " enregistrements)");
                 return directData;
             }
         } catch (Exception e) {
-            System.out.println("ÉCHEC DIRECT");
+            System.out.println("ÉCHEC");
         }
 
         // List of possible locations (most common first)
         String[] possiblePaths = {
-                fileName,  // Just the filename (already tried, but keep for consistency)
+                fileName,
                 "data/" + fileName,
                 "src/main/resources/data/" + fileName,
                 "src/main/resources/" + fileName,
@@ -386,7 +550,7 @@ public class Main {
     private static void analyzeHistoricalData() {
         LOGGER.info("Analyse des données historiques CSV...");
 
-        System.out.println("\n=== ANALYSE DES DONNÉES HISTORIQUES (2005-2025) ===");
+        System.out.println("\n=== ANALYSE DES DONNÉES HISTORIQUES ===");
         System.out.println("1. Analyser exports_historical.csv (complet)");
         System.out.println("2. Analyser exports_training.csv (entraînement)");
         System.out.println("3. Analyser exports_test.csv (test)");
@@ -412,6 +576,12 @@ public class Main {
         // Afficher les statistiques
         DataLoader.displayDatasetStatistics(historicalData);
 
+        // Vérifier si on utilise DJL Réel
+        if (intelligenceService.getPredictionModel() instanceof DJLRealModel) {
+            System.out.println("\n🎯 MODÈLE DJL RÉEL DÉTECTÉ");
+            System.out.println("Les prédictions utiliseront un réseau de neurones entraîné.");
+        }
+
         // Menu d'analyse avancée
         System.out.println("\n=== OPTIONS D'ANALYSE ===");
         System.out.println("1. Faire des prédictions sur ces données");
@@ -431,10 +601,23 @@ public class Main {
     }
 
     /**
-     * Fait des prédictions sur les données chargées.
+     * Fait des prédictions sur les données chargées avec DJL Réel.
      */
     private static void makePredictionsOnData(List<ExportData> data) {
         LOGGER.info("Prédictions sur " + data.size() + " enregistrements...");
+
+        // Afficher le modèle utilisé
+        boolean isDJLReal = intelligenceService.getPredictionModel() instanceof DJLRealModel;
+
+        System.out.println("\n" + "=".repeat(60));
+        if (isDJLReal) {
+            System.out.println("🎯 PRÉDICTIONS AVEC DJL RÉEL");
+            System.out.println("Modèle: Deep Learning (MLP 7→12→8→4→1)");
+        } else {
+            System.out.println("🔮 PRÉDICTIONS");
+            System.out.println("Modèle: " + intelligenceService.getPredictionModel().getModelName());
+        }
+        System.out.println("=".repeat(60));
 
         try {
             List<PricePrediction> predictions = intelligenceService.analyzeExports(data);
@@ -442,8 +625,8 @@ public class Main {
             // Afficher les résultats
             displayPredictions(predictions);
 
-            // Statistiques
-            displayStatistics(predictions);
+            // Statistiques améliorées
+            displayEnhancedStatistics(predictions, isDJLReal);
 
             // Demander si on veut sauvegarder
             System.out.print("\n💾 Voulez-vous exporter ces prédictions en CSV? (o/n): ");
@@ -453,6 +636,19 @@ public class Main {
                 String fileName = "predictions_" + LocalDate.now() + ".csv";
                 DataLoader.exportPredictionsToCSV(predictions, fileName);
                 System.out.println("✅ Prédictions exportées dans: " + fileName);
+
+                // Afficher un extrait du fichier
+                try {
+                    List<String> lines = java.nio.file.Files.readAllLines(java.nio.file.Paths.get(fileName));
+                    System.out.println("\n📄 Extrait du fichier exporté:");
+                    System.out.println("-".repeat(80));
+                    lines.stream().limit(5).forEach(System.out::println);
+                    if (lines.size() > 5) {
+                        System.out.println("... et " + (lines.size() - 5) + " lignes supplémentaires");
+                    }
+                } catch (Exception e) {
+                    // Ignorer
+                }
             }
 
         } catch (PredictionException e) {
@@ -466,6 +662,114 @@ public class Main {
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Erreur inattendue: " + e.getMessage(), e);
             System.err.println("Erreur: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Affiche des statistiques améliorées pour DJL Réel.
+     */
+    private static void displayEnhancedStatistics(List<PricePrediction> predictions, boolean isDJLReal) {
+        if (predictions.isEmpty()) {
+            System.out.println("Aucune statistique disponible.");
+            return;
+        }
+
+        System.out.println("\n📊 STATISTIQUES AVANCÉES");
+        if (isDJLReal) {
+            System.out.println("(Modèle DJL Réel - Deep Learning)");
+        }
+        System.out.println("=".repeat(50));
+
+        // Statistiques de base
+        double avgPrice = predictions.stream()
+                .mapToDouble(PricePrediction::predictedPrice)
+                .average()
+                .orElse(0.0);
+
+        double maxPrice = predictions.stream()
+                .mapToDouble(PricePrediction::predictedPrice)
+                .max()
+                .orElse(0.0);
+
+        double minPrice = predictions.stream()
+                .mapToDouble(PricePrediction::predictedPrice)
+                .min()
+                .orElse(0.0);
+
+        double avgConfidence = predictions.stream()
+                .mapToDouble(PricePrediction::confidence)
+                .average()
+                .orElse(0.0);
+
+        // Calcul de la variance
+        double variance = predictions.stream()
+                .mapToDouble(p -> Math.pow(p.predictedPrice() - avgPrice, 2))
+                .average()
+                .orElse(0.0);
+        double stdDev = Math.sqrt(variance);
+
+        System.out.printf("• Nombre de prédictions: %d%n", predictions.size());
+        System.out.printf("• Prix moyen prédit: %.2f TND/tonne%n", avgPrice);
+        System.out.printf("• Écart-type: %.2f TND/tonne%n", stdDev);
+        System.out.printf("• Fourchette: %.2f - %.2f TND/tonne%n", minPrice, maxPrice);
+        System.out.printf("• Confiance moyenne: %.2f%%%n", avgConfidence * 100);
+
+        // Analyse par produit
+        System.out.println("\n📦 ANALYSE PAR PRODUIT:");
+        Map<ProductType, List<PricePrediction>> byProduct = predictions.stream()
+                .collect(Collectors.groupingBy(PricePrediction::productType));
+
+        byProduct.forEach((product, productPredictions) -> {
+            double productAvg = productPredictions.stream()
+                    .mapToDouble(PricePrediction::predictedPrice)
+                    .average()
+                    .orElse(0.0);
+
+            double productConfidence = productPredictions.stream()
+                    .mapToDouble(PricePrediction::confidence)
+                    .average()
+                    .orElse(0.0);
+
+            System.out.printf("  • %-15s: %5.0f TND (confiance: %5.1f%%, %d prédictions)%n",
+                    product.getFrenchName(),
+                    productAvg,
+                    productConfidence * 100,
+                    productPredictions.size());
+        });
+
+        // Distribution des confiances
+        long highConfidence = predictions.stream()
+                .filter(p -> p.confidence() >= 0.8)
+                .count();
+
+        long mediumConfidence = predictions.stream()
+                .filter(p -> p.confidence() >= 0.6 && p.confidence() < 0.8)
+                .count();
+
+        long lowConfidence = predictions.stream()
+                .filter(p -> p.confidence() < 0.6)
+                .count();
+
+        System.out.println("\n🎯 DISTRIBUTION DES CONFIANCES:");
+        System.out.printf("  • Haute confiance (≥80%%): %d (%.1f%%)%n",
+                highConfidence, (highConfidence * 100.0 / predictions.size()));
+        System.out.printf("  • Confiance moyenne (60-80%%): %d (%.1f%%)%n",
+                mediumConfidence, (mediumConfidence * 100.0 / predictions.size()));
+        System.out.printf("  • Basse confiance (<60%%): %d (%.1f%%)%n",
+                lowConfidence, (lowConfidence * 100.0 / predictions.size()));
+
+        // Avis sur la qualité des prédictions
+        System.out.println("\n💡 INTERPRÉTATION:");
+        if (isDJLReal) {
+            System.out.println("✅ Prédictions basées sur un modèle Deep Learning entraîné");
+        }
+
+        if (avgConfidence >= 0.8) {
+            System.out.println("✅ Excellente qualité des prédictions");
+        } else if (avgConfidence >= 0.6) {
+            System.out.println("👍 Bonne qualité des prédictions");
+        } else {
+            System.out.println("⚠️  Qualité modérée - à utiliser avec précaution");
         }
     }
 
