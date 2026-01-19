@@ -19,33 +19,77 @@ public class DataLoader {
      */
     public static List<ExportData> loadCSVData(String fileName) {
         List<ExportData> data = new ArrayList<>();
-        String filePath = "src/main/resources/data/" + fileName;
+
+        // Try multiple possible locations
+        String[] possiblePaths = {
+                fileName,                                      // Current directory
+                "data/" + fileName,                            // data folder
+                "src/main/resources/data/" + fileName,         // Maven resources
+                "src/main/resources/" + fileName,              // Resources root
+                "resources/data/" + fileName,                  // Compiled resources
+                System.getProperty("user.dir") + "/" + fileName,
+                System.getProperty("user.dir") + "/data/" + fileName
+        };
+
+        Path foundPath = null;
+
+        for (String pathStr : possiblePaths) {
+            try {
+                Path path = Paths.get(pathStr);
+                if (Files.exists(path)) {
+                    foundPath = path;
+                    log.info("✅ Found CSV file at: {}", path.toAbsolutePath());
+                    break;
+                }
+            } catch (Exception e) {
+                // Try next path
+            }
+        }
+
+        if (foundPath == null) {
+            log.error("❌ File '{}' not found in any location!", fileName);
+            log.error("💡 Searched in:");
+            for (String path : possiblePaths) {
+                log.error("   - {}", path);
+            }
+            return data;
+        }
 
         try {
-            log.info("Chargement du fichier CSV: {}", filePath);
-            List<String> lines = Files.readAllLines(Paths.get(filePath));
+            List<String> lines = Files.readAllLines(foundPath);
+            log.info("📄 File has {} lines", lines.size());
 
             boolean isFirstLine = true;
+            int successCount = 0;
+            int errorCount = 0;
+
             for (String line : lines) {
                 if (isFirstLine) {
+                    log.info("📋 Header: {}", line);
                     isFirstLine = false;
-                    continue; // Skip header
+                    continue;
                 }
 
                 if (!line.trim().isEmpty()) {
                     ExportData exportData = parseCSVLine(line);
                     if (exportData != null) {
                         data.add(exportData);
+                        successCount++;
+                    } else {
+                        errorCount++;
                     }
                 }
             }
 
-            log.info("{} lignes chargées depuis {}", data.size(), fileName);
+            log.info("✅ Successfully loaded {} records from {}", successCount, fileName);
+            if (errorCount > 0) {
+                log.warn("⚠️  Failed to parse {} lines", errorCount);
+            }
 
         } catch (IOException e) {
-            log.error("Erreur lors du chargement du fichier CSV: {}", e.getMessage());
+            log.error("❌ Error reading file: {}", e.getMessage());
         } catch (Exception e) {
-            log.error("Erreur de parsing du CSV: {}", e.getMessage());
+            log.error("❌ Error parsing CSV: {}", e.getMessage());
         }
 
         return data;
