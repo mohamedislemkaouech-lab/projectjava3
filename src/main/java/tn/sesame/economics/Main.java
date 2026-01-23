@@ -12,13 +12,13 @@ import tn.sesame.economics.ai.DJLRealModel;
 import tn.sesame.economics.ai.SimpleLinearModel;
 import tn.sesame.economics.ai.SimpleLinearPredictionService;
 import tn.sesame.economics.ai.ONNXRuntimeService;
-import javafx.scene.control.Alert;
-import tn.sesame.economics.dashboard.service.ReportDTO;
 import tn.sesame.economics.dashboard.service.ReportService;
 import tn.sesame.economics.dashboard.view.ReportGenerationDashboard;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
 
 import java.util.Random;
 import java.time.LocalDate;
@@ -26,6 +26,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * Classe principale de l'application d'intelligence économique tunisienne.
@@ -38,6 +39,22 @@ public class Main {
     private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
     private static final Scanner scanner = new Scanner(System.in);
     private static EconomicIntelligenceService intelligenceService;
+
+    /**
+     * Data holder class for passing data to JavaFX application
+     */
+    public static class ReportDataHolder {
+        public static boolean useLocalLLM;
+        public static List<PricePrediction> predictions;
+        public static List<ExportData> historicalData;
+        public static CountDownLatch latch = new CountDownLatch(1);
+
+        public static void clear() {
+            useLocalLLM = false;
+            predictions = null;
+            historicalData = null;
+        }
+    }
 
     /**
      * Point d'entrée principal de l'application.
@@ -180,6 +197,7 @@ public class Main {
 
         intelligenceService = new EconomicIntelligenceService(predictionService, reportService);
     }
+
     /**
      * Permet de changer de modèle d'IA pendant l'exécution.
      */
@@ -309,89 +327,6 @@ public class Main {
         }
     }
 
-    private static void generateExecutiveSummary() {
-        System.out.println("\n📈 GÉNÉRATION DE RÉSUMÉ EXÉCUTIF");
-        System.out.println("=".repeat(40));
-
-        System.out.println("1. Utiliser les données historiques");
-        System.out.println("2. Utiliser un échantillon aléatoire");
-        System.out.print("Votre choix: ");
-
-        int choice = readIntInput("");
-
-        try {
-            List<ExportData> data;
-            if (choice == 2) {
-                data = loadCSVFile("exports_historical.csv");
-                if (data.size() > 10) {
-                    Collections.shuffle(data);
-                    data = data.subList(0, 10);
-                }
-            } else {
-                data = loadCSVFile("exports_training.csv");
-            }
-
-            if (data.isEmpty()) {
-                System.out.println("❌ Aucune donnée disponible");
-                return;
-            }
-
-            // Faire des prédictions
-            List<PricePrediction> predictions = intelligenceService.analyzeExports(data);
-
-            // Générer le résumé exécutif
-            String report = intelligenceService.generateIntelligenceReport(predictions);
-
-            System.out.println("\n" + "=".repeat(60));
-            System.out.println("📈 RÉSUMÉ EXÉCUTIF");
-            System.out.println("=".repeat(60));
-            System.out.println(report);
-
-            // Sauvegarde optionnelle
-            System.out.print("\n💾 Sauvegarder le résumé? (o/n): ");
-            String saveChoice = scanner.nextLine();
-
-            if (saveChoice.equalsIgnoreCase("o")) {
-                String fileName = "resume_executif_" + LocalDate.now() + ".txt";
-                java.nio.file.Files.writeString(
-                        java.nio.file.Paths.get(fileName),
-                        report
-                );
-                System.out.println("✅ Résumé sauvegardé dans: " + fileName);
-            }
-
-        } catch (Exception e) {
-            System.out.println("❌ Erreur: " + e.getMessage());
-        }
-    }
-
-    /**
-     * Affiche le menu principal amélioré.
-     */
-    private static void displayMainMenu() {
-        String currentModel = "DJL Simulé";
-        if (intelligenceService != null && intelligenceService.getPredictionModel() != null) {
-            currentModel = intelligenceService.getPredictionModel().getModelName();
-        }
-
-        System.out.println("\n" + "=".repeat(60));
-        System.out.println("           🤖 INTELLIGENCE ÉCONOMIQUE TUNISIENNE");
-        System.out.println("           Modèle actuel: " + currentModel);
-        System.out.println("=".repeat(60));
-        System.out.println("1.  Analyser les données historiques");
-        System.out.println("2.  Effectuer une analyse personnalisée");
-        System.out.println("3.  Entraîner le modèle IA");
-        System.out.println("4.  Générer rapport de marché (TinyLlama)");
-        System.out.println("5.  Générer résumé exécutif (TinyLlama)");
-        System.out.println("6.  Tester TinyLlama");
-        System.out.println("7.  Informations système");
-        System.out.println("8.  Exporter les prédictions");
-        System.out.println("9.  Changer de modèle d'IA");
-        System.out.println("10. Open Dashboard (JavaFX)");
-        System.out.println("11. 🆕 Report Generation System"); // NEW OPTION
-        System.out.println("0.  Quitter");
-        System.out.print("Votre choix: ");
-    }
     /**
      * Setup project directories and check file structure.
      */
@@ -456,28 +391,349 @@ public class Main {
             scanner.nextLine();
         }
     }
+
     /**
-     * Launch JavaFX Dashboard
+     * Affiche le menu principal amélioré.
      */
-    private static void launchDashboard() {
-        System.out.println("\n🚀 Launching JavaFX Dashboard...");
-        System.out.println("Please wait while the dashboard loads...");
+    private static void displayMainMenu() {
+        String currentModel = "DJL Simulé";
+        if (intelligenceService != null && intelligenceService.getPredictionModel() != null) {
+            currentModel = intelligenceService.getPredictionModel().getModelName();
+        }
+
+        System.out.println("\n" + "=".repeat(60));
+        System.out.println("           🤖 INTELLIGENCE ÉCONOMIQUE TUNISIENNE");
+        System.out.println("           Modèle actuel: " + currentModel);
+        System.out.println("=".repeat(60));
+        System.out.println("1.  Analyser les données historiques");
+        System.out.println("2.  Effectuer une analyse personnalisée");
+        System.out.println("3.  Entraîner le modèle IA");
+        System.out.println("4.  Générer rapport de marché (TinyLlama)");
+        System.out.println("5.  Générer résumé exécutif (TinyLlama)");
+        System.out.println("6.  Tester TinyLlama");
+        System.out.println("7.  Informations système");
+        System.out.println("8.  Exporter les prédictions");
+        System.out.println("9.  Changer de modèle d'IA");
+        System.out.println("10. Launch Dashboard (JavaFX)");
+        System.out.println("11. 📊 Report Generation System");
+        System.out.println("0.  Quitter");
+        System.out.print("Votre choix: ");
+    }
+
+    /**
+     * Launch the comprehensive Report Generation System
+     */
+    private static void launchReportSystem() {
+        System.out.println("\n" + "=".repeat(70));
+        System.out.println("                📊 REPORT GENERATION SYSTEM");
+        System.out.println("                AI-Powered Tunisian Economic Intelligence");
+        System.out.println("=".repeat(70));
+
+        System.out.println("\n🚀 Initializing Report Generation System...");
 
         try {
-            // Run JavaFX on a separate thread
-            new Thread(() -> {
-                javafx.application.Application.launch(DashboardLauncher.class);
-            }).start();
+            // 1. Load data for reports
+            System.out.println("\n📊 LOADING DATA...");
+            List<ExportData> loadedHistoricalData = loadCSVFile("exports_historical.csv");
+            List<ExportData> loadedTrainingData = loadCSVFile("exports_training.csv");
 
-            System.out.println("✅ Dashboard launched successfully!");
+            final List<ExportData> historicalData; // Variable finale pour lambda
+            final List<ExportData> trainingData;   // Variable finale pour lambda
+
+            if (loadedHistoricalData.isEmpty() && loadedTrainingData.isEmpty()) {
+                System.out.println("⚠️ No CSV data found. Generating sample data...");
+                historicalData = generateSampleHistoricalData(100);
+                trainingData = generateSampleHistoricalData(50);
+            } else {
+                historicalData = loadedHistoricalData;
+                trainingData = loadedTrainingData;
+            }
+
+            System.out.println("✓ Historical data loaded: " + historicalData.size() + " records");
+            System.out.println("✓ Training data loaded: " + trainingData.size() + " records");
+
+            // 2. Generate predictions
+            System.out.println("\n🤖 GENERATING PREDICTIONS...");
+            final List<PricePrediction> predictions; // Variable finale pour lambda
+
+            if (intelligenceService != null && !trainingData.isEmpty()) {
+                // Use real AI service
+                int sampleSize = Math.min(50, trainingData.size());
+                predictions = intelligenceService.analyzeExports(
+                        trainingData.subList(0, sampleSize));
+                System.out.println("✓ Real AI predictions generated: " + predictions.size() + " records");
+            } else {
+                // Generate demo predictions
+                predictions = generateDemoPredictions(20);
+                System.out.println("✓ Demo predictions generated: " + predictions.size() + " records");
+            }
+
+            // 3. Ask for LLM preference
+            System.out.println("\n🤖 AI SETTINGS:");
+            System.out.println("1. Use local TinyLlama (requires Ollama running)");
+            System.out.println("2. Use OpenAI (requires API key)");
+            System.out.println("3. Use template mode only (no AI)");
+            System.out.print("Your choice (1-3): ");
+
+            int llmChoice = readIntInput("");
+            final boolean useLocalLLM;  // Variable finale pour lambda
+            final boolean useLLM;       // Variable finale pour lambda
+
+            switch (llmChoice) {
+                case 2 -> {
+                    useLocalLLM = false;
+                    useLLM = true;
+                    System.out.println("⚠️  Make sure OPENAI_API_KEY environment variable is set");
+                }
+                case 3 -> {
+                    useLocalLLM = true;
+                    useLLM = false;
+                    System.out.println("✓ Using template mode (no AI required)");
+                }
+                default -> {
+                    useLocalLLM = true;
+                    useLLM = true;
+                    System.out.println("✓ Using local TinyLlama");
+                    System.out.println("⚠️  Make sure Ollama is running: ollama serve");
+                }
+            }
+
+            // 4. Test TinyLlama connection if using local LLM
+            if (useLLM && useLocalLLM) {
+                System.out.println("\n🔍 Testing TinyLlama connection...");
+                TinyLlamaService testService = new TinyLlamaService();
+                String testResult = testService.testConnection();
+                System.out.println(testResult);
+
+                if (!testResult.contains("✅")) {
+                    System.out.println("\n⚠️  WARNING: TinyLlama not available!");
+                    System.out.println("Make sure Ollama is running with TinyLlama:");
+                    System.out.println("  1. ollama serve");
+                    System.out.println("  2. ollama pull tinyllama");
+                    System.out.println("\nContinuing anyway (will use fallback mode)...");
+                    Thread.sleep(2000);
+                }
+            }
+
+            // 5. Store data in holder for JavaFX
+            System.out.println("\n💾 Storing data for JavaFX dashboard...");
+            ReportDataHolder.useLocalLLM = useLocalLLM;
+            ReportDataHolder.predictions = predictions;
+            ReportDataHolder.historicalData = historicalData;
+            ReportDataHolder.latch = new CountDownLatch(1);
+
+            // 6. Launch JavaFX Dashboard using the data holder pattern
+            System.out.println("\n🎨 LAUNCHING REPORT GENERATION DASHBOARD...");
+            System.out.println("Please wait for the JavaFX window to appear...");
+
+            // Check if JavaFX is already initialized
+            if (!Platform.isFxApplicationThread()) {
+                // Start JavaFX in a new thread
+                Thread fxThread = new Thread(() -> {
+                    try {
+                        Application.launch(ReportDashboardLauncherFixed.class);
+                    } catch (IllegalStateException e) {
+                        // JavaFX is already launched, just open a new window
+                        System.out.println("✓ JavaFX already running, opening new window...");
+                        Platform.runLater(() -> {
+                            openReportDashboardWindow(useLocalLLM, predictions, historicalData);
+                        });
+                    } catch (Exception e) {
+                        System.err.println("❌ Failed to launch JavaFX: " + e.getMessage());
+                    }
+                });
+                fxThread.setDaemon(true);
+                fxThread.start();
+
+                // Wait a bit for JavaFX to start
+                Thread.sleep(1000);
+            } else {
+                // JavaFX is already running, just open a new window
+                System.out.println("✓ JavaFX already running, opening new window...");
+                Platform.runLater(() -> {
+                    openReportDashboardWindow(useLocalLLM, predictions, historicalData);
+                });
+            }
+
+            System.out.println("\n✅ Report Generation System launched!");
+            System.out.println("The dashboard window should appear shortly...");
             System.out.println("Press Enter to return to main menu...");
             scanner.nextLine();
 
+            // Clean up
+            ReportDataHolder.clear();
+
         } catch (Exception e) {
-            System.out.println("❌ Failed to launch dashboard: " + e.getMessage());
-            System.out.println("Make sure JavaFX is properly configured in pom.xml");
+            System.out.println("❌ Error launching Report Generation System: " + e.getMessage());
+            e.printStackTrace();
+            System.out.println("Press Enter to continue...");
+            scanner.nextLine();
         }
     }
+
+    /**
+     * Opens the report dashboard window
+     */
+    private static void openReportDashboardWindow(final boolean useLocalLLM,
+                                                  final List<PricePrediction> predictions,
+                                                  final List<ExportData> historicalData) {
+        try {
+            // Create new stage (window)
+            Stage dashboardStage = new Stage();
+
+            // Initialize Report Service
+            ReportService reportService = new ReportService(useLocalLLM);
+
+            // Create the dashboard
+            ReportGenerationDashboard dashboard = new ReportGenerationDashboard(reportService);
+
+            // Set data on dashboard
+            dashboard.setData(predictions, historicalData);
+
+            // Create scene
+            Scene scene = new Scene(dashboard, 1100, 800);
+
+            // Configure stage
+            dashboardStage.setTitle("📊 Tunisian Economic Intelligence - Report Generation System");
+            dashboardStage.setScene(scene);
+
+            // Handle window close
+            dashboardStage.setOnCloseRequest(e -> {
+                dashboard.shutdown();
+                System.out.println("Report Generation Dashboard closed");
+                ReportDataHolder.latch.countDown(); // Signal that window is closed
+            });
+
+            // Show the window
+            dashboardStage.show();
+
+            System.out.println("✅ Dashboard window opened successfully!");
+
+        } catch (Exception e) {
+            System.err.println("❌ Failed to open dashboard window: " + e.getMessage());
+            e.printStackTrace();
+
+            // Show error dialog
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Failed to open Report Dashboard");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+    /**
+     * JavaFX Launcher for the Report Generation Dashboard
+     */
+    public static class ReportDashboardLauncherFixed extends Application {
+        @Override
+        public void init() {
+            // Initialize JavaFX platform
+            System.out.println("Initializing JavaFX platform...");
+        }
+
+        @Override
+        public void start(Stage primaryStage) {
+            try {
+                // Get data from holder
+                boolean useLocalLLM = ReportDataHolder.useLocalLLM;
+                List<PricePrediction> predictions = ReportDataHolder.predictions;
+                List<ExportData> historicalData = ReportDataHolder.historicalData;
+
+                // Clear the holder
+                ReportDataHolder.clear();
+
+                System.out.println("Starting Report Dashboard with data:");
+                System.out.println("  - LLM Mode: " + (useLocalLLM ? "Local" : "Template"));
+                System.out.println("  - Predictions: " + (predictions != null ? predictions.size() : 0));
+                System.out.println("  - Historical Data: " + (historicalData != null ? historicalData.size() : 0));
+
+                // Create the dashboard window
+                openReportDashboardWindow(useLocalLLM, predictions, historicalData);
+
+                // The primary stage is just a dummy, we don't show it
+                primaryStage.setOnCloseRequest(e -> {
+                    ReportDataHolder.latch.countDown();
+                    Platform.exit();
+                });
+
+            } catch (Exception e) {
+                System.err.println("Failed to start Report Dashboard: " + e.getMessage());
+                e.printStackTrace();
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Failed to launch Report Generation System");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
+        }
+
+        @Override
+        public void stop() {
+            System.out.println("JavaFX Application stopping...");
+            ReportDataHolder.latch.countDown();
+        }
+    }
+
+    // ==================== REST OF THE METHODS (EXISTING CODE) ====================
+
+    private static void generateExecutiveSummary() {
+        System.out.println("\n📈 GÉNÉRATION DE RÉSUMÉ EXÉCUTIF");
+        System.out.println("=".repeat(40));
+
+        System.out.println("1. Utiliser les données historiques");
+        System.out.println("2. Utiliser un échantillon aléatoire");
+        System.out.print("Votre choix: ");
+
+        int choice = readIntInput("");
+
+        try {
+            List<ExportData> data;
+            if (choice == 2) {
+                data = loadCSVFile("exports_historical.csv");
+                if (data.size() > 10) {
+                    Collections.shuffle(data);
+                    data = data.subList(0, 10);
+                }
+            } else {
+                data = loadCSVFile("exports_training.csv");
+            }
+
+            if (data.isEmpty()) {
+                System.out.println("❌ Aucune donnée disponible");
+                return;
+            }
+
+            // Faire des prédictions
+            List<PricePrediction> predictions = intelligenceService.analyzeExports(data);
+
+            // Générer le résumé exécutif
+            String report = intelligenceService.generateIntelligenceReport(predictions);
+
+            System.out.println("\n" + "=".repeat(60));
+            System.out.println("📈 RÉSUMÉ EXÉCUTIF");
+            System.out.println("=".repeat(60));
+            System.out.println(report);
+
+            // Sauvegarde optionnelle
+            System.out.print("\n💾 Sauvegarder le résumé? (o/n): ");
+            String saveChoice = scanner.nextLine();
+
+            if (saveChoice.equalsIgnoreCase("o")) {
+                String fileName = "resume_executif_" + LocalDate.now() + ".txt";
+                java.nio.file.Files.writeString(
+                        java.nio.file.Paths.get(fileName),
+                        report
+                );
+                System.out.println("✅ Résumé sauvegardé dans: " + fileName);
+            }
+
+        } catch (Exception e) {
+            System.out.println("❌ Erreur: " + e.getMessage());
+        }
+    }
+
     /**
      * Teste la connexion à TinyLlama.
      */
@@ -511,9 +767,10 @@ public class Main {
                 String summary = tinyLlama.generateSummaryReport(testData);
                 System.out.println(summary);
 
-                System.out.println("\n🧪 Test 3: Rapport formaté (Markdown)");
+                System.out.println("\n🧪 Test 3: Rapport formaté (PLAIN_TEXT)");
                 System.out.println("-".repeat(30));
-                String formatted = tinyLlama.generateReport(testData, ReportGenerator.ReportFormat.MARKDOWN);
+                // Use PLAIN_TEXT from ReportGenerator enum
+                String formatted = tinyLlama.generateReport(testData, ReportGenerator.ReportFormat.PLAIN_TEXT);
                 System.out.println(formatted.substring(0, Math.min(150, formatted.length())) + "...");
             }
         }
@@ -522,412 +779,62 @@ public class Main {
         System.out.println("Appuyez sur Entrée pour continuer...");
         scanner.nextLine();
     }
+
     /**
-     * Launch the comprehensive Report Generation System
+     * Launch JavaFX Dashboard
      */
-    private static void launchReportSystem() {
+    /**
+     * Launch JavaFX Dashboard - FIXED VERSION
+     * Replace the launchDashboard() method in Main.java with this version
+     */
+    private static void launchDashboard() {
         System.out.println("\n" + "=".repeat(70));
-        System.out.println("                📊 REPORT GENERATION SYSTEM");
-        System.out.println("                AI-Powered Tunisian Economic Intelligence");
+        System.out.println("           🚀 LAUNCHING JAVAFX DASHBOARD");
         System.out.println("=".repeat(70));
 
-        System.out.println("\n🚀 Initializing Report Generation System...");
-        System.out.println("This feature provides:");
-        System.out.println("• AI-powered report generation with TinyLlama/OpenAI");
-        System.out.println("• Multiple export formats (HTML, Markdown, Text)");
-        System.out.println("• Customizable report templates");
-        System.out.println("• Scheduled report generation");
-        System.out.println("• Report versioning and history");
-
-        System.out.println("\n📊 LOADING DATA...");
+        System.out.println("\n📊 Initializing dashboard components...");
+        System.out.println("✓ AI Model: " + intelligenceService.getPredictionModel().getModelName());
+        System.out.println("✓ Report Service: Available");
 
         try {
-            // 1. Load data for reports
-            List<ExportData> historicalData = loadCSVFile("exports_historical.csv");
-            List<ExportData> trainingData = loadCSVFile("exports_training.csv");
+            // Set the intelligence service for the dashboard
+            DashboardLauncher.setIntelligenceService(intelligenceService);
 
-            System.out.println("✓ Historical data loaded: " + historicalData.size() + " records");
-            System.out.println("✓ Training data loaded: " + trainingData.size() + " records");
-
-            // 2. Generate predictions
-            System.out.println("\n🤖 GENERATING PREDICTIONS...");
-            List<PricePrediction> predictions;
-
-            if (intelligenceService != null && !trainingData.isEmpty()) {
-                predictions = intelligenceService.analyzeExports(trainingData.subList(0, Math.min(50, trainingData.size())));
-                System.out.println("✓ Predictions generated: " + predictions.size() + " records");
-            } else {
-                // Generate demo predictions if no service available
-                predictions = generateDemoPredictions(20);
-                System.out.println("✓ Demo predictions generated: " + predictions.size() + " records");
-            }
-
-            // 3. Ask for LLM preference
-            System.out.println("\n🤖 AI SETTINGS:");
-            System.out.println("1. Use local TinyLlama (requires Ollama)");
-            System.out.println("2. Use OpenAI (requires API key)");
-            System.out.println("3. Use template mode only (no AI)");
-            System.out.print("Your choice (1-3): ");
-
-            int llmChoice = readIntInput("");
-            final boolean useLocalLLM;  // FIX: Make these final
-            final boolean useLLM;
-
-            switch (llmChoice) {
-                case 2 -> {
-                    useLocalLLM = false;
-                    useLLM = true;
-                    System.out.println("⚠️  Make sure OPENAI_API_KEY environment variable is set");
-                }
-                case 3 -> {
-                    useLocalLLM = true;  // Value doesn't matter since we won't use LLM
-                    useLLM = false;
-                    System.out.println("✓ Using template mode (no AI required)");
-                }
-                default -> {
-                    useLocalLLM = true;
-                    useLLM = true;
-                    System.out.println("✓ Using local TinyLlama");
-                }
-            }
-
-            // 4. Create final copies for lambda
-            final List<PricePrediction> finalPredictions = predictions;
-            final List<ExportData> finalHistoricalData = historicalData;
-            final boolean shouldUseLocalLLM = useLLM ? useLocalLLM : true; // If not using LLM, value doesn't matter
-
-            // 5. Create JavaFX Dashboard
-            System.out.println("🎨 LAUNCHING REPORT GENERATION DASHBOARD...");
-            System.out.println("Please wait for the JavaFX window to appear...");
+            System.out.println("\n🎨 Opening JavaFX window...");
+            System.out.println("Please wait for the dashboard to load...");
 
             // Launch JavaFX in a separate thread
             new Thread(() -> {
                 try {
-                    javafx.application.Application.launch(ReportDashboardLauncher.class,
-                            new String[]{
-                                    String.valueOf(shouldUseLocalLLM),
-                                    String.valueOf(finalPredictions.size()),
-                                    String.valueOf(finalHistoricalData.size())
-                            });
+                    javafx.application.Application.launch(DashboardLauncher.class);
                 } catch (Exception e) {
-                    System.err.println("❌ Failed to launch JavaFX dashboard: " + e.getMessage());
-                    System.out.println("\n📝 Running in console mode instead...");
-                    // Create report service for console mode
-                    ReportService consoleReportService = new ReportService(shouldUseLocalLLM);
-                    runConsoleReportMode(consoleReportService, finalPredictions, finalHistoricalData);
+                    System.err.println("❌ Failed to launch dashboard: " + e.getMessage());
+                    e.printStackTrace();
                 }
             }).start();
 
-            System.out.println("\n✅ Report Generation System launched!");
-            System.out.println("Press Enter to return to main menu...");
+            // Give the JavaFX thread time to start
+            Thread.sleep(2000);
+
+            System.out.println("\n✅ Dashboard launched!");
+            System.out.println("📌 The dashboard window should appear shortly");
+            System.out.println("📌 If you don't see it, check your taskbar");
+            System.out.println("\nPress Enter to return to main menu...");
             scanner.nextLine();
 
         } catch (Exception e) {
-            System.out.println("❌ Error launching Report Generation System: " + e.getMessage());
-            System.out.println("Press Enter to continue...");
+            System.out.println("\n❌ Failed to launch dashboard: " + e.getMessage());
+            System.out.println("\n🔧 Troubleshooting tips:");
+            System.out.println("1. Make sure JavaFX is properly configured in pom.xml");
+            System.out.println("2. Check that you're using Java 21 or higher");
+            System.out.println("3. Verify that the AI model is loaded (option 3 in menu)");
+            System.out.println("\nPress Enter to continue...");
             scanner.nextLine();
         }
     }
-    /**
-     * JavaFX Launcher for the Report Generation Dashboard
-     */
-    public static class ReportDashboardLauncher extends Application {
-        private boolean useLocalLLM;
-        private List<PricePrediction> predictions;
-        private List<ExportData> historicalData;
 
-        @Override
-        public void init() throws Exception {
-            // Parse command line arguments
-            Parameters params = getParameters();
-            List<String> args = params.getRaw();
+    // ==================== EXISTING HELPER METHODS ====================
 
-            if (args.size() >= 3) {
-                this.useLocalLLM = Boolean.parseBoolean(args.get(0));
-                int predictionCount = Integer.parseInt(args.get(1));
-                int historicalCount = Integer.parseInt(args.get(2));
-
-                // Generate sample data based on counts
-                this.predictions = generateDemoPredictions(predictionCount);
-                this.historicalData = generateSampleHistoricalData(historicalCount);
-            } else {
-                // Default data
-                this.useLocalLLM = true;
-                this.predictions = generateDemoPredictions(50);
-                this.historicalData = generateSampleHistoricalData(100);
-            }
-        }
-
-        @Override
-        public void start(Stage primaryStage) {
-            try {
-                // Initialize Report Service
-                ReportService reportService = new ReportService(useLocalLLM);
-
-                // Create the dashboard
-                ReportGenerationDashboard dashboard = new ReportGenerationDashboard(reportService);
-
-                // Set data on dashboard
-                dashboard.setData(predictions, historicalData);
-
-                // Create scene
-                Scene scene = new Scene(dashboard, 1100, 800);
-
-                // Configure stage
-                primaryStage.setTitle("📊 Tunisian Economic Intelligence - Report Generation System");
-                primaryStage.setScene(scene);
-                primaryStage.show();
-
-                // Handle window close
-                primaryStage.setOnCloseRequest(e -> {
-                    dashboard.shutdown();
-                    System.out.println("Report Generation Dashboard closed");
-                });
-
-            } catch (Exception e) {
-                System.err.println("Failed to start Report Dashboard: " + e.getMessage());
-                e.printStackTrace();
-
-                // Show error dialog
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Failed to launch Report Generation System");
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
-            }
-        }
-
-        private List<ExportData> generateSampleHistoricalData(int count) {
-            List<ExportData> data = new ArrayList<>();
-            Random random = new Random();
-            ProductType[] products = ProductType.values();
-            String[] countries = {"France", "Germany", "Italy", "Spain", "UK", "USA", "China"};
-            MarketIndicator[] indicators = MarketIndicator.values();
-
-            LocalDate startDate = LocalDate.now().minusDays(365);
-
-            for (int i = 0; i < count; i++) {
-                ProductType productType = products[random.nextInt(products.length)];
-                double pricePerTon = 800 + random.nextDouble() * 5000;
-                double volume = 10 + random.nextDouble() * 200;
-                String country = countries[random.nextInt(countries.length)];
-                MarketIndicator indicator = indicators[random.nextInt(indicators.length)];
-
-                ExportData exportData = new ExportData(
-                        startDate.plusDays(i),
-                        productType,
-                        pricePerTon,
-                        volume,
-                        country,
-                        indicator
-                );
-                data.add(exportData);
-            }
-
-            return data;
-        }
-    }
-    /**
-     * Fallback console mode for report generation
-     */
-    private static void runConsoleReportMode(ReportService reportService,
-                                             List<PricePrediction> predictions,
-                                             List<ExportData> historicalData) {
-        System.out.println("\n" + "=".repeat(60));
-        System.out.println("         CONSOLE REPORT GENERATION MODE");
-        System.out.println("=".repeat(60));
-
-        boolean running = true;
-        while (running) {
-            System.out.println("\n📊 REPORT GENERATION MENU:");
-            System.out.println("1. Generate Market Intelligence Report");
-            System.out.println("2. Export Reports");
-            System.out.println("3. View Report History");
-            System.out.println("4. Schedule Automated Reports");
-            System.out.println("5. Test LLM Connection");
-            System.out.println("0. Return to Main Menu");
-            System.out.print("Your choice: ");
-
-            int choice = readIntInput("");
-
-            switch (choice) {
-                case 1 -> generateConsoleReport(reportService, predictions, historicalData);
-                case 2 -> exportConsoleReports(reportService);
-                case 3 -> viewReportHistory(reportService);
-                case 4 -> scheduleConsoleReports(reportService);
-                case 5 -> testLLMConnection(reportService);
-                case 0 -> running = false;
-                default -> System.out.println("Invalid choice");
-            }
-        }
-    }
-
-    private static void generateConsoleReport(ReportService reportService,
-                                              List<PricePrediction> predictions,
-                                              List<ExportData> historicalData) {
-        System.out.println("\n🤖 GENERATING MARKET INTELLIGENCE REPORT...");
-
-        // Create custom variables
-        Map<String, String> customVariables = new HashMap<>();
-        customVariables.put("report_title", "Market Intelligence Report");
-        customVariables.put("period", "Last Quarter");
-        customVariables.put("products_count", String.valueOf(predictions.size()));
-
-        // Generate report
-        String report = reportService.generateMarketIntelligenceReport(
-                predictions, historicalData, customVariables
-        );
-
-        System.out.println("\n" + "=".repeat(70));
-        System.out.println("                     MARKET INTELLIGENCE REPORT");
-        System.out.println("=".repeat(70));
-        System.out.println(report.substring(0, Math.min(500, report.length())) + "...");
-
-        System.out.print("\n💾 Export this report? (y/n): ");
-        String exportChoice = scanner.nextLine();
-
-        if (exportChoice.equalsIgnoreCase("y")) {
-            String reportName = "Market_Report_" + System.currentTimeMillis();
-            String[] formats = {"HTML", "MARKDOWN", "TEXT"};
-
-            Map<String, String> results = reportService.exportReport(report, reportName, formats);
-
-            System.out.println("\n📤 EXPORT RESULTS:");
-            results.forEach((format, result) ->
-                    System.out.println("  • " + format + ": " + result));
-        }
-    }
-
-    private static void exportConsoleReports(ReportService reportService) {
-        System.out.println("\n📤 EXPORT REPORTS");
-        System.out.println("1. Export in HTML format");
-        System.out.println("2. Export in Markdown format");
-        System.out.println("3. Export in Text format");
-        System.out.println("4. Export in all formats");
-        System.out.print("Your choice: ");
-
-        int choice = readIntInput("");
-
-        String[] formats;
-        switch (choice) {
-            case 1 -> formats = new String[]{"HTML"};
-            case 2 -> formats = new String[]{"MARKDOWN"};
-            case 3 -> formats = new String[]{"TEXT"};
-            case 4 -> formats = new String[]{"HTML", "MARKDOWN", "TEXT"};
-            default -> {
-                System.out.println("Invalid choice");
-                return;
-            }
-        }
-
-        System.out.print("Enter report content (type 'demo' for demo report): ");
-        String content = scanner.nextLine();
-
-        if (content.equalsIgnoreCase("demo")) {
-            content = """
-            # Market Intelligence Report
-            ## Tunisian Agricultural Export Analysis
-            
-            **Generated:** """ + java.time.LocalDateTime.now() + """
-            
-            **Period:** Last 30 Days
-            **Products Analyzed:** 50
-            
-            ### Executive Summary
-            The Tunisian agricultural export market shows positive trends with olive oil and dates leading growth.
-            
-            ### Price Analysis
-            Average predicted price across all products: 2,450 TND/ton
-            
-            ### Recommendations
-            1. Focus on high-value products
-            2. Diversify export markets
-            3. Optimize export timing""";
-        }
-
-        String reportName = "Report_" + System.currentTimeMillis();
-        Map<String, String> results = reportService.exportReport(content, reportName, formats);
-
-        System.out.println("\n✅ EXPORT COMPLETE:");
-        results.forEach((format, result) ->
-                System.out.println("  • " + format + ": " + result));
-    }
-
-    private static void viewReportHistory(ReportService reportService) {
-        System.out.println("\n📜 REPORT HISTORY");
-
-        List<ReportDTO> history = reportService.getReportHistory();
-
-        if (history.isEmpty()) {
-            System.out.println("No reports generated yet.");
-            return;
-        }
-
-        System.out.printf("%-5s %-30s %-20s %-10s%n",
-                "No.", "Report Name", "Generated", "Format");
-        System.out.println("-".repeat(70));
-
-        for (int i = 0; i < history.size(); i++) {
-            ReportDTO report = history.get(i);
-            System.out.printf("%-5d %-30s %-20s %-10s%n",
-                    i + 1,
-                    report.getReportName(),
-                    report.getGenerationTime().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
-                    report.getFormat()
-            );
-        }
-    }
-
-    private static void scheduleConsoleReports(ReportService reportService) {
-        System.out.println("\n⏰ SCHEDULE AUTOMATED REPORTS");
-        System.out.println("1. Schedule daily reports");
-        System.out.println("2. Schedule weekly reports");
-        System.out.println("3. Schedule monthly reports");
-        System.out.print("Your choice: ");
-
-        int choice = readIntInput("");
-
-        String scheduleType;
-        String cronExpression;
-
-        switch (choice) {
-            case 1 -> {
-                scheduleType = "Daily";
-                cronExpression = "0 0 9 * * ?"; // 9 AM daily
-            }
-            case 2 -> {
-                scheduleType = "Weekly";
-                cronExpression = "0 0 9 ? * MON"; // 9 AM every Monday
-            }
-            case 3 -> {
-                scheduleType = "Monthly";
-                cronExpression = "0 0 9 1 * ?"; // 9 AM on 1st day of month
-            }
-            default -> {
-                System.out.println("Invalid choice");
-                return;
-            }
-        }
-
-        Map<String, String> parameters = new HashMap<>();
-        parameters.put("report_type", "Market Intelligence");
-        parameters.put("company_name", "Tunisian Agricultural Exports");
-
-        reportService.scheduleReport("market_intelligence", cronExpression, parameters);
-
-        System.out.println("\n✅ " + scheduleType + " reports scheduled!");
-        System.out.println("Reports will be generated at: " + cronExpression);
-    }
-
-    private static void testLLMConnection(ReportService reportService) {
-        System.out.println("\n🔍 TESTING LLM CONNECTION...");
-        System.out.println("This will test if the AI model (TinyLlama/OpenAI) is accessible.");
-        System.out.println("Note: The ReportService handles LLM internally.");
-        System.out.println("If you're using local TinyLlama, make sure Ollama is running:");
-        System.out.println("  Command: ollama serve");
-        System.out.println("\n✅ Report Service initialized successfully!");
-        System.out.println("The service will automatically use fallback templates if LLM is unavailable.");
-    }
     /**
      * Charge un fichier CSV en essayant plusieurs emplacements.
      */
@@ -1746,6 +1653,36 @@ public class Main {
             ));
         }
         return predictions;
+    }
+
+    // Helper method to generate sample historical data
+    private static List<ExportData> generateSampleHistoricalData(int count) {
+        List<ExportData> data = new ArrayList<>();
+        Random random = new Random();
+        ProductType[] products = ProductType.values();
+        String[] countries = {"France", "Germany", "Italy", "Spain", "UK", "USA"};
+        MarketIndicator[] indicators = MarketIndicator.values();
+
+        LocalDate startDate = LocalDate.now().minusDays(365);
+
+        for (int i = 0; i < count; i++) {
+            ProductType productType = products[random.nextInt(products.length)];
+            double pricePerTon = 1000 + random.nextDouble() * 4000;
+            double volume = 10 + random.nextDouble() * 200;
+            String country = countries[random.nextInt(countries.length)];
+            MarketIndicator indicator = indicators[random.nextInt(indicators.length)];
+
+            data.add(new ExportData(
+                    startDate.plusDays(i),
+                    productType,
+                    pricePerTon,
+                    volume,
+                    country,
+                    indicator
+            ));
+        }
+
+        return data;
     }
 
     private static int readIntInput(String prompt) {

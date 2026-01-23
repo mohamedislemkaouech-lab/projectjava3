@@ -57,5 +57,6 @@ public interface ReportGenerator {
         MARKDOWN,
         HTML,
         PLAIN_TEXT
+
     }
 }

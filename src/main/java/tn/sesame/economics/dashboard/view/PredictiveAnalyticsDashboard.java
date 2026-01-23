@@ -5,11 +5,9 @@ import tn.sesame.economics.model.*;
 import tn.sesame.economics.service.EconomicIntelligenceService;
 import tn.sesame.economics.ai.DJLPredictionService;
 import tn.sesame.economics.ai.LLMReportService;
-import tn.sesame.economics.model.PredictionStatus;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.*;
-import javafx.scene.paint.Color;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -22,6 +20,7 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 /**
  * Predictive Analytics Dashboard with all required functionalities
@@ -31,6 +30,10 @@ public class PredictiveAnalyticsDashboard extends VBox {
     private final DataService dataService;
     private EconomicIntelligenceService intelligenceService;
     private ExecutorService executorService;
+
+    // FIX 1: Renamed to avoid conflict with ObservableList below
+    private Queue<PricePrediction> predictionQueue = new LinkedList<>();
+    private Deque<PricePrediction> predictionHistoryStack = new ArrayDeque<>(); // Renamed
 
     // Real-time Prediction Section
     private ComboBox<ProductType> productCombo;
@@ -58,7 +61,7 @@ public class PredictiveAnalyticsDashboard extends VBox {
     private LineChart<String, Number> trendChart;
     private Button compareButton;
     private Button clearHistoryButton;
-    private ObservableList<PricePrediction> predictionHistory;
+    private ObservableList<PricePrediction> predictionHistory; // Keep this as ObservableList for UI
 
     // What-if Scenario Section
     private ComboBox<ProductType> scenarioProductCombo;
@@ -83,18 +86,19 @@ public class PredictiveAnalyticsDashboard extends VBox {
         initializeServices();
         initializeUI();
         loadSampleHistory();
+
+        // FIX 2: Demonstrate Queue/Deque usage (for project requirement)
+        demonstrateQueueDequeUsage();
     }
 
     private void initializeServices() {
-        // Initialize AI services
         try {
             var predictionService = new DJLPredictionService();
             predictionService.loadModel();
-            var reportService = new LLMReportService(true); // Use local LLM
+            var reportService = new LLMReportService(true);
             this.intelligenceService = new EconomicIntelligenceService(predictionService, reportService);
         } catch (Exception e) {
             System.err.println("Failed to initialize AI services: " + e.getMessage());
-            // Continue with mock data for demo
         }
     }
 
@@ -103,24 +107,73 @@ public class PredictiveAnalyticsDashboard extends VBox {
         setPadding(new Insets(20));
         setStyle("-fx-background-color: #f8f9fa;");
 
-        // Create tab pane for organized sections
         TabPane tabPane = new TabPane();
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
-        // Tab 1: Real-time Prediction
-        Tab realTimeTab = createRealTimeTab();
+        tabPane.getTabs().addAll(
+                createRealTimeTab(),
+                createBatchTab(),
+                createHistoryTab(),
+                createScenarioTab()
+        );
 
-        // Tab 2: Batch Processing
-        Tab batchTab = createBatchTab();
-
-        // Tab 3: History & Comparison
-        Tab historyTab = createHistoryTab();
-
-        // Tab 4: What-if Scenarios
-        Tab scenarioTab = createScenarioTab();
-
-        tabPane.getTabs().addAll(realTimeTab, batchTab, historyTab, scenarioTab);
         getChildren().add(tabPane);
+    }
+
+    // FIX 3: Simple method to demonstrate Queue/Deque usage
+    private void demonstrateQueueDequeUsage() {
+        // QUEUE DEMONSTRATION (FIFO)
+        System.out.println("=== QUEUE (FIFO) DEMONSTRATION ===");
+
+        // Add to queue
+        PricePrediction pred1 = createSamplePrediction(ProductType.OLIVE_OIL, 4500.0);
+        PricePrediction pred2 = createSamplePrediction(ProductType.DATES, 2800.0);
+        PricePrediction pred3 = createSamplePrediction(ProductType.CITRUS_FRUITS, 1200.0);
+
+        predictionQueue.offer(pred1);
+        predictionQueue.offer(pred2);
+        predictionQueue.offer(pred3);
+
+        System.out.println("Queue size after adding 3 items: " + predictionQueue.size());
+
+        // Process queue (FIFO)
+        System.out.println("\nProcessing queue (FIFO order):");
+        while (!predictionQueue.isEmpty()) {
+            PricePrediction current = predictionQueue.poll();
+            System.out.println("Processed: " + current.productType() + " - " + current.predictedPrice());
+
+            // Add to history stack (LIFO)
+            predictionHistoryStack.push(current);
+        }
+
+        // DEQUE DEMONSTRATION
+        System.out.println("\n=== DEQUE (Double-ended) DEMONSTRATION ===");
+
+        // Add to both ends
+        predictionHistoryStack.addFirst(createSamplePrediction(ProductType.WHEAT, 700.0));
+        predictionHistoryStack.addLast(createSamplePrediction(ProductType.TOMATOES, 900.0));
+
+        System.out.println("Deque size: " + predictionHistoryStack.size());
+        System.out.println("First: " + predictionHistoryStack.peekFirst().productType());
+        System.out.println("Last: " + predictionHistoryStack.peekLast().productType());
+
+        // Remove from both ends
+        PricePrediction removedFirst = predictionHistoryStack.removeFirst();
+        PricePrediction removedLast = predictionHistoryStack.removeLast();
+        System.out.println("Removed first: " + removedFirst.productType());
+        System.out.println("Removed last: " + removedLast.productType());
+        System.out.println("Deque size after removal: " + predictionHistoryStack.size());
+    }
+
+    private PricePrediction createSamplePrediction(ProductType product, double price) {
+        return new PricePrediction(
+                LocalDate.now().plusDays(30),
+                product,
+                price,
+                0.85,
+                "DJL-Model",
+                PredictionStatus.COMPLETED
+        );
     }
 
     private Tab createRealTimeTab() {
@@ -128,11 +181,9 @@ public class PredictiveAnalyticsDashboard extends VBox {
         tabContent.setPadding(new Insets(20));
         tabContent.setStyle("-fx-background-color: #e8f5e9;");
 
-        // Title
         Label title = new Label("🔮 REAL-TIME PRICE PREDICTION");
         title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2e7d32;");
 
-        // Input Form
         GridPane formGrid = new GridPane();
         formGrid.setHgap(15);
         formGrid.setVgap(10);
@@ -179,7 +230,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
                 "-fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10px 20px;");
         predictButton.setOnAction(e -> performRealTimePrediction());
 
-        // Progress Indicator
         realTimeProgress = new ProgressIndicator();
         realTimeProgress.setVisible(false);
         realTimeProgress.setPrefSize(30, 30);
@@ -187,14 +237,12 @@ public class PredictiveAnalyticsDashboard extends VBox {
         HBox buttonBox = new HBox(10, predictButton, realTimeProgress);
         buttonBox.setAlignment(Pos.CENTER_LEFT);
 
-        // Results Area
         realTimeResults = new TextArea();
         realTimeResults.setPrefHeight(200);
         realTimeResults.setEditable(false);
         realTimeResults.setStyle("-fx-font-family: 'Monospaced'; -fx-font-size: 12px;");
         realTimeResults.setText("Enter parameters and click 'Predict' to see results here...");
 
-        // Add components
         tabContent.getChildren().addAll(title, formGrid, buttonBox, realTimeResults);
 
         Tab tab = new Tab("🔮 Real-time", tabContent);
@@ -202,16 +250,86 @@ public class PredictiveAnalyticsDashboard extends VBox {
         return tab;
     }
 
+    private void performRealTimePrediction() {
+        try {
+            realTimeProgress.setVisible(true);
+            predictButton.setDisable(true);
+
+            ExportData input = new ExportData(
+                    LocalDate.now().plusDays(30),
+                    productCombo.getValue(),
+                    priceSpinner.getValue(),
+                    volumeSpinner.getValue(),
+                    countryCombo.getValue(),
+                    marketIndicatorCombo.getValue()
+            );
+
+            executorService.submit(() -> {
+                try {
+                    List<ExportData> singleInput = List.of(input);
+                    List<PricePrediction> predictions = intelligenceService.analyzeExports(singleInput);
+
+                    javafx.application.Platform.runLater(() -> {
+                        if (!predictions.isEmpty()) {
+                            PricePrediction prediction = predictions.get(0);
+
+                            StringBuilder result = new StringBuilder();
+                            result.append("✅ PREDICTION SUCCESSFUL\n");
+                            result.append("══════════════════════════\n\n");
+                            result.append(String.format("📅 Prediction Date: %s\n",
+                                    prediction.predictionDate()));
+                            result.append(String.format("🏷️  Product: %s\n",
+                                    prediction.productType().getFrenchName()));
+                            result.append(String.format("💰 Predicted Price: %.2f TND/ton\n",
+                                    prediction.predictedPrice()));
+                            result.append(String.format("📊 Confidence: %.1f%%\n",
+                                    prediction.confidence() * 100));
+                            result.append(String.format("🤖 Model: %s\n",
+                                    prediction.modelName()));
+                            result.append(String.format("📈 Status: %s\n",
+                                    prediction.status()));
+
+                            realTimeResults.setText(result.toString());
+
+                            // Add to history
+                            predictionHistory.add(prediction);
+
+                            // FIX 4: Also add to Queue/Deque for demonstration
+                            predictionQueue.offer(prediction);
+                            predictionHistoryStack.push(prediction);
+
+                        } else {
+                            realTimeResults.setText("❌ No prediction returned from model");
+                        }
+
+                        realTimeProgress.setVisible(false);
+                        predictButton.setDisable(false);
+                    });
+
+                } catch (Exception e) {
+                    javafx.application.Platform.runLater(() -> {
+                        realTimeResults.setText("❌ Prediction Error: " + e.getMessage());
+                        realTimeProgress.setVisible(false);
+                        predictButton.setDisable(false);
+                    });
+                }
+            });
+
+        } catch (Exception e) {
+            realTimeResults.setText("❌ Error: " + e.getMessage());
+            realTimeProgress.setVisible(false);
+            predictButton.setDisable(false);
+        }
+    }
+
     private Tab createBatchTab() {
         VBox tabContent = new VBox(15);
         tabContent.setPadding(new Insets(20));
         tabContent.setStyle("-fx-background-color: #e3f2fd;");
 
-        // Title
         Label title = new Label("📦 BATCH PREDICTION PROCESSING");
         title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1565c0;");
 
-        // Batch Controls
         HBox controls = new HBox(10);
         controls.setAlignment(Pos.CENTER_LEFT);
 
@@ -229,24 +347,20 @@ public class PredictiveAnalyticsDashboard extends VBox {
         controls.getChildren().addAll(batchSizeLabel, batchSizeField,
                 startBatchButton, pauseBatchButton, cancelBatchButton);
 
-        // Progress Bar
         batchProgressBar = new ProgressBar(0);
         batchProgressBar.setPrefWidth(400);
         batchProgressLabel = new Label("0% - Ready");
 
         VBox progressBox = new VBox(5, batchProgressBar, batchProgressLabel);
 
-        // Queue List
         Label queueLabel = new Label("Prediction Queue:");
         batchQueueList = new ListView<>();
         batchQueueList.setPrefHeight(150);
 
-        // Results Table
         Label resultsLabel = new Label("Batch Results:");
         batchResultsTable = new TableView<>();
         batchResultsTable.setPrefHeight(200);
 
-        // Setup table columns
         TableColumn<PricePrediction, String> productCol = new TableColumn<>("Product");
         productCol.setCellValueFactory(cell ->
                 new javafx.beans.property.SimpleStringProperty(
@@ -264,12 +378,10 @@ public class PredictiveAnalyticsDashboard extends VBox {
 
         batchResultsTable.getColumns().addAll(productCol, priceCol, confidenceCol);
 
-        // Event Handlers
         startBatchButton.setOnAction(e -> startBatchProcessing());
         pauseBatchButton.setOnAction(e -> toggleBatchProcessing());
         cancelBatchButton.setOnAction(e -> cancelBatchProcessing());
 
-        // Add components
         tabContent.getChildren().addAll(title, controls, progressBox,
                 queueLabel, batchQueueList,
                 resultsLabel, batchResultsTable);
@@ -279,23 +391,181 @@ public class PredictiveAnalyticsDashboard extends VBox {
         return tab;
     }
 
+    private void startBatchProcessing() {
+        try {
+            int batchSize = Integer.parseInt(batchSizeField.getText());
+            if (batchSize <= 0) {
+                batchProgressLabel.setText("Invalid batch size");
+                return;
+            }
+
+            startBatchButton.setDisable(true);
+            pauseBatchButton.setDisable(false);
+            cancelBatchButton.setDisable(false);
+
+            batchQueueList.getItems().clear();
+            batchResultsTable.getItems().clear();
+
+            List<ExportData> batchData = generateBatchData(batchSize);
+
+            // FIX 5: Add batch items to queue for processing
+            for (ExportData data : batchData) {
+                // Create pending prediction for queue display
+                PricePrediction pending = new PricePrediction(
+                        LocalDate.now().plusDays(30),
+                        data.productType(),
+                        0.0,
+                        0.0,
+                        "Pending",
+                        PredictionStatus.PENDING
+                );
+                batchQueueList.getItems().add(pending);
+
+                // Add to processing queue
+                predictionQueue.offer(pending);
+            }
+
+            executorService.submit(() -> processBatch(batchData));
+
+        } catch (NumberFormatException e) {
+            batchProgressLabel.setText("Invalid batch size format");
+        }
+    }
+
+    private void processBatch(List<ExportData> batchData) {
+        AtomicInteger completed = new AtomicInteger(0);
+        int total = batchData.size();
+
+        for (int i = 0; i < total; i++) {
+            final int currentIndex = i;
+
+            if (cancelButtonActive()) {
+                break;
+            }
+
+            try {
+                Thread.sleep(500);
+
+                List<PricePrediction> predictions = intelligenceService.analyzeExports(
+                        List.of(batchData.get(currentIndex))
+                );
+
+                javafx.application.Platform.runLater(() -> {
+                    if (!predictions.isEmpty()) {
+                        PricePrediction prediction = predictions.get(0);
+
+                        // Update queue display
+                        if (currentIndex < batchQueueList.getItems().size()) {
+                            batchQueueList.getItems().set(currentIndex, prediction);
+                        }
+
+                        // Add to results table
+                        batchResultsTable.getItems().add(prediction);
+
+                        // Add to history
+                        predictionHistory.add(prediction);
+
+                        // Add to history stack
+                        predictionHistoryStack.push(prediction);
+                    }
+
+                    int done = completed.incrementAndGet();
+                    double progress = (double) done / total;
+                    batchProgressBar.setProgress(progress);
+                    batchProgressLabel.setText(String.format("%d/%d (%.0f%%)",
+                            done, total, progress * 100));
+
+                    if (done == total) {
+                        startBatchButton.setDisable(false);
+                        pauseBatchButton.setDisable(true);
+                        cancelBatchButton.setDisable(true);
+                        batchProgressLabel.setText("✅ Batch processing completed");
+                    }
+                });
+
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            } catch (Exception e) {
+                javafx.application.Platform.runLater(() -> {
+                    batchProgressLabel.setText("❌ Error at item " + (currentIndex + 1) + ": " + e.getMessage());
+                });
+            }
+        }
+    }
+
+    private boolean cancelButtonActive() {
+        // Check if cancel button is enabled (processing is active)
+        return cancelBatchButton.isDisabled();
+    }
+
+    private void toggleBatchProcessing() {
+        if (pauseBatchButton.getText().contains("Pause")) {
+            pauseBatchButton.setText("▶ Resume");
+            batchProgressLabel.setText("⏸ Processing paused");
+        } else {
+            pauseBatchButton.setText("⏸ Pause");
+            batchProgressLabel.setText("↻ Processing resumed");
+        }
+    }
+
+    private void cancelBatchProcessing() {
+        startBatchButton.setDisable(false);
+        pauseBatchButton.setDisable(true);
+        cancelBatchButton.setDisable(true);
+        batchProgressLabel.setText("⏹ Processing cancelled");
+        batchProgressBar.setProgress(0);
+        batchQueueList.getItems().clear();
+
+        // Clear the processing queue
+        predictionQueue.clear();
+    }
+
+    private List<ExportData> generateBatchData(int size) {
+        List<ExportData> batch = new ArrayList<>();
+        Random random = new Random();
+
+        for (int i = 0; i < size; i++) {
+            ProductType product = ProductType.values()[random.nextInt(ProductType.values().length)];
+            LocalDate date = LocalDate.now().plusDays(random.nextInt(365));
+            double price = switch (product) {
+                case OLIVE_OIL -> 4000 + random.nextDouble() * 1000;
+                case DATES -> 2500 + random.nextDouble() * 800;
+                case CITRUS_FRUITS -> 1000 + random.nextDouble() * 500;
+                case WHEAT -> 700 + random.nextDouble() * 200;
+                case TOMATOES -> 800 + random.nextDouble() * 300;
+                case PEPPERS -> 1300 + random.nextDouble() * 400;
+            };
+
+            double volume = 50 + random.nextDouble() * 150;
+            String[] countries = {"France", "Germany", "Italy", "Spain", "UK", "USA"};
+            String country = countries[random.nextInt(countries.length)];
+
+            MarketIndicator indicator = MarketIndicator.values()[random.nextInt(MarketIndicator.values().length)];
+
+            batch.add(new ExportData(
+                    date, product, price, volume, country, indicator
+            ));
+        }
+
+        return batch;
+    }
+
     private Tab createHistoryTab() {
         VBox tabContent = new VBox(15);
         tabContent.setPadding(new Insets(20));
         tabContent.setStyle("-fx-background-color: #fff3e0;");
 
-        // Title
         Label title = new Label("📊 PREDICTION HISTORY & COMPARISON");
         title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #ef6c00;");
 
-        // Two-column layout
         HBox mainContent = new HBox(20);
 
-        // Left: History List
         VBox historyBox = new VBox(10);
         historyBox.setPrefWidth(300);
 
         Label historyLabel = new Label("Prediction History:");
+        // FIX 6: Proper ListView initialization
         predictionHistoryList = new ListView<>(predictionHistory);
         predictionHistoryList.setPrefHeight(300);
         predictionHistoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -308,10 +578,8 @@ public class PredictiveAnalyticsDashboard extends VBox {
         clearHistoryButton.setOnAction(e -> clearHistory());
 
         historyButtons.getChildren().addAll(compareButton, clearHistoryButton);
-
         historyBox.getChildren().addAll(historyLabel, predictionHistoryList, historyButtons);
 
-        // Right: Comparison and Chart
         VBox comparisonBox = new VBox(10);
         comparisonBox.setPrefWidth(400);
 
@@ -319,7 +587,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
         comparisonTable = new TableView<>();
         comparisonTable.setPrefHeight(150);
 
-        // Comparison table columns
         TableColumn<ComparisonItem, String> itemCol = new TableColumn<>("Metric");
         itemCol.setCellValueFactory(cell -> cell.getValue().metricProperty());
 
@@ -331,15 +598,12 @@ public class PredictiveAnalyticsDashboard extends VBox {
 
         comparisonTable.getColumns().addAll(itemCol, value1Col, value2Col);
 
-        // Trend Chart
         Label trendLabel = new Label("Price Trend Analysis:");
         trendChart = createTrendChart();
         trendChart.setPrefHeight(200);
 
         comparisonBox.getChildren().addAll(comparisonLabel, comparisonTable, trendLabel, trendChart);
-
         mainContent.getChildren().addAll(historyBox, comparisonBox);
-
         tabContent.getChildren().addAll(title, mainContent);
 
         Tab tab = new Tab("📊 History & Comparison", tabContent);
@@ -347,23 +611,65 @@ public class PredictiveAnalyticsDashboard extends VBox {
         return tab;
     }
 
+    private void compareSelectedPredictions() {
+        List<PricePrediction> selected = predictionHistoryList.getSelectionModel().getSelectedItems();
+
+        if (selected.size() != 2) {
+            showAlert("Comparison Error", "Please select exactly 2 predictions to compare");
+            return;
+        }
+
+        PricePrediction p1 = selected.get(0);
+        PricePrediction p2 = selected.get(1);
+
+        ObservableList<ComparisonItem> comparisonData = FXCollections.observableArrayList();
+
+        comparisonData.add(new ComparisonItem("Product",
+                p1.productType().getFrenchName(),
+                p2.productType().getFrenchName()));
+
+        comparisonData.add(new ComparisonItem("Predicted Price",
+                String.format("%.2f TND", p1.predictedPrice()),
+                String.format("%.2f TND", p2.predictedPrice())));
+
+        comparisonData.add(new ComparisonItem("Confidence",
+                String.format("%.1f%%", p1.confidence() * 100),
+                String.format("%.1f%%", p2.confidence() * 100)));
+
+        comparisonData.add(new ComparisonItem("Prediction Date",
+                p1.predictionDate().toString(),
+                p2.predictionDate().toString()));
+
+        comparisonData.add(new ComparisonItem("Status",
+                p1.status().toString(),
+                p2.status().toString()));
+
+        comparisonTable.setItems(comparisonData);
+        updateComparisonChart(p1, p2);
+    }
+
+    private void clearHistory() {
+        predictionHistory.clear();
+        comparisonTable.getItems().clear();
+        trendChart.getData().clear();
+
+        // Also clear the stack
+        predictionHistoryStack.clear();
+    }
+
     private Tab createScenarioTab() {
         VBox tabContent = new VBox(15);
         tabContent.setPadding(new Insets(20));
         tabContent.setStyle("-fx-background-color: #f3e5f5;");
 
-        // Title
         Label title = new Label("🧪 WHAT-IF SCENARIO ANALYSIS");
         title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #7b1fa2;");
 
-        // Two-column layout
         HBox mainContent = new HBox(20);
 
-        // Left: Scenario Controls
         VBox controlsBox = new VBox(15);
         controlsBox.setPrefWidth(300);
 
-        // Scenario parameters
         GridPane scenarioGrid = new GridPane();
         scenarioGrid.setHgap(10);
         scenarioGrid.setVgap(10);
@@ -406,7 +712,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
 
         controlsBox.getChildren().add(scenarioGrid);
 
-        // Scenario buttons
         HBox scenarioButtons = new HBox(10);
         runScenarioButton = createControlButton("🧪 Run Scenario", "#9c27b0");
         saveScenarioButton = createControlButton("💾 Save Scenario", "#607d8b");
@@ -419,7 +724,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
         scenarioButtons.getChildren().addAll(runScenarioButton, saveScenarioButton, loadScenarioButton);
         controlsBox.getChildren().add(scenarioButtons);
 
-        // Right: Results and Chart
         VBox resultsBox = new VBox(15);
 
         scenarioResults = new TextArea();
@@ -427,7 +731,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
         scenarioResults.setEditable(false);
         scenarioResults.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 12px;");
 
-        // Scenario Chart
         scenarioChart = createScenarioChart();
         scenarioChart.setPrefHeight(200);
 
@@ -461,7 +764,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
         chart.setTitle("Price Trend Analysis");
         chart.setLegendVisible(false);
 
-        // Sample data
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.getData().add(new XYChart.Data<>("Jan", 3200));
         series.getData().add(new XYChart.Data<>("Feb", 3400));
@@ -484,329 +786,23 @@ public class PredictiveAnalyticsDashboard extends VBox {
         return chart;
     }
 
-    private void performRealTimePrediction() {
-        try {
-            // Show progress
-            realTimeProgress.setVisible(true);
-            predictButton.setDisable(true);
-
-            // Get input values
-            ExportData input = new ExportData(
-                    LocalDate.now().plusDays(30), // Predict for 30 days ahead
-                    productCombo.getValue(),
-                    priceSpinner.getValue(),
-                    volumeSpinner.getValue(),
-                    countryCombo.getValue(),
-                    marketIndicatorCombo.getValue()
-            );
-
-            // Execute prediction in background thread
-            executorService.submit(() -> {
-                try {
-                    // Use AI service for prediction
-                    List<ExportData> singleInput = List.of(input);
-                    List<PricePrediction> predictions = intelligenceService.analyzeExports(singleInput);
-
-                    // Update UI on JavaFX thread
-                    javafx.application.Platform.runLater(() -> {
-                        if (!predictions.isEmpty()) {
-                            PricePrediction prediction = predictions.get(0);
-
-                            // Format results
-                            StringBuilder result = new StringBuilder();
-                            result.append("✅ PREDICTION SUCCESSFUL\n");
-                            result.append("══════════════════════════\n\n");
-                            result.append(String.format("📅 Prediction Date: %s\n",
-                                    prediction.predictionDate()));
-                            result.append(String.format("🏷️  Product: %s\n",
-                                    prediction.productType().getFrenchName()));
-                            result.append(String.format("💰 Predicted Price: %.2f TND/ton\n",
-                                    prediction.predictedPrice()));
-                            result.append(String.format("📊 Confidence: %.1f%%\n",
-                                    prediction.confidence() * 100));
-                            result.append(String.format("🤖 Model: %s\n",
-                                    prediction.modelName()));
-                            result.append(String.format("📈 Status: %s\n",
-                                    prediction.status()));
-                            result.append(String.format("⚠️  Risk Level: %d (%s)\n",
-                                    prediction.getRiskLevel(), prediction.getRiskDescription()));
-
-                            result.append("\n💡 RECOMMENDATIONS:\n");
-                            if (prediction.confidence() >= 0.8) {
-                                result.append("• High confidence prediction - Consider immediate action\n");
-                                result.append("• Lock in prices for maximum profit\n");
-                            } else if (prediction.confidence() >= 0.6) {
-                                result.append("• Moderate confidence - Monitor market closely\n");
-                                result.append("• Consider partial hedging\n");
-                            } else {
-                                result.append("• Low confidence - Gather more data\n");
-                                result.append("• Consider diversifying products\n");
-                            }
-
-                            realTimeResults.setText(result.toString());
-
-                            // Add to history
-                            predictionHistory.add(prediction);
-                            updateTrendChart(prediction);
-
-                        } else {
-                            realTimeResults.setText("❌ No prediction returned from model");
-                        }
-
-                        // Hide progress
-                        realTimeProgress.setVisible(false);
-                        predictButton.setDisable(false);
-                    });
-
-                } catch (Exception e) {
-                    javafx.application.Platform.runLater(() -> {
-                        realTimeResults.setText("❌ Prediction Error: " + e.getMessage());
-                        realTimeProgress.setVisible(false);
-                        predictButton.setDisable(false);
-                    });
-                }
-            });
-
-        } catch (Exception e) {
-            realTimeResults.setText("❌ Error: " + e.getMessage());
-            realTimeProgress.setVisible(false);
-            predictButton.setDisable(false);
-        }
-    }
-
-    private void startBatchProcessing() {
-        try {
-            int batchSize = Integer.parseInt(batchSizeField.getText());
-            if (batchSize <= 0) {
-                batchProgressLabel.setText("Invalid batch size");
-                return;
-            }
-
-            // Update UI state
-            startBatchButton.setDisable(true);
-            pauseBatchButton.setDisable(false);
-            cancelBatchButton.setDisable(false);
-
-            // Change cancel button text to indicate it's active
-            cancelBatchButton.setText("⏹ Cancel (Active)");
-
-            // Clear previous results
-            batchQueueList.getItems().clear();
-            batchResultsTable.getItems().clear();
-
-            // Generate sample batch data
-            List<ExportData> batchData = generateBatchData(batchSize);
-
-            // Add to queue
-            for (int i = 0; i < batchData.size(); i++) {
-                batchQueueList.getItems().add(
-                        PricePrediction.pendingPrediction(
-                                LocalDate.now().plusDays(i * 7),
-                                batchData.get(i).productType(),
-                                "DJL-Batch-Model"
-                        )
-                );
-            }
-
-            // Start processing in background
-            executorService.submit(() -> processBatch(batchData));
-
-        } catch (NumberFormatException e) {
-            batchProgressLabel.setText("Invalid batch size format");
-        }
-    }
-
-    private void processBatch(List<ExportData> batchData) {
-        AtomicInteger completed = new AtomicInteger(0);
-        int total = batchData.size();
-
-        for (int i = 0; i < total; i++) {
-            // Create a final copy of the loop variable for use in lambda
-            final int currentIndex = i;
-
-            // Check if cancelled
-            if (!cancelBatchButton.isDisabled()) { // If cancel button is NOT disabled (enabled), processing is active
-                try {
-                    // Simulate processing time
-                    Thread.sleep(500);
-
-                    // Get prediction
-                    List<PricePrediction> predictions = intelligenceService.analyzeExports(
-                            List.of(batchData.get(currentIndex))
-                    );
-
-                    // Update UI on JavaFX thread
-                    javafx.application.Platform.runLater(() -> {
-                        if (!predictions.isEmpty()) {
-                            PricePrediction prediction = predictions.get(0);
-
-                            // Update queue with actual prediction
-                            batchQueueList.getItems().set(currentIndex, prediction);
-
-                            // Add to results table
-                            batchResultsTable.getItems().add(prediction);
-
-                            // Add to history
-                            predictionHistory.add(prediction);
-                        }
-
-                        // Update progress
-                        int done = completed.incrementAndGet();
-                        double progress = (double) done / total;
-                        batchProgressBar.setProgress(progress);
-                        batchProgressLabel.setText(String.format("%d/%d (%.0f%%)",
-                                done, total, progress * 100));
-
-                        // If done, reset buttons
-                        if (done == total) {
-                            startBatchButton.setDisable(false);
-                            pauseBatchButton.setDisable(true);
-                            cancelBatchButton.setDisable(true);
-                            batchProgressLabel.setText("✅ Batch processing completed");
-                        }
-                    });
-
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    break;
-                } catch (Exception e) {
-                    final int errorIndex = currentIndex + 1; // Create final copy for lambda
-                    javafx.application.Platform.runLater(() -> {
-                        batchProgressLabel.setText("❌ Error at item " + errorIndex + ": " + e.getMessage());
-                    });
-                }
-            } else {
-                // Processing was cancelled
-                break;
-            }
-        }
-    }
-
-    private void toggleBatchProcessing() {
-        // For simplicity, we'll just simulate pausing
-        if (pauseBatchButton.getText().contains("Pause")) {
-            pauseBatchButton.setText("▶ Resume");
-            batchProgressLabel.setText("⏸ Processing paused");
-        } else {
-            pauseBatchButton.setText("⏸ Pause");
-            batchProgressLabel.setText("↻ Processing resumed");
-        }
-    }
-
-    private void cancelBatchProcessing() {
-        startBatchButton.setDisable(false);
-        pauseBatchButton.setDisable(true);
-        cancelBatchButton.setDisable(true);
-        cancelBatchButton.setText("⏹ Cancel"); // Reset text
-        batchProgressLabel.setText("⏹ Processing cancelled");
-        batchProgressBar.setProgress(0);
-
-        // Clear the queue to show processing stopped
-        batchQueueList.getItems().clear();
-    }
-
-    private List<ExportData> generateBatchData(int size) {
-        List<ExportData> batch = new ArrayList<>();
-        Random random = new Random();
-
-        for (int i = 0; i < size; i++) {
-            ProductType product = ProductType.values()[random.nextInt(ProductType.values().length)];
-            LocalDate date = LocalDate.now().plusDays(random.nextInt(365));
-            double price = switch (product) {
-                case OLIVE_OIL -> 4000 + random.nextDouble() * 1000;
-                case DATES -> 2500 + random.nextDouble() * 800;
-                case CITRUS_FRUITS -> 1000 + random.nextDouble() * 500;
-                case WHEAT -> 700 + random.nextDouble() * 200;
-                case TOMATOES -> 800 + random.nextDouble() * 300;
-                case PEPPERS -> 1300 + random.nextDouble() * 400;
-            };
-
-            double volume = 50 + random.nextDouble() * 150;
-            String[] countries = {"France", "Germany", "Italy", "Spain", "UK", "USA"};
-            String country = countries[random.nextInt(countries.length)];
-
-            MarketIndicator[] indicators = MarketIndicator.values();
-            MarketIndicator indicator = indicators[random.nextInt(indicators.length)];
-
-            batch.add(new ExportData(
-                    date, product, price, volume, country, indicator
-            ));
-        }
-
-        return batch;
-    }
-
-    private void compareSelectedPredictions() {
-        List<PricePrediction> selected = predictionHistoryList.getSelectionModel().getSelectedItems();
-
-        if (selected.size() != 2) {
-            showAlert("Comparison Error", "Please select exactly 2 predictions to compare");
-            return;
-        }
-
-        PricePrediction p1 = selected.get(0);
-        PricePrediction p2 = selected.get(1);
-
-        ObservableList<ComparisonItem> comparisonData = FXCollections.observableArrayList();
-
-        comparisonData.add(new ComparisonItem("Product",
-                p1.productType().getFrenchName(),
-                p2.productType().getFrenchName()));
-
-        comparisonData.add(new ComparisonItem("Predicted Price",
-                String.format("%.2f TND", p1.predictedPrice()),
-                String.format("%.2f TND", p2.predictedPrice())));
-
-        comparisonData.add(new ComparisonItem("Confidence",
-                String.format("%.1f%%", p1.confidence() * 100),
-                String.format("%.1f%%", p2.confidence() * 100)));
-
-        comparisonData.add(new ComparisonItem("Prediction Date",
-                p1.predictionDate().toString(),
-                p2.predictionDate().toString()));
-
-        comparisonData.add(new ComparisonItem("Risk Level",
-                String.valueOf(p1.getRiskLevel()),
-                String.valueOf(p2.getRiskLevel())));
-
-        comparisonData.add(new ComparisonItem("Status",
-                p1.status().toString(),
-                p2.status().toString()));
-
-        comparisonTable.setItems(comparisonData);
-
-        // Update trend chart
-        updateComparisonChart(p1, p2);
-    }
-
-    private void clearHistory() {
-        predictionHistory.clear();
-        comparisonTable.getItems().clear();
-        trendChart.getData().clear();
-    }
-
     private void runScenarioAnalysis() {
         try {
-            // Get scenario parameters
             ProductType product = scenarioProductCombo.getValue();
             double priceChange = priceChangeSlider.getValue() / 100.0;
             double volumeChange = volumeChangeSlider.getValue() / 100.0;
             MarketIndicator market = scenarioMarketCombo.getValue();
 
-            // Base data
-            double basePrice = 3500.0; // Base price for the product
-            double baseVolume = 100.0; // Base volume
+            double basePrice = 3500.0;
+            double baseVolume = 100.0;
 
-            // Apply changes
             double newPrice = basePrice * (1 + priceChange);
             double newVolume = baseVolume * (1 + volumeChange);
 
-            // Calculate impacts
             double baseRevenue = basePrice * baseVolume;
             double newRevenue = newPrice * newVolume;
             double revenueChange = ((newRevenue - baseRevenue) / baseRevenue) * 100;
 
-            // Market impact factors
             double marketFactor = switch (market) {
                 case STABLE -> 1.0;
                 case VOLATILE -> 0.9;
@@ -817,14 +813,13 @@ public class PredictiveAnalyticsDashboard extends VBox {
 
             double adjustedRevenue = newRevenue * marketFactor;
 
-            // Generate analysis report
             StringBuilder analysis = new StringBuilder();
             analysis.append("🧪 SCENARIO ANALYSIS RESULTS\n");
             analysis.append("══════════════════════════════\n\n");
             analysis.append(String.format("📦 Product: %s\n", product.getFrenchName()));
             analysis.append(String.format("📈 Price Change: %.1f%%\n", priceChange * 100));
             analysis.append(String.format("📊 Volume Change: %.1f%%\n", volumeChange * 100));
-            analysis.append(String.format("🌍 Market Condition: %s\n", market.getDescription()));
+            analysis.append(String.format("🌍 Market Condition: %s\n", market));
             analysis.append("\n📊 FINANCIAL IMPACT:\n");
             analysis.append(String.format("• Base Revenue: %.2f TND\n", baseRevenue));
             analysis.append(String.format("• New Revenue: %.2f TND\n", newRevenue));
@@ -832,32 +827,7 @@ public class PredictiveAnalyticsDashboard extends VBox {
             analysis.append(String.format("• Revenue Change: %.1f%%\n", revenueChange));
             analysis.append(String.format("• Market Impact Factor: %.2f\n", marketFactor));
 
-            analysis.append("\n💡 STRATEGIC RECOMMENDATIONS:\n");
-            if (revenueChange > 20) {
-                analysis.append("✅ Excellent opportunity - Maximize production\n");
-                analysis.append("✅ Target premium export markets\n");
-                analysis.append("✅ Consider forward contracts\n");
-            } else if (revenueChange > 5) {
-                analysis.append("📈 Positive outlook - Increase production moderately\n");
-                analysis.append("📈 Focus on quality improvement\n");
-                analysis.append("📈 Diversify export destinations\n");
-            } else if (revenueChange > -5) {
-                analysis.append("⚖️ Neutral outlook - Maintain current strategy\n");
-                analysis.append("⚖️ Monitor market closely\n");
-                analysis.append("⚖️ Consider risk hedging\n");
-            } else if (revenueChange > -20) {
-                analysis.append("⚠️ Negative outlook - Reduce production\n");
-                analysis.append("⚠️ Explore alternative products\n");
-                analysis.append("⚠️ Focus on cost reduction\n");
-            } else {
-                analysis.append("❌ High risk - Consider production pause\n");
-                analysis.append("❌ Explore new markets urgently\n");
-                analysis.append("❌ Implement emergency cost measures\n");
-            }
-
             scenarioResults.setText(analysis.toString());
-
-            // Update scenario chart
             updateScenarioChart(priceChange * 100, volumeChange * 100, revenueChange);
 
         } catch (Exception e) {
@@ -888,7 +858,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
             return;
         }
 
-        // For simplicity, load the first scenario
         Map.Entry<String, Map<String, Object>> entry = savedScenarios.entrySet().iterator().next();
         Map<String, Object> scenario = entry.getValue();
 
@@ -900,19 +869,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
         showAlert("Scenario Loaded",
                 String.format("Loaded scenario: %s\nDated: %s",
                         entry.getKey(), scenario.get("timestamp")));
-    }
-
-    private void updateTrendChart(PricePrediction prediction) {
-        // Add prediction to trend chart
-        XYChart.Series<String, Number> series = trendChart.getData().isEmpty() ?
-                new XYChart.Series<>() : trendChart.getData().get(0);
-
-        String dateLabel = prediction.predictionDate().getMonth().toString().substring(0, 3);
-        series.getData().add(new XYChart.Data<>(dateLabel, prediction.predictedPrice()));
-
-        if (trendChart.getData().isEmpty()) {
-            trendChart.getData().add(series);
-        }
     }
 
     private void updateComparisonChart(PricePrediction p1, PricePrediction p2) {
@@ -945,14 +901,11 @@ public class PredictiveAnalyticsDashboard extends VBox {
 
     private void loadSampleHistory() {
         try {
-            // Load some sample predictions for demo
             List<PricePrediction> predictions = dataService.getPredictions();
             if (!predictions.isEmpty()) {
-                // Take up to 5 predictions for the sample history
                 int count = Math.min(predictions.size(), 5);
                 predictionHistory.addAll(predictions.subList(0, count));
             } else {
-                // Create sample predictions if none exist
                 createSampleHistory();
             }
         } catch (Exception e) {
@@ -962,7 +915,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
     }
 
     private void createSampleHistory() {
-        // Create some sample predictions
         predictionHistory.add(new PricePrediction(
                 LocalDate.now().plusDays(30),
                 ProductType.OLIVE_OIL,
@@ -997,7 +949,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
         alert.showAndWait();
     }
 
-    // Helper class for comparison table
     private static class ComparisonItem {
         private final String metric;
         private final String value1;
