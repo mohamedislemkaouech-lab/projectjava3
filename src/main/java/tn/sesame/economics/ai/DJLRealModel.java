@@ -52,7 +52,7 @@ public class DJLRealModel extends BaseAIModel {
     private NDManager manager;
 
     // Model configuration - enhanced for better learning
-    private static final int INPUT_FEATURES = 6;
+    private static final int INPUT_FEATURES = 8;
     private static final int HIDDEN_SIZE = 32;
     private static final int OUTPUT_SIZE = 1;
     private static final int BATCH_SIZE = 16;
@@ -87,12 +87,12 @@ public class DJLRealModel extends BaseAIModel {
         public NDList processInput(TranslatorContext ctx, ExportData input) {
             NDManager manager = ctx.getNDManager();
 
-            // Convert ExportData to features
+            // Convert ExportData to features - 8 features now
             float[] features = new float[INPUT_FEATURES];
 
-            // Enhanced feature engineering
+            // Enhanced feature engineering with new fields
             features[0] = input.productType().ordinal() / 10.0f;
-            features[1] = (float) (Math.log1p(input.pricePerTon()) / Math.log(10000)); // Log normalization
+            features[1] = (float) (Math.log1p(input.pricePerTon()) / Math.log(10000));
             features[2] = (float) (input.volume() / 1000.0);
             features[3] = input.indicator().ordinal() / 10.0f;
 
@@ -101,9 +101,16 @@ public class DJLRealModel extends BaseAIModel {
             features[4] = (float) Math.sin(2 * Math.PI * month / 12);
             features[5] = (float) Math.cos(2 * Math.PI * month / 12);
 
+            // Nouveau: Volatilité des prix (feature 6)
+            features[6] = (float) input.priceVolatility();
+
+            // Nouveau: Taux de change (feature 7)
+            features[7] = (float) (input.exchangeRateTNDUSD() / 4.0); // Normalisé
+
             NDArray array = manager.create(features).reshape(1, INPUT_FEATURES);
             return new NDList(array);
         }
+
 
         @Override
         public Float processOutput(TranslatorContext ctx, NDList list) {
@@ -136,6 +143,10 @@ public class DJLRealModel extends BaseAIModel {
                 int month = input.date().getMonthValue();
                 batchFeatures[i][4] = (float) Math.sin(2 * Math.PI * month / 12);
                 batchFeatures[i][5] = (float) Math.cos(2 * Math.PI * month / 12);
+
+                // Nouveaux champs
+                batchFeatures[i][6] = (float) input.priceVolatility();
+                batchFeatures[i][7] = (float) (input.exchangeRateTNDUSD() / 4.0);
             }
 
             NDArray array = manager.create(batchFeatures).reshape(inputs.size(), INPUT_FEATURES);
@@ -461,10 +472,45 @@ public class DJLRealModel extends BaseAIModel {
                 default: volume = 100 + random.nextDouble() * 150;
             }
 
+            // Generate realistic price volatility (0.05 to 0.35)
+            double priceVolatility = 0.05 + (random.nextDouble() * 0.3);
+
+            // Adjust volatility based on market indicator
+            switch (indicator) {
+                case VOLATILE:
+                    priceVolatility *= 1.5;
+                    break;
+                case STABLE:
+                    priceVolatility *= 0.6;
+                    break;
+                case RISING:
+                case FALLING:
+                    priceVolatility *= 0.8;
+                    break;
+            }
+
+            // Ensure volatility is within reasonable bounds
+            priceVolatility = Math.max(0.01, Math.min(0.5, priceVolatility));
+
+            // Generate realistic exchange rate TND/USD (typically 0.30 to 0.33)
+            double exchangeRateTNDUSD = 0.30 + (random.nextDouble() * 0.03);
+            // Add some variation over time
+            exchangeRateTNDUSD *= (0.995 + (random.nextDouble() * 0.01));
+
             LocalDate date = baseDate.plusDays(i);
             String country = countries[random.nextInt(countries.length)];
 
-            data.add(new ExportData(date, product, basePrice, volume, country, indicator));
+            // Updated: Now with 8 arguments
+            data.add(new ExportData(
+                    date,
+                    product,
+                    basePrice,
+                    volume,
+                    country,
+                    indicator,
+                    priceVolatility,        // New field
+                    exchangeRateTNDUSD      // New field
+            ));
         }
 
         return data;
@@ -478,7 +524,7 @@ public class DJLRealModel extends BaseAIModel {
         for (int i = 0; i < size; i++) {
             ExportData export = data.get(i);
 
-            // Features (same as translator)
+            // Features (updated for 8 features)
             features[i][0] = export.productType().ordinal() / 10.0f;
             features[i][1] = (float) (Math.log1p(export.pricePerTon()) / Math.log(10000));
             features[i][2] = (float) (export.volume() / 1000.0);
@@ -488,7 +534,11 @@ public class DJLRealModel extends BaseAIModel {
             features[i][4] = (float) Math.sin(2 * Math.PI * month / 12);
             features[i][5] = (float) Math.cos(2 * Math.PI * month / 12);
 
-            // Target: predict price 30 days in future with realistic variations
+            // Nouveaux champs
+            features[i][6] = (float) export.priceVolatility();
+            features[i][7] = (float) (export.exchangeRateTNDUSD() / 4.0);
+
+            // Target: predict price 30 days in future
             double currentPrice = export.pricePerTon();
             double futurePrice = currentPrice * (0.97 + 0.06 * Math.random());
 
@@ -505,7 +555,10 @@ public class DJLRealModel extends BaseAIModel {
                     break;
             }
 
-            // Normalize target (same as input)
+            // Consider exchange rate effect
+            futurePrice *= (0.98 + 0.04 * (export.exchangeRateTNDUSD() / 3.0));
+
+            // Normalize target
             labels[i][0] = (float) (Math.log1p(futurePrice) / Math.log(10000));
         }
 
@@ -513,13 +566,13 @@ public class DJLRealModel extends BaseAIModel {
         NDArray featuresND = datasetManager.create(features);
         NDArray labelsND = datasetManager.create(labels);
 
-        // Create dataset with NDArrays
         return new ArrayDataset.Builder()
                 .setData(featuresND)
                 .optLabels(labelsND)
                 .setSampling(BATCH_SIZE, true)
                 .build();
     }
+
 
     @Override
     public PricePrediction predictPrice(ExportData input) {
@@ -748,6 +801,8 @@ public class DJLRealModel extends BaseAIModel {
         System.out.println("  4. Market Indicator (encoded)");
         System.out.println("  5. Month (sin)");
         System.out.println("  6. Month (cos)");
+        System.out.println("  7. Price Volatility");
+        System.out.println("  8. Exchange Rate TND/USD");
 
         System.out.println("\n🎯 OUTPUT:");
         System.out.println("  Predicted Future Price (30 days)");
@@ -847,20 +902,25 @@ public class DJLRealModel extends BaseAIModel {
     /**
      * Verify if deep learning is actually working
      */
+    /**
+     * Verify if deep learning is actually working
+     */
     public boolean verifyDeepLearning() {
         if (!modelTrained || model == null) {
             return false;
         }
 
         try {
-            // Test inference speed
+            // Test inference speed - Updated with all 8 fields
             ExportData testData = new ExportData(
                     LocalDate.now(),
                     tn.sesame.economics.model.ProductType.OLIVE_OIL,
                     3500.0,
                     100.0,
                     "France",
-                    tn.sesame.economics.model.MarketIndicator.RISING
+                    tn.sesame.economics.model.MarketIndicator.RISING,
+                    0.15,     // priceVolatility
+                    0.3215    // exchangeRateTNDUSD
             );
 
             long startTime = System.nanoTime();

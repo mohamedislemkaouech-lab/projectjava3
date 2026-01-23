@@ -5,6 +5,7 @@ import tn.sesame.economics.model.*;
 import tn.sesame.economics.service.EconomicIntelligenceService;
 import tn.sesame.economics.ai.DJLPredictionService;
 import tn.sesame.economics.ai.LLMReportService;
+import tn.sesame.economics.util.DataLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.*;
@@ -30,6 +31,7 @@ public class PredictiveAnalyticsDashboard extends VBox {
     private final DataService dataService;
     private EconomicIntelligenceService intelligenceService;
     private ExecutorService executorService;
+    private List<ExportData> historicalData;
 
     // FIX 1: Renamed to avoid conflict with ObservableList below
     private Queue<PricePrediction> predictionQueue = new LinkedList<>();
@@ -83,12 +85,90 @@ public class PredictiveAnalyticsDashboard extends VBox {
         this.predictionHistory = FXCollections.observableArrayList();
         this.savedScenarios = new HashMap<>();
 
+        // Load historical data
+        loadHistoricalData();
         initializeServices();
         initializeUI();
         loadSampleHistory();
 
         // FIX 2: Demonstrate Queue/Deque usage (for project requirement)
         demonstrateQueueDequeUsage();
+    }
+
+    private void loadHistoricalData() {
+        try {
+            historicalData = DataLoader.loadCSVData("exports_historical.csv");
+            if (historicalData.isEmpty()) {
+                System.out.println("⚠️ No historical data found. Using fallback data...");
+                historicalData = createFallbackData();
+            } else {
+                System.out.println("✅ Loaded " + historicalData.size() + " historical records");
+            }
+        } catch (Exception e) {
+            System.err.println("❌ Error loading historical data: " + e.getMessage());
+            historicalData = createFallbackData();
+        }
+    }
+
+    private List<ExportData> createFallbackData() {
+        List<ExportData> fallbackData = new ArrayList<>();
+        Random random = new Random();
+
+        for (int i = 0; i < 50; i++) {
+            ProductType product = ProductType.values()[random.nextInt(ProductType.values().length)];
+            LocalDate date = LocalDate.now().minusDays(random.nextInt(365));
+            double price = switch (product) {
+                case OLIVE_OIL -> 3200 + random.nextDouble() * 1600;
+                case DATES -> 2200 + random.nextDouble() * 1200;
+                case CITRUS_FRUITS -> 1200 + random.nextDouble() * 1000;
+                case WHEAT -> 700 + random.nextDouble() * 600;
+                case TOMATOES -> 900 + random.nextDouble() * 800;
+                case PEPPERS -> 1300 + random.nextDouble() * 1000;
+            };
+            double volume = 50 + random.nextDouble() * 200;
+            String[] countries = {"France", "Germany", "Italy", "Spain", "UK", "USA"};
+            String country = countries[random.nextInt(countries.length)];
+            MarketIndicator indicator = MarketIndicator.values()[random.nextInt(MarketIndicator.values().length)];
+            double volatility = 0.05 + random.nextDouble() * 0.25;
+            double exchangeRate = 0.30 + random.nextDouble() * 0.03;
+
+            fallbackData.add(new ExportData(
+                    date, product, price, volume, country, indicator,
+                    volatility, exchangeRate
+            ));
+        }
+
+        return fallbackData;
+    }
+
+    private double[] getRealisticValuesForProduct(ProductType productType) {
+        List<ExportData> productData = historicalData.stream()
+                .filter(data -> data.productType() == productType)
+                .collect(Collectors.toList());
+
+        if (productData.isEmpty()) {
+            double avgVolatility = historicalData.stream()
+                    .mapToDouble(ExportData::priceVolatility)
+                    .average()
+                    .orElse(0.15);
+            double avgExchangeRate = historicalData.stream()
+                    .mapToDouble(ExportData::exchangeRateTNDUSD)
+                    .average()
+                    .orElse(0.315);
+
+            return new double[]{avgVolatility, avgExchangeRate};
+        }
+
+        double avgVolatility = productData.stream()
+                .mapToDouble(ExportData::priceVolatility)
+                .average()
+                .orElse(0.15);
+        double avgExchangeRate = productData.stream()
+                .mapToDouble(ExportData::exchangeRateTNDUSD)
+                .average()
+                .orElse(0.315);
+
+        return new double[]{avgVolatility, avgExchangeRate};
     }
 
     private void initializeServices() {
@@ -120,7 +200,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
         getChildren().add(tabPane);
     }
 
-    // FIX 3: Simple method to demonstrate Queue/Deque usage
     private void demonstrateQueueDequeUsage() {
         // QUEUE DEMONSTRATION (FIFO)
         System.out.println("=== QUEUE (FIFO) DEMONSTRATION ===");
@@ -255,13 +334,20 @@ public class PredictiveAnalyticsDashboard extends VBox {
             realTimeProgress.setVisible(true);
             predictButton.setDisable(true);
 
+            ProductType selectedProduct = productCombo.getValue();
+            double[] realisticValues = getRealisticValuesForProduct(selectedProduct);
+            double realisticVolatility = realisticValues[0];
+            double realisticExchangeRate = realisticValues[1];
+
             ExportData input = new ExportData(
                     LocalDate.now().plusDays(30),
-                    productCombo.getValue(),
+                    selectedProduct,
                     priceSpinner.getValue(),
                     volumeSpinner.getValue(),
                     countryCombo.getValue(),
-                    marketIndicatorCombo.getValue()
+                    marketIndicatorCombo.getValue(),
+                    realisticVolatility,
+                    realisticExchangeRate
             );
 
             executorService.submit(() -> {
@@ -294,7 +380,7 @@ public class PredictiveAnalyticsDashboard extends VBox {
                             // Add to history
                             predictionHistory.add(prediction);
 
-                            // FIX 4: Also add to Queue/Deque for demonstration
+                            // Also add to Queue/Deque for demonstration
                             predictionQueue.offer(prediction);
                             predictionHistoryStack.push(prediction);
 
@@ -408,9 +494,8 @@ public class PredictiveAnalyticsDashboard extends VBox {
 
             List<ExportData> batchData = generateBatchData(batchSize);
 
-            // FIX 5: Add batch items to queue for processing
+            // Add batch items to queue for processing
             for (ExportData data : batchData) {
-                // Create pending prediction for queue display
                 PricePrediction pending = new PricePrediction(
                         LocalDate.now().plusDays(30),
                         data.productType(),
@@ -420,8 +505,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
                         PredictionStatus.PENDING
                 );
                 batchQueueList.getItems().add(pending);
-
-                // Add to processing queue
                 predictionQueue.offer(pending);
             }
 
@@ -430,6 +513,104 @@ public class PredictiveAnalyticsDashboard extends VBox {
         } catch (NumberFormatException e) {
             batchProgressLabel.setText("Invalid batch size format");
         }
+    }
+
+    private List<ExportData> generateBatchData(int size) {
+        List<ExportData> batch = new ArrayList<>();
+        Random random = new Random();
+
+        // Use historical data as source if available
+        if (!historicalData.isEmpty()) {
+            for (int i = 0; i < Math.min(size, historicalData.size()); i++) {
+                ExportData original = historicalData.get(i % historicalData.size());
+
+                double priceVariation = 0.9 + (random.nextDouble() * 0.2);
+                double volumeVariation = 0.8 + (random.nextDouble() * 0.4);
+
+                ExportData modified = new ExportData(
+                        original.date().plusDays(30),
+                        original.productType(),
+                        original.pricePerTon() * priceVariation,
+                        original.volume() * volumeVariation,
+                        original.destinationCountry(),
+                        original.indicator(),
+                        original.priceVolatility() * (0.8 + random.nextDouble() * 0.4),
+                        original.exchangeRateTNDUSD() * (0.99 + random.nextDouble() * 0.02)
+                );
+
+                batch.add(modified);
+            }
+
+            // If we need more data than historical, fill with random
+            if (size > historicalData.size()) {
+                int remaining = size - historicalData.size();
+                batch.addAll(generateRandomBatchData(remaining, random));
+            }
+        } else {
+            // Fallback to random generation if no historical data
+            batch = generateRandomBatchData(size, random);
+        }
+
+        return batch;
+    }
+
+    private List<ExportData> generateRandomBatchData(int size, Random random) {
+        List<ExportData> batch = new ArrayList<>();
+
+        for (int i = 0; i < size; i++) {
+            ProductType product = ProductType.values()[random.nextInt(ProductType.values().length)];
+            LocalDate date = LocalDate.now().plusDays(random.nextInt(365));
+            double price = switch (product) {
+                case OLIVE_OIL -> 4000 + random.nextDouble() * 1000;
+                case DATES -> 2500 + random.nextDouble() * 800;
+                case CITRUS_FRUITS -> 1000 + random.nextDouble() * 500;
+                case WHEAT -> 700 + random.nextDouble() * 200;
+                case TOMATOES -> 800 + random.nextDouble() * 300;
+                case PEPPERS -> 1300 + random.nextDouble() * 400;
+            };
+
+            double volume = 50 + random.nextDouble() * 150;
+            String[] countries = {"France", "Germany", "Italy", "Spain", "UK", "USA"};
+            String country = countries[random.nextInt(countries.length)];
+
+            MarketIndicator indicator = MarketIndicator.values()[random.nextInt(MarketIndicator.values().length)];
+
+            double volatility = calculateRealisticVolatility(product, indicator, random);
+            double exchangeRate = calculateRealisticExchangeRate(random);
+
+            batch.add(new ExportData(
+                    date, product, price, volume, country, indicator,
+                    volatility, exchangeRate
+            ));
+        }
+
+        return batch;
+    }
+
+    private double calculateRealisticVolatility(ProductType product, MarketIndicator indicator, Random random) {
+        double baseVolatility = switch (product) {
+            case OLIVE_OIL -> 0.15;
+            case DATES -> 0.12;
+            case CITRUS_FRUITS -> 0.20;
+            case WHEAT -> 0.10;
+            case TOMATOES -> 0.25;
+            case PEPPERS -> 0.18;
+        };
+
+        double indicatorFactor = switch (indicator) {
+            case VOLATILE -> 1.5;
+            case UNPREDICTABLE -> 1.3;
+            case RISING, FALLING -> 1.1;
+            case STABLE -> 0.8;
+        };
+
+        double variation = 0.7 + (random.nextDouble() * 0.6);
+
+        return Math.max(0.05, Math.min(0.5, baseVolatility * indicatorFactor * variation));
+    }
+
+    private double calculateRealisticExchangeRate(Random random) {
+        return 0.315 + ((random.nextDouble() - 0.5) * 0.015);
     }
 
     private void processBatch(List<ExportData> batchData) {
@@ -521,36 +702,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
         predictionQueue.clear();
     }
 
-    private List<ExportData> generateBatchData(int size) {
-        List<ExportData> batch = new ArrayList<>();
-        Random random = new Random();
-
-        for (int i = 0; i < size; i++) {
-            ProductType product = ProductType.values()[random.nextInt(ProductType.values().length)];
-            LocalDate date = LocalDate.now().plusDays(random.nextInt(365));
-            double price = switch (product) {
-                case OLIVE_OIL -> 4000 + random.nextDouble() * 1000;
-                case DATES -> 2500 + random.nextDouble() * 800;
-                case CITRUS_FRUITS -> 1000 + random.nextDouble() * 500;
-                case WHEAT -> 700 + random.nextDouble() * 200;
-                case TOMATOES -> 800 + random.nextDouble() * 300;
-                case PEPPERS -> 1300 + random.nextDouble() * 400;
-            };
-
-            double volume = 50 + random.nextDouble() * 150;
-            String[] countries = {"France", "Germany", "Italy", "Spain", "UK", "USA"};
-            String country = countries[random.nextInt(countries.length)];
-
-            MarketIndicator indicator = MarketIndicator.values()[random.nextInt(MarketIndicator.values().length)];
-
-            batch.add(new ExportData(
-                    date, product, price, volume, country, indicator
-            ));
-        }
-
-        return batch;
-    }
-
     private Tab createHistoryTab() {
         VBox tabContent = new VBox(15);
         tabContent.setPadding(new Insets(20));
@@ -565,7 +716,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
         historyBox.setPrefWidth(300);
 
         Label historyLabel = new Label("Prediction History:");
-        // FIX 6: Proper ListView initialization
         predictionHistoryList = new ListView<>(predictionHistory);
         predictionHistoryList.setPrefHeight(300);
         predictionHistoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -793,8 +943,11 @@ public class PredictiveAnalyticsDashboard extends VBox {
             double volumeChange = volumeChangeSlider.getValue() / 100.0;
             MarketIndicator market = scenarioMarketCombo.getValue();
 
-            double basePrice = 3500.0;
-            double baseVolume = 100.0;
+            double avgPrice = getAveragePriceForProduct(product);
+            double avgVolume = getAverageVolumeForProduct(product);
+
+            double basePrice = avgPrice;
+            double baseVolume = avgVolume;
 
             double newPrice = basePrice * (1 + priceChange);
             double newVolume = baseVolume * (1 + volumeChange);
@@ -833,6 +986,32 @@ public class PredictiveAnalyticsDashboard extends VBox {
         } catch (Exception e) {
             scenarioResults.setText("❌ Error in scenario analysis: " + e.getMessage());
         }
+    }
+
+    private double getAveragePriceForProduct(ProductType productType) {
+        return historicalData.stream()
+                .filter(data -> data.productType() == productType)
+                .mapToDouble(ExportData::pricePerTon)
+                .average()
+                .orElseGet(() -> {
+                    switch (productType) {
+                        case OLIVE_OIL: return 3500.0;
+                        case DATES: return 2500.0;
+                        case CITRUS_FRUITS: return 1500.0;
+                        case WHEAT: return 900.0;
+                        case TOMATOES: return 1200.0;
+                        case PEPPERS: return 1600.0;
+                        default: return 2000.0;
+                    }
+                });
+    }
+
+    private double getAverageVolumeForProduct(ProductType productType) {
+        return historicalData.stream()
+                .filter(data -> data.productType() == productType)
+                .mapToDouble(ExportData::volume)
+                .average()
+                .orElse(100.0);
     }
 
     private void saveCurrentScenario() {

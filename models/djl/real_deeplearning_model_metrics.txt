@@ -1,9 +1,9 @@
 Model: real_deeplearning_model
-Training Date: 2026-01-21
-Accuracy: 99,78%
-Training Loss: 0,000216
-Validation Loss: 0,000238
-Architecture: 6→32→16→1
+Training Date: 2026-01-23
+Accuracy: 99,96%
+Training Loss: 0,000041
+Validation Loss: 0,000045
+Architecture: 8→32→16→1
 Epochs: 50
 Batch Size: 16
 Learning Rate: 0.001

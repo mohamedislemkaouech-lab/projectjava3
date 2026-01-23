@@ -94,50 +94,15 @@ public class DataLoader {
 
         return data;
     }
-    private static void checkFileLocations() {
-        System.out.println("\n=== VÉRIFICATION DES FICHIERS ===");
 
-        String[] files = {
-                "exports_historical.csv",
-                "exports_training.csv",
-                "exports_test.csv"
-        };
-
-        for (String file : files) {
-            // Check multiple possible locations
-            String[] paths = {
-                    file,
-                    "data/" + file,
-                    "src/main/resources/data/" + file,
-                    "resources/data/" + file,
-                    "src/main/resources/" + file,
-                    "resources/" + file
-            };
-
-            System.out.println("\nRecherche de: " + file);
-            boolean found = false;
-
-            for (String path : paths) {
-                java.nio.file.Path filePath = java.nio.file.Paths.get(path);
-                if (java.nio.file.Files.exists(filePath)) {
-                    System.out.println("✓ Trouvé à: " + filePath.toAbsolutePath());
-                    found = true;
-                    break;
-                }
-            }
-
-            if (!found) {
-                System.out.println("❌ Fichier non trouvé");
-            }
-        }
-    }
     /**
      * Parse une ligne CSV en objet ExportData
+     * Format: date,product_type,price_per_ton,volume,destination_country,market_indicator,price_volatility,exchange_rate
      */
     private static ExportData parseCSVLine(String line) {
         try {
             String[] parts = line.split(",");
-            if (parts.length != 6) {
+            if (parts.length != 8) {
                 log.warn("Ligne invalide ({} champs): {}", parts.length, line);
                 return null;
             }
@@ -148,7 +113,9 @@ public class DataLoader {
                     Double.parseDouble(parts[2].trim()),
                     Double.parseDouble(parts[3].trim()),
                     parts[4].trim(),
-                    MarketIndicator.valueOf(parts[5].trim())
+                    MarketIndicator.valueOf(parts[5].trim()),
+                    Double.parseDouble(parts[6].trim()),  // price_volatility
+                    Double.parseDouble(parts[7].trim())   // exchange_rate_TND_USD
             );
         } catch (Exception e) {
             log.error("Erreur de parsing de la ligne: {} - {}", line, e.getMessage());
@@ -157,7 +124,45 @@ public class DataLoader {
     }
 
     /**
-     * Affiche les statistiques du dataset
+     * Encode les caractéristiques d'une exportation en vecteur numérique.
+     * Mise à jour pour inclure les nouveaux champs.
+     */
+    public static double[] encodeFeatures(ExportData data) {
+        // Augmenter la taille du vecteur pour inclure les nouvelles features
+        double[] features = new double[12];
+
+        // 1. Encodage du mois (0-11)
+        features[0] = data.date().getMonthValue() / 12.0;
+
+        // 2. Encodage du produit (one-hot simplifié)
+        int productIndex = data.productType().ordinal();
+        features[1 + productIndex % 5] = 1.0;
+
+        // 3. Encodage du volume (normalisé)
+        features[6] = data.volume() / 1000.0;
+
+        // 4. Encodage du pays (simplifié)
+        int countryHash = Math.abs(data.destinationCountry().hashCode() % 10);
+        features[7] = countryHash / 10.0;
+
+        // 5. Encodage de l'indicateur de marché
+        features[8] = data.indicator().ordinal() / 4.0;
+
+        // 6. Année normalisée (0-1 sur 20 ans)
+        int year = data.date().getYear();
+        features[9] = (year - 2005) / 20.0;
+
+        // 7. Volatilité des prix
+        features[10] = data.priceVolatility();
+
+        // 8. Taux de change
+        features[11] = data.exchangeRateTNDUSD() / 4.0;
+
+        return features;
+    }
+
+    /**
+     * Affiche les statistiques du dataset avec les nouveaux champs.
      */
     public static void displayDatasetStatistics(List<ExportData> dataset) {
         if (dataset.isEmpty()) {
@@ -165,8 +170,8 @@ public class DataLoader {
             return;
         }
 
-        System.out.println("\n📊 STATISTIQUES DU DATASET");
-        System.out.println("=".repeat(50));
+        System.out.println("\n📊 STATISTIQUES DU DATASET (8 champs)");
+        System.out.println("=".repeat(60));
 
         // Nombre total d'enregistrements
         System.out.printf("Nombre total d'exportations: %,d%n", dataset.size());
@@ -195,6 +200,20 @@ public class DataLoader {
                 .sum();
         System.out.printf("Volume total exporté: %.2f tonnes%n", totalVolume);
 
+        // Volatilité moyenne
+        double avgVolatility = dataset.stream()
+                .mapToDouble(ExportData::priceVolatility)
+                .average()
+                .orElse(0.0);
+        System.out.printf("Volatilité moyenne des prix: %.4f%n", avgVolatility);
+
+        // Taux de change moyen
+        double avgExchangeRate = dataset.stream()
+                .mapToDouble(ExportData::exchangeRateTNDUSD)
+                .average()
+                .orElse(0.0);
+        System.out.printf("Taux de change moyen TND/USD: %.4f%n", avgExchangeRate);
+
         // Distribution par produit
         System.out.println("\n📦 DISTRIBUTION PAR PRODUIT:");
         Map<ProductType, Long> productCount = dataset.stream()
@@ -219,152 +238,123 @@ public class DataLoader {
     }
 
     /**
-     * Exporte les prédictions vers un fichier CSV
+     * NOUVELLE MÉTHODE: Export predictions to CSV file
      */
-    public static void exportPredictionsToCSV(List<PricePrediction> predictions, String outputFileName) {
-        String filePath = "src/main/resources/data/" + outputFileName;
-
-        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
-            // Écrire l'en-tête
-            writer.println("prediction_date,product_type,predicted_price,confidence,model_name,status");
-
-            // Écrire les données
-            for (PricePrediction prediction : predictions) {
-                writer.printf("%s,%s,%.2f,%.2f,%s,%s%n",
-                        prediction.predictionDate(),
-                        prediction.productType(),
-                        prediction.predictedPrice(),
-                        prediction.confidence(),
-                        prediction.modelName(),
-                        prediction.status()
-                );
-            }
-
-            log.info("{} prédictions exportées vers {}", predictions.size(), outputFileName);
-
-        } catch (IOException e) {
-            log.error("Erreur lors de l'export CSV: {}", e.getMessage());
+    public static void exportPredictionsToCSV(List<PricePrediction> predictions, String fileName) throws IOException {
+        if (predictions.isEmpty()) {
+            throw new IOException("No predictions to export");
         }
+
+        StringBuilder csv = new StringBuilder();
+        // Header
+        csv.append("prediction_date,product_type,predicted_price,confidence,model_name,status\n");
+
+        // Data rows
+        for (PricePrediction pred : predictions) {
+            csv.append(String.format("%s,%s,%.2f,%.4f,%s,%s%n",
+                    pred.predictionDate(),
+                    pred.productType().name(),
+                    pred.predictedPrice(),
+                    pred.confidence(),
+                    pred.modelName(),
+                    pred.status().name()));
+        }
+
+        Files.writeString(Paths.get(fileName), csv.toString());
+        log.info("✅ Exported {} predictions to {}", predictions.size(), fileName);
     }
 
     /**
-     * Prépare les données pour l'entraînement (normalisation, encodage, etc.)
+     * NOUVELLE MÉTHODE: Prepare data for training - converts ExportData to feature vectors and targets.
      */
-    public static Map<String, Object> prepareDataForTraining(List<ExportData> trainingData) {
-        log.info("Préparation des données pour l'entraînement ({} enregistrements)", trainingData.size());
+    public static Map<String, Object> prepareDataForTraining(List<ExportData> data) {
+        List<double[]> features = new ArrayList<>();
+        double[] targets = new double[data.size()];
 
-        Map<String, Object> preparedData = new HashMap<>();
+        for (int i = 0; i < data.size(); i++) {
+            ExportData export = data.get(i);
+            features.add(encodeFeatures(export));
+            targets[i] = export.pricePerTon();
+        }
 
-        // 1. Extraire les features (caractéristiques)
-        List<double[]> features = trainingData.stream()
-                .map(data -> encodeFeatures(data))
-                .collect(Collectors.toList());
-
-        // 2. Extraire les targets (prix réels)
-        double[] targets = trainingData.stream()
-                .mapToDouble(ExportData::pricePerTon)
-                .toArray();
-
-        // 3. Calculer les statistiques pour la normalisation
-        double[] featureMeans = calculateFeatureMeans(features);
-        double[] featureStdDevs = calculateFeatureStdDevs(features, featureMeans);
-
-        // 4. Normaliser les features
-        List<double[]> normalizedFeatures = normalizeFeatures(features, featureMeans, featureStdDevs);
-
-        preparedData.put("features", normalizedFeatures);
-        preparedData.put("targets", targets);
-        preparedData.put("feature_means", featureMeans);
-        preparedData.put("feature_stddevs", featureStdDevs);
-        preparedData.put("original_data", trainingData);
-
-        log.info("Données préparées: {} features, {} targets",
-                features.size(), targets.length);
-
-        return preparedData;
+        Map<String, Object> result = new HashMap<>();
+        result.put("features", features);
+        result.put("targets", targets);
+        return result;
     }
 
     /**
-     * Encode les caractéristiques d'une exportation en vecteur numérique
+     * Normalize features to [0, 1] range
      */
-    public static double[] encodeFeatures(ExportData data) {
-        // Créer un vecteur de features
-        double[] features = new double[10]; // Ajuster selon le nombre de features
+    public static List<double[]> normalizeFeatures(List<double[]> features) {
+        if (features.isEmpty()) return features;
 
-        // 1. Encodage du mois (0-11)
-        features[0] = data.date().getMonthValue() / 12.0;
-
-        // 2. Encodage du produit (one-hot simplifié)
-        int productIndex = data.productType().ordinal();
-        features[1 + productIndex % 5] = 1.0; // Utilise les positions 1-5
-
-        // 3. Encodage du volume (normalisé)
-        features[6] = data.volume() / 1000.0; // Normalisation approximative
-
-        // 4. Encodage du pays (simplifié)
-        int countryHash = Math.abs(data.destinationCountry().hashCode() % 10);
-        features[7] = countryHash / 10.0;
-
-        // 5. Encodage de l'indicateur de marché
-        features[8] = data.indicator().ordinal() / 4.0; // Normalisé 0-1
-
-        // 6. Année normalisée (0-1 sur 20 ans)
-        int year = data.date().getYear();
-        features[9] = (year - 2005) / 20.0; // 2005-2025
-
-        return features;
-    }
-
-    private static double[] calculateFeatureMeans(List<double[]> features) {
         int numFeatures = features.get(0).length;
-        double[] means = new double[numFeatures];
+        double[] mins = new double[numFeatures];
+        double[] maxs = new double[numFeatures];
 
-        for (double[] featureVector : features) {
+        Arrays.fill(mins, Double.MAX_VALUE);
+        Arrays.fill(maxs, Double.MIN_VALUE);
+
+        // Find min and max for each feature
+        for (double[] feature : features) {
             for (int i = 0; i < numFeatures; i++) {
-                means[i] += featureVector[i];
+                mins[i] = Math.min(mins[i], feature[i]);
+                maxs[i] = Math.max(maxs[i], feature[i]);
             }
         }
 
-        for (int i = 0; i < numFeatures; i++) {
-            means[i] /= features.size();
+        // Normalize
+        List<double[]> normalized = new ArrayList<>();
+        for (double[] feature : features) {
+            double[] norm = new double[numFeatures];
+            for (int i = 0; i < numFeatures; i++) {
+                double range = maxs[i] - mins[i];
+                norm[i] = range > 0 ? (feature[i] - mins[i]) / range : 0.0;
+            }
+            normalized.add(norm);
         }
 
-        return means;
+        return normalized;
     }
 
-    private static double[] calculateFeatureStdDevs(List<double[]> features, double[] means) {
-        int numFeatures = features.get(0).length;
-        double[] variances = new double[numFeatures];
+    /**
+     * Check file locations - utility method
+     */
+    public static void checkFileLocations() {
+        System.out.println("\n=== VÉRIFICATION DES FICHIERS ===");
 
-        for (double[] featureVector : features) {
-            for (int i = 0; i < numFeatures; i++) {
-                double diff = featureVector[i] - means[i];
-                variances[i] += diff * diff;
+        String[] files = {
+                "exports_historical.csv",
+                "exports_training.csv",
+                "exports_test.csv"
+        };
+
+        for (String file : files) {
+            String[] paths = {
+                    file,
+                    "data/" + file,
+                    "src/main/resources/data/" + file,
+                    "resources/data/" + file,
+                    "src/main/resources/" + file,
+                    "resources/" + file
+            };
+
+            System.out.println("\nRecherche de: " + file);
+            boolean found = false;
+
+            for (String path : paths) {
+                Path filePath = Paths.get(path);
+                if (Files.exists(filePath)) {
+                    System.out.println("✓ Trouvé à: " + filePath.toAbsolutePath());
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                System.out.println("❌ Fichier non trouvé");
             }
         }
-
-        double[] stdDevs = new double[numFeatures];
-        for (int i = 0; i < numFeatures; i++) {
-            stdDevs[i] = Math.sqrt(variances[i] / features.size());
-            // Éviter la division par zéro
-            if (stdDevs[i] < 0.0001) {
-                stdDevs[i] = 1.0;
-            }
-        }
-
-        return stdDevs;
-    }
-
-    private static List<double[]> normalizeFeatures(List<double[]> features,
-                                                    double[] means, double[] stdDevs) {
-        return features.stream()
-                .map(featureVector -> {
-                    double[] normalized = new double[featureVector.length];
-                    for (int i = 0; i < featureVector.length; i++) {
-                        normalized[i] = (featureVector[i] - means[i]) / stdDevs[i];
-                    }
-                    return normalized;
-                })
-                .collect(Collectors.toList());
     }
 }

@@ -47,18 +47,19 @@ public class SimpleLinearPredictionService extends BaseAIModel {
                 }
             }
 
-            // If still no data, create demo data
+            // If still no data, create demo data WITH ALL 8 FIELDS
             if (trainingDataList == null || trainingDataList.isEmpty()) {
                 log.warn("Utilisation de données de démonstration");
                 trainingDataList = Arrays.asList(
-                        // CORRECTED: Using proper constructor order
                         new ExportData(
                                 LocalDate.now().minusDays(60),  // date
                                 ProductType.OLIVE_OIL,           // productType
-                                2500.0,                         // pricePerTon (NOT volume!)
-                                100.0,                          // volume (NOT pricePerTon!)
+                                2500.0,                         // pricePerTon
+                                100.0,                          // volume
                                 "France",                       // destinationCountry
-                                MarketIndicator.STABLE          // indicator
+                                MarketIndicator.STABLE,         // indicator
+                                0.12,                           // priceVolatility (new)
+                                0.315                           // exchangeRateTNDUSD (new)
                         ),
                         new ExportData(
                                 LocalDate.now().minusDays(30),
@@ -66,7 +67,9 @@ public class SimpleLinearPredictionService extends BaseAIModel {
                                 1800.0,      // pricePerTon
                                 80.0,        // volume
                                 "Germany",
-                                MarketIndicator.RISING
+                                MarketIndicator.RISING,
+                                0.08,        // priceVolatility
+                                0.318        // exchangeRateTNDUSD
                         ),
                         new ExportData(
                                 LocalDate.now().minusDays(45),
@@ -74,15 +77,19 @@ public class SimpleLinearPredictionService extends BaseAIModel {
                                 2600.0,     // pricePerTon
                                 120.0,      // volume
                                 "Italy",
-                                MarketIndicator.VOLATILE
+                                MarketIndicator.VOLATILE,
+                                0.22,       // priceVolatility
+                                0.312       // exchangeRateTNDUSD
                         ),
                         new ExportData(
                                 LocalDate.now().minusDays(20),
-                                ProductType.CITRUS_FRUITS,  // CORRECTED: CITRUS_FRUITS not CITRUS
+                                ProductType.CITRUS_FRUITS,
                                 1200.0,    // pricePerTon
                                 90.0,      // volume
                                 "Spain",
-                                MarketIndicator.STABLE
+                                MarketIndicator.STABLE,
+                                0.10,      // priceVolatility
+                                0.320      // exchangeRateTNDUSD
                         ),
                         new ExportData(
                                 LocalDate.now().minusDays(15),
@@ -90,18 +97,27 @@ public class SimpleLinearPredictionService extends BaseAIModel {
                                 1850.0,    // pricePerTon
                                 60.0,      // volume
                                 "France",
-                                MarketIndicator.FALLING
+                                MarketIndicator.FALLING,
+                                0.07,      // priceVolatility
+                                0.317      // exchangeRateTNDUSD
                         )
                 );
             }
 
-            // Prepare and train
-            Map<String, Object> preparedData = DataLoader.prepareDataForTraining(trainingDataList);
+            // Prepare and train - USE CUSTOM TRAINING METHOD
+            log.info("Préparation des données pour l'entraînement...");
 
-            @SuppressWarnings("unchecked")
-            List<double[]> features = (List<double[]>) preparedData.get("features");
-            double[] targets = (double[]) preparedData.get("targets");
+            // Extract features and targets manually
+            List<double[]> features = new ArrayList<>();
+            double[] targets = new double[trainingDataList.size()];
 
+            for (int i = 0; i < trainingDataList.size(); i++) {
+                ExportData data = trainingDataList.get(i);
+                features.add(encodeFeaturesForTraining(data));
+                targets[i] = data.pricePerTon(); // Target is the price
+            }
+
+            // Train the model
             model.train(features, targets, 100, 0.01);
             isLoaded = true;
 
@@ -112,6 +128,39 @@ public class SimpleLinearPredictionService extends BaseAIModel {
             log.error("Erreur lors du chargement: {}", e.getMessage());
             isLoaded = true; // Mark as loaded anyway to avoid blocking
         }
+    }
+
+    /**
+     * Custom method to encode features for training (8 features)
+     */
+    private double[] encodeFeaturesForTraining(ExportData data) {
+        double[] features = new double[8]; // Updated to 8 features
+
+        // 1. Month encoding (0-1)
+        features[0] = data.date().getMonthValue() / 12.0;
+
+        // 2. Product type encoding (0-1)
+        features[1] = data.productType().ordinal() / 10.0;
+
+        // 3. Volume normalized (/1000)
+        features[2] = data.volume() / 1000.0;
+
+        // 4. Market indicator encoding (0-1)
+        features[3] = data.indicator().ordinal() / 5.0;
+
+        // 5. Price volatility (already normalized 0-0.5)
+        features[4] = data.priceVolatility() / 0.5;
+
+        // 6. Exchange rate normalized (/0.5)
+        features[5] = data.exchangeRateTNDUSD() / 0.5;
+
+        // 7. Country hash encoding
+        features[6] = (data.destinationCountry().hashCode() % 100) / 100.0;
+
+        // 8. Day of year encoding (0-1)
+        features[7] = data.date().getDayOfYear() / 365.0;
+
+        return features;
     }
 
     @Override
@@ -139,6 +188,12 @@ public class SimpleLinearPredictionService extends BaseAIModel {
                 predictedPrice *= (0.9 + Math.random() * 0.2);
             }
 
+            // Adjust for exchange rate
+            predictedPrice *= (1.0 + (input.exchangeRateTNDUSD() - 0.315) * 2.0);
+
+            // Adjust for volatility
+            predictedPrice *= (1.0 + input.priceVolatility() * 0.5);
+
             return new PricePrediction(
                     LocalDate.now().plusDays(30),
                     input.productType(),
@@ -162,15 +217,36 @@ public class SimpleLinearPredictionService extends BaseAIModel {
         }
     }
 
+    /**
+     * Encode features for prediction (8 features)
+     */
     private double[] encodeFeaturesLocal(ExportData data) {
-        double[] features = new double[6];
+        double[] features = new double[8]; // Updated to 8 features
+
+        // 1. Month encoding (0-1)
         features[0] = data.date().getMonthValue() / 12.0;
+
+        // 2. Product type encoding (0-1)
         features[1] = data.productType().ordinal() / 10.0;
+
+        // 3. Volume normalized (/1000)
         features[2] = data.volume() / 1000.0;
+
+        // 4. Price normalized (/5000)
         features[3] = data.pricePerTon() / 5000.0;
+
+        // 5. Market indicator encoding (0-1)
         features[4] = data.indicator().ordinal() / 5.0;
-        // Simple country encoding
-        features[5] = (data.destinationCountry().hashCode() % 100) / 100.0;
+
+        // 6. Price volatility (0-0.5)
+        features[5] = data.priceVolatility() / 0.5;
+
+        // 7. Exchange rate normalized (/0.5)
+        features[6] = data.exchangeRateTNDUSD() / 0.5;
+
+        // 8. Country hash encoding
+        features[7] = (data.destinationCountry().hashCode() % 100) / 100.0;
+
         return features;
     }
 
@@ -193,5 +269,63 @@ public class SimpleLinearPredictionService extends BaseAIModel {
         model = null;
         isLoaded = false;
         log.info("Modèle simple déchargé");
+    }
+
+    /**
+     * Additional helper method to create demo data
+     */
+    public static List<ExportData> createDemoData() {
+        return Arrays.asList(
+                new ExportData(
+                        LocalDate.now().minusDays(60),
+                        ProductType.OLIVE_OIL,
+                        2500.0,
+                        100.0,
+                        "France",
+                        MarketIndicator.STABLE,
+                        0.12,
+                        0.315
+                ),
+                new ExportData(
+                        LocalDate.now().minusDays(30),
+                        ProductType.DATES,
+                        1800.0,
+                        80.0,
+                        "Germany",
+                        MarketIndicator.RISING,
+                        0.08,
+                        0.318
+                ),
+                new ExportData(
+                        LocalDate.now().minusDays(45),
+                        ProductType.OLIVE_OIL,
+                        2600.0,
+                        120.0,
+                        "Italy",
+                        MarketIndicator.VOLATILE,
+                        0.22,
+                        0.312
+                ),
+                new ExportData(
+                        LocalDate.now().minusDays(20),
+                        ProductType.CITRUS_FRUITS,
+                        1200.0,
+                        90.0,
+                        "Spain",
+                        MarketIndicator.STABLE,
+                        0.10,
+                        0.320
+                ),
+                new ExportData(
+                        LocalDate.now().minusDays(15),
+                        ProductType.DATES,
+                        1850.0,
+                        60.0,
+                        "France",
+                        MarketIndicator.FALLING,
+                        0.07,
+                        0.317
+                )
+        );
     }
 }

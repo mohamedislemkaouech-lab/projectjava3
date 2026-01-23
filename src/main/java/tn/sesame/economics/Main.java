@@ -1672,18 +1672,26 @@ public class Main {
             String country = countries[random.nextInt(countries.length)];
             MarketIndicator indicator = indicators[random.nextInt(indicators.length)];
 
+            // NEW: Generate realistic volatility and exchange rate
+            double priceVolatility = 0.05 + random.nextDouble() * 0.25; // 5% to 30% volatility
+            double exchangeRateTNDUSD = 2.8 + random.nextDouble() * 0.4; // ~2.8-3.2 TND per USD
+
+            // FIXED: Constructor now uses correct 8 parameters
             data.add(new ExportData(
-                    startDate.plusDays(i),
-                    productType,
-                    pricePerTon,
-                    volume,
-                    country,
-                    indicator
+                    startDate.plusDays(i),      // 1. date
+                    productType,                 // 2. productType
+                    pricePerTon,                 // 3. pricePerTon
+                    volume,                      // 4. volume
+                    country,                     // 5. destinationCountry
+                    indicator,                   // 6. market_indicator
+                    priceVolatility,             // 7. priceVolatility (NEW)
+                    exchangeRateTNDUSD           // 8. exchangeRateTNDUSD (NEW)
             ));
         }
 
         return data;
     }
+
 
     private static int readIntInput(String prompt) {
         System.out.print(prompt);
