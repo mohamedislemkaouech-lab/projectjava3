@@ -16,6 +16,8 @@ public class PieChartStrategy implements ChartStrategy {
     public void drawChart(GraphicsContext gc, Map<String, Double> data,
                           double width, double height, String title) {
 
+        System.out.println("🔧 PieChartStrategy.drawChart() called");
+
         if (!validateData(data)) {
             drawNoDataMessage(gc, width, height);
             return;
@@ -38,6 +40,9 @@ public class PieChartStrategy implements ChartStrategy {
         double total = entries.stream()
                 .mapToDouble(Map.Entry::getValue)
                 .sum();
+
+        System.out.println("  - Total value: " + total);
+        System.out.println("  - Number of entries: " + entries.size());
 
         // Calculate pie chart position and size
         double centerX = width / 2;
@@ -75,8 +80,8 @@ public class PieChartStrategy implements ChartStrategy {
             double labelY = centerY + labelRadius * Math.sin(Math.toRadians(midAngle - 90));
 
             // Draw percentage label
-            if (sliceAngle > 10) { // Only draw if slice is big enough
-                gc.setFill(Color.BLACK);
+            if (sliceAngle > 10 && percentage > 5) { // Only draw if slice is big enough
+                gc.setFill(Color.WHITE);
                 gc.setFont(Font.font("Arial", 10));
                 String percentText = String.format("%.1f%%", percentage);
                 gc.fillText(percentText, labelX - 10, labelY + 4);
@@ -87,6 +92,8 @@ public class PieChartStrategy implements ChartStrategy {
 
         // Draw legend
         drawLegend(gc, entries, total, 50, height - 100);
+
+        System.out.println("✅ Pie chart drawn successfully");
     }
 
     private void drawTitle(GraphicsContext gc, String title, double width) {

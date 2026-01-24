@@ -1,5 +1,7 @@
 package tn.sesame.economics.dashboard.util.chart;
 
+import java.util.Arrays;
+
 /**
  * Factory Pattern: Creates different chart strategies
  */
@@ -25,12 +27,16 @@ public class ChartFactory {
      * Create chart by name
      */
     public static ChartStrategy createChart(String typeName) {
+        System.out.println("🔧 ChartFactory.createChart() called with: " + typeName);
         try {
-            ChartType type = ChartType.valueOf(typeName.toUpperCase());
+            ChartType type = ChartType.valueOf(typeName.toUpperCase().trim());
+            System.out.println("🔧 Creating chart of type: " + type);
             return createChart(type);
         } catch (IllegalArgumentException e) {
+            System.err.println("❌ ERROR: Unknown chart type: " + typeName);
+            System.err.println("Available types: " + Arrays.toString(ChartType.values()));
             throw new IllegalArgumentException("Unknown chart type: " + typeName +
-                    ". Available types: BAR, LINE, PIE");
+                    ". Available types: BAR, LINE, PIE", e);
         }
     }
 

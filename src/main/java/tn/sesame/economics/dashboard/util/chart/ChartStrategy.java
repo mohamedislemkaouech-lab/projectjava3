@@ -6,7 +6,6 @@ import java.util.Map;
 /**
  * Strategy Pattern: Interface for different chart types
  */
-@FunctionalInterface
 public interface ChartStrategy {
 
     /**
@@ -32,8 +31,16 @@ public interface ChartStrategy {
      */
     default String getColorForIndex(int index) {
         String[] colors = {
-                "#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4", "#FFEAA7",
-                "#DDA0DD", "#98D8C8", "#F7DC6F", "#BB8FCE", "#85C1E9"
+                "#1E88E5", // Blue
+                "#43A047", // Green
+                "#FF6F00", // Orange
+                "#8E24AA", // Purple
+                "#E53935", // Red
+                "#00ACC1", // Cyan
+                "#FFA726", // Yellow
+                "#5C6BC0", // Indigo
+                "#26A69A", // Teal
+                "#7CB342"  // Light Green
         };
         return colors[index % colors.length];
     }

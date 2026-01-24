@@ -19,6 +19,7 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import java.util.Arrays;
 
 /**
  * Interactive chart panel with zoom, pan, and export capabilities
@@ -32,6 +33,9 @@ public class InteractiveChartPanel extends VBox {
     private Button zoomOutButton;
     private Button resetZoomButton;
     private Button exportImageButton;
+    private Button barChartButton;
+    private Button lineChartButton;
+    private Button pieChartButton;
     private Label chartTitleLabel;
     private Label statusLabel;
 
@@ -48,6 +52,7 @@ public class InteractiveChartPanel extends VBox {
     public InteractiveChartPanel() {
         initializeUI();
         setupEventHandlers();
+        System.out.println("✅ InteractiveChartPanel created");
     }
 
     private void initializeUI() {
@@ -82,12 +87,19 @@ public class InteractiveChartPanel extends VBox {
         HBox controlPanel = new HBox(10);
         controlPanel.setPadding(new Insets(10, 0, 10, 0));
 
-        // Chart type selection
+        // Chart type selection - FIXED: Use direct buttons AND combo box
         Label typeLabel = new Label("Chart Type:");
+
+        // Direct buttons for easier testing
+        barChartButton = createChartTypeButton("📊", "BAR", "Bar Chart");
+        lineChartButton = createChartTypeButton("📈", "LINE", "Line Chart");
+        pieChartButton = createChartTypeButton("🥧", "PIE", "Pie Chart");
+
+        // Combo box for dropdown selection
         chartTypeCombo = new ComboBox<>();
-        chartTypeCombo.getItems().addAll(ChartFactory.getAvailableChartTypes());
+        chartTypeCombo.getItems().addAll("BAR", "LINE", "PIE");
         chartTypeCombo.setValue("BAR");
-        chartTypeCombo.setPrefWidth(120);
+        chartTypeCombo.setPrefWidth(100);
 
         // Zoom controls
         zoomInButton = createControlButton("➕", "Zoom In");
@@ -97,8 +109,11 @@ public class InteractiveChartPanel extends VBox {
         // Export button
         exportImageButton = createControlButton("💾", "Export as Image");
 
+        // Add all controls
         controlPanel.getChildren().addAll(
-                typeLabel, chartTypeCombo,
+                typeLabel,
+                barChartButton, lineChartButton, pieChartButton,
+                chartTypeCombo,
                 zoomInButton, zoomOutButton, resetZoomButton,
                 exportImageButton
         );
@@ -113,6 +128,20 @@ public class InteractiveChartPanel extends VBox {
         return button;
     }
 
+    private Button createChartTypeButton(String icon, String chartType, String tooltip) {
+        Button button = new Button(icon);
+        button.setStyle("-fx-font-size: 14px; -fx-padding: 5px 10px;");
+        Tooltip.install(button, new Tooltip(tooltip));
+
+        button.setOnAction(event -> {
+            System.out.println("🔧 Chart type button clicked: " + chartType);
+            chartTypeCombo.setValue(chartType);
+            updateChartStrategy(chartType);
+        });
+
+        return button;
+    }
+
     private void setupTooltips() {
         Tooltip.install(chartTypeCombo, new Tooltip("Select chart type (Bar, Line, or Pie)"));
         Tooltip.install(zoomInButton, new Tooltip("Zoom in for detailed view"));
@@ -122,8 +151,12 @@ public class InteractiveChartPanel extends VBox {
     }
 
     private void setupEventHandlers() {
-        // Chart type change
-        chartTypeCombo.setOnAction(event -> updateChart());
+        // Chart type change - FIXED: Proper event handling
+        chartTypeCombo.setOnAction(event -> {
+            String selectedType = chartTypeCombo.getValue();
+            System.out.println("🔧 Chart type changed to: " + selectedType);
+            updateChartStrategy(selectedType);
+        });
 
         // Zoom controls
         zoomInButton.setOnAction(event -> {
@@ -193,10 +226,42 @@ public class InteractiveChartPanel extends VBox {
     }
 
     /**
+     * Update the chart strategy and redraw
+     */
+    private void updateChartStrategy(String chartType) {
+        System.out.println("🔧 updateChartStrategy() called with: " + chartType);
+
+        if (currentData == null || currentData.isEmpty()) {
+            System.out.println("⚠️ No data available, cannot update chart type");
+            statusLabel.setText("Please set data first");
+            return;
+        }
+
+        try {
+            currentChartStrategy = ChartFactory.createChart(chartType);
+            System.out.println("✅ Chart strategy created: " +
+                    currentChartStrategy.getClass().getSimpleName());
+            updateChart();
+            statusLabel.setText("Switched to " + chartType + " chart");
+        } catch (Exception e) {
+            System.err.println("❌ ERROR creating chart: " + e.getMessage());
+            e.printStackTrace();
+            statusLabel.setText("Error: " + e.getMessage());
+        }
+    }
+
+    /**
      * Update the chart with current data and settings
      */
     public void updateChart() {
+        System.out.println("🔧 updateChart() called");
+        System.out.println("  - Chart type: " + chartTypeCombo.getValue());
+        System.out.println("  - Current data: " + (currentData != null ? currentData.size() + " items" : "null"));
+        System.out.println("  - Current strategy: " + (currentChartStrategy != null ?
+                currentChartStrategy.getClass().getSimpleName() : "null"));
+
         if (currentChartStrategy == null || currentData == null || currentData.isEmpty()) {
+            System.out.println("🔧 Drawing placeholder (no data or strategy)");
             drawPlaceholder();
             return;
         }
@@ -212,32 +277,56 @@ public class InteractiveChartPanel extends VBox {
         gc.scale(zoomLevel, zoomLevel);
 
         // Draw chart
-        currentChartStrategy.drawChart(gc, currentData,
-                chartCanvas.getWidth() / zoomLevel,
-                chartCanvas.getHeight() / zoomLevel,
-                currentTitle);
+        try {
+            currentChartStrategy.drawChart(gc, currentData,
+                    chartCanvas.getWidth() / zoomLevel,
+                    chartCanvas.getHeight() / zoomLevel,
+                    currentTitle != null ? currentTitle : chartTypeCombo.getValue() + " Chart");
+        } catch (Exception e) {
+            System.err.println("❌ ERROR drawing chart: " + e.getMessage());
+            e.printStackTrace();
+            drawPlaceholder();
+            statusLabel.setText("Error drawing chart: " + e.getMessage());
+        }
 
         // Restore transformation
         gc.restore();
 
         // Draw zoom/pan info
         drawTransformationInfo();
+
+        System.out.println("✅ Chart updated successfully");
     }
 
     /**
      * Set data and update chart
      */
     public void setChartData(Map<String, Double> data, String title) {
+        System.out.println("🔧 setChartData() called");
+        System.out.println("  - Data size: " + (data != null ? data.size() : 0));
+        System.out.println("  - Title: " + title);
+
         this.currentData = data;
         this.currentTitle = title;
 
         if (data != null && !data.isEmpty()) {
             // Create chart strategy based on current selection
             String chartType = chartTypeCombo.getValue();
+            System.out.println("🔧 Creating chart strategy for type: " + chartType);
+
             if (chartType != null) {
-                currentChartStrategy = ChartFactory.createChart(chartType);
-                updateChart();
-                statusLabel.setText(String.format("Showing %d data points", data.size()));
+                try {
+                    currentChartStrategy = ChartFactory.createChart(chartType);
+                    System.out.println("🔧 Chart strategy created: " +
+                            currentChartStrategy.getClass().getSimpleName());
+                    updateChart();
+                    statusLabel.setText(String.format("Showing %d data points", data.size()));
+                } catch (Exception e) {
+                    System.err.println("❌ ERROR creating chart: " + e.getMessage());
+                    e.printStackTrace();
+                    drawPlaceholder();
+                    statusLabel.setText("Error creating chart: " + e.getMessage());
+                }
             }
         } else {
             drawPlaceholder();
@@ -246,13 +335,18 @@ public class InteractiveChartPanel extends VBox {
     }
 
     /**
-     * Change chart type
+     * Change chart type - PUBLIC method for external control
      */
     public void setChartType(String chartType) {
-        chartTypeCombo.setValue(chartType);
-        if (currentData != null && !currentData.isEmpty()) {
-            currentChartStrategy = ChartFactory.createChart(chartType);
-            updateChart();
+        System.out.println("🔧 setChartType(" + chartType + ") called");
+
+        // Make sure the chart type exists in the combo box
+        if (chartTypeCombo.getItems().contains(chartType.toUpperCase())) {
+            chartTypeCombo.setValue(chartType.toUpperCase());
+            updateChartStrategy(chartType.toUpperCase());
+        } else {
+            System.err.println("❌ Chart type not found: " + chartType);
+            System.err.println("Available types: " + chartTypeCombo.getItems());
         }
     }
 
@@ -319,5 +413,8 @@ public class InteractiveChartPanel extends VBox {
     public Button getZoomOutButton() { return zoomOutButton; }
     public Button getResetZoomButton() { return resetZoomButton; }
     public Button getExportImageButton() { return exportImageButton; }
+    public Button getBarChartButton() { return barChartButton; }
+    public Button getLineChartButton() { return lineChartButton; }
+    public Button getPieChartButton() { return pieChartButton; }
     public Canvas getChartCanvas() { return chartCanvas; }
 }

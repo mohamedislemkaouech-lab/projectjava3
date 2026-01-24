@@ -415,7 +415,6 @@ public class Main {
         System.out.println("8.  Exporter les prédictions");
         System.out.println("9.  Changer de modèle d'IA");
         System.out.println("10. Launch Dashboard (JavaFX)");
-        System.out.println("11. 📊 Report Generation System");
         System.out.println("0.  Quitter");
         System.out.print("Votre choix: ");
     }
@@ -471,9 +470,7 @@ public class Main {
             // 3. Ask for LLM preference
             System.out.println("\n🤖 AI SETTINGS:");
             System.out.println("1. Use local TinyLlama (requires Ollama running)");
-            System.out.println("2. Use OpenAI (requires API key)");
-            System.out.println("3. Use template mode only (no AI)");
-            System.out.print("Your choice (1-3): ");
+            System.out.print("Your choice : ");
 
             int llmChoice = readIntInput("");
             final boolean useLocalLLM;  // Variable finale pour lambda
@@ -574,6 +571,7 @@ public class Main {
     /**
      * Opens the report dashboard window
      */
+// In the openReportDashboardWindow() method, update these lines:
     private static void openReportDashboardWindow(final boolean useLocalLLM,
                                                   final List<PricePrediction> predictions,
                                                   final List<ExportData> historicalData) {
@@ -590,18 +588,26 @@ public class Main {
             // Set data on dashboard
             dashboard.setData(predictions, historicalData);
 
-            // Create scene
-            Scene scene = new Scene(dashboard, 1100, 800);
+            // ✅ INCREASE WINDOW SIZE HERE
+            // Create scene with larger dimensions
+            Scene scene = new Scene(dashboard, 1200, 900);  // Increased from 1100x800
 
             // Configure stage
             dashboardStage.setTitle("📊 Tunisian Economic Intelligence - Report Generation System");
             dashboardStage.setScene(scene);
 
+            // ✅ ENABLE WINDOW RESIZING
+            dashboardStage.setResizable(true);
+
+            // Set minimum size to ensure all content is visible
+            dashboardStage.setMinWidth(1000);
+            dashboardStage.setMinHeight(800);
+
             // Handle window close
             dashboardStage.setOnCloseRequest(e -> {
                 dashboard.shutdown();
                 System.out.println("Report Generation Dashboard closed");
-                ReportDataHolder.latch.countDown(); // Signal that window is closed
+                ReportDataHolder.latch.countDown();
             });
 
             // Show the window

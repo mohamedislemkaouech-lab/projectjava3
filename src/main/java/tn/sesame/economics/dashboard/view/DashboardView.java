@@ -1,8 +1,10 @@
 package tn.sesame.economics.dashboard.view;
 
+import javafx.scene.control.*;
 import tn.sesame.economics.dashboard.view.chart.InteractiveChartPanel;
 import tn.sesame.economics.dashboard.service.ChartDataService;
 import tn.sesame.economics.dashboard.service.DataService;
+import tn.sesame.economics.dashboard.service.ReportService;
 import tn.sesame.economics.dashboard.view.FilterPanel;
 import tn.sesame.economics.dashboard.view.StatisticsPanel;
 import tn.sesame.economics.dashboard.view.ProductDistributionPanel;
@@ -10,13 +12,8 @@ import tn.sesame.economics.dashboard.view.CountryDistributionPanel;
 import tn.sesame.economics.dashboard.view.TimeTrendsPanel;
 import tn.sesame.economics.dashboard.model.DashboardStatistics;
 import tn.sesame.economics.model.PricePrediction;
-import tn.sesame.economics.model.ExportData; // ADDED
+import tn.sesame.economics.model.ExportData;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
@@ -27,7 +24,7 @@ import java.util.Map;
 import tn.sesame.economics.dashboard.view.PredictiveAnalyticsDashboard;
 
 /**
- * Main dashboard view
+ * Main dashboard view with integrated Report Generation
  */
 public class DashboardView {
 
@@ -47,11 +44,19 @@ public class DashboardView {
     private InteractiveChartPanel comparisonChartPanel;
     private ChartDataService chartDataService;
 
+    // Report Generation Components
+    private ReportService reportService;
+    private ReportGenerationDashboard reportDashboard;
+
     public DashboardView(Stage primaryStage, DataService dataService) {
         this.stage = primaryStage;
         this.dataService = dataService;
         this.filterPanel = new FilterPanel();
         this.chartDataService = new ChartDataService();
+
+        // Initialize Report Service
+        this.reportService = new ReportService(true); // Use local LLM
+
         initializeUI();
     }
 
@@ -59,6 +64,7 @@ public class DashboardView {
         // Create main container
         BorderPane root = new BorderPane();
         root.setPadding(new Insets(10));
+        root.getStyleClass().add("dashboard-root");
 
         // Header
         VBox header = createHeader();
@@ -93,31 +99,57 @@ public class DashboardView {
         analyticsTab.setClosable(false);
         analyticsTab.setContent(createAnalyticsTab());
 
-        mainTabs.getTabs().addAll(statsTab, chartsTab, analyticsTab);
+        // Tab 4: Report Generation (NEW - INTEGRATED)
+        Tab reportTab = new Tab("📄 Report Generation");
+        reportTab.setClosable(false);
+        reportTab.setContent(createReportTab());
+
+        mainTabs.getTabs().addAll(statsTab, chartsTab, analyticsTab, reportTab);
         root.setCenter(mainTabs);
 
         // Footer
         HBox footer = createFooter();
         root.setBottom(footer);
 
-        // Create scene
+        // Create scene with CSS
         Scene scene = new Scene(root, 1400, 850);
+
+        // Load CSS stylesheet
+        try {
+            // Try to load from resources
+            String css = getClass().getResource("/dashboard.css").toExternalForm();
+            scene.getStylesheets().add(css);
+            System.out.println("✅ CSS stylesheet loaded successfully");
+        } catch (Exception e) {
+            System.out.println("⚠️ CSS stylesheet not found, using default styling");
+            // Apply inline styles as fallback
+            applyInlineStyles(root);
+        }
+
         stage.setScene(scene);
-        stage.setTitle("Tunisian Economic Intelligence Dashboard");
+        stage.setTitle("🤖 Tunisian Economic Intelligence Dashboard");
     }
 
     private VBox createStatisticsTab() {
         VBox statsTab = new VBox(20);
         statsTab.setPadding(new Insets(20));
+        statsTab.getStyleClass().add("tab-content");
 
         GridPane centerGrid = new GridPane();
         centerGrid.setHgap(20);
         centerGrid.setVgap(20);
 
         statisticsPanel = new StatisticsPanel();
+        statisticsPanel.getStyleClass().add("statistics-panel");
+
         productPanel = new ProductDistributionPanel();
+        productPanel.getStyleClass().add("product-distribution-panel");
+
         countryPanel = new CountryDistributionPanel();
+        countryPanel.getStyleClass().add("country-distribution-panel");
+
         trendsPanel = new TimeTrendsPanel(dataService);
+        trendsPanel.getStyleClass().add("trends-panel");
 
         // Row 0: Statistics and Product Distribution
         centerGrid.add(statisticsPanel, 0, 0);
@@ -134,6 +166,7 @@ public class DashboardView {
     private VBox createChartsTab() {
         VBox chartsTab = new VBox(20);
         chartsTab.setPadding(new Insets(20));
+        chartsTab.getStyleClass().add("tab-content");
 
         // Create chart selection controls
         HBox chartControls = createChartControls();
@@ -174,11 +207,11 @@ public class DashboardView {
         title.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
 
         Button refreshChartsButton = new Button("🔄 Refresh All Charts");
-        refreshChartsButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
+        refreshChartsButton.getStyleClass().addAll("button", "button-success");
         refreshChartsButton.setOnAction(event -> refreshAllCharts());
 
         Button exportAllButton = new Button("📥 Export All Charts");
-        exportAllButton.setStyle("-fx-background-color: #2196F3; -fx-text-fill: white;");
+        exportAllButton.getStyleClass().addAll("button", "button-info");
         exportAllButton.setOnAction(event -> exportAllCharts());
 
         controls.getChildren().addAll(title, refreshChartsButton, exportAllButton);
@@ -188,56 +221,57 @@ public class DashboardView {
     private VBox createAnalyticsTab() {
         VBox analyticsTab = new VBox();
         analyticsTab.setPadding(new Insets(10));
+        analyticsTab.getStyleClass().add("tab-content");
 
-        // Create the predictive analytics tab - placeholder for now
-        Label placeholder = new Label("🤖 Predictive Analytics Dashboard\n\n" +
-                "This feature will include:\n" +
-                "• Real-time price prediction interface\n" +
-                "• Batch prediction processing\n" +
-                "• What-if scenario analysis\n" +
-                "• Prediction history tracking\n\n" +
-                "Implementation coming soon!");
-        placeholder.setStyle("-fx-font-size: 16px; -fx-text-alignment: center;");
-        placeholder.setWrapText(true);
-
-        analyticsTab.getChildren().add(placeholder);
         PredictiveAnalyticsDashboard analyticsDashboard = new PredictiveAnalyticsDashboard(dataService);
         analyticsTab.getChildren().add(analyticsDashboard);
 
         return analyticsTab;
     }
 
+    /**
+     * NEW: Create Report Generation Tab (Integrated)
+     */
+    private VBox createReportTab() {
+        // Create the report dashboard
+        reportDashboard = new ReportGenerationDashboard(reportService);
+
+        // Load data
+        List<PricePrediction> predictions = dataService.getPredictions();
+        List<ExportData> historicalData = dataService.loadHistoricalData();
+        reportDashboard.setData(predictions, historicalData);
+
+        // Create ScrollPane with proper styling
+        ScrollPane scrollPane = new ScrollPane(reportDashboard);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+        scrollPane.getStyleClass().add("report-tab-scroll");
+
+        // Force scrollbars
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+
+        // Create container
+        VBox container = new VBox(scrollPane);
+        container.getStyleClass().add("report-generation-tab");
+        VBox.setVgrow(scrollPane, Priority.ALWAYS);
+
+        return container;
+    }
+
     private VBox createHeader() {
         VBox header = new VBox(10);
         header.setPadding(new Insets(15));
-        header.setStyle("-fx-background-color: #2c3e50;");
+        header.getStyleClass().add("dashboard-header");
 
         Label title = new Label("🤖 TUNISIAN AGRICULTURAL EXPORT INTELLIGENCE SYSTEM");
-        title.setFont(Font.font("Arial", 24));
-        title.setTextFill(Color.WHITE);
+        title.getStyleClass().add("dashboard-title");
 
-        Label subtitle = new Label("Real-time Market Analysis & Price Predictions");
-        subtitle.setFont(Font.font("Arial", 14));
-        subtitle.setTextFill(Color.LIGHTGRAY);
+        Label subtitle = new Label("Real-time Market Analysis, Price Predictions & Intelligent Reporting");
+        subtitle.getStyleClass().add("dashboard-subtitle");
 
         header.getChildren().addAll(title, subtitle);
         return header;
-    }
-
-    private VBox createPlaceholderPanel(String title) {
-        VBox panel = new VBox(10);
-        panel.setPadding(new Insets(20));
-        panel.setStyle("-fx-background-color: #fff8dc; -fx-border-color: #dda; -fx-border-radius: 5;");
-
-        Label label = new Label(title);
-        label.setFont(Font.font("Arial", 14));
-        label.setTextFill(Color.DARKSLATEGRAY);
-
-        Label placeholder = new Label("(Feature coming soon)");
-        placeholder.setTextFill(Color.GRAY);
-
-        panel.getChildren().addAll(label, placeholder);
-        return panel;
     }
 
     private VBox createInfoPanel() {
@@ -245,21 +279,22 @@ public class DashboardView {
         infoPanel.setPadding(new Insets(15));
         infoPanel.setStyle("-fx-background-color: #fff8e1; -fx-border-color: #ffd54f; -fx-border-radius: 5;");
 
-        Label title = new Label("ℹ️ FILTERING GUIDE");
+        Label title = new Label("ℹ️ QUICK GUIDE");
         title.setFont(Font.font("Arial", 14));
         title.setTextFill(Color.DARKSLATEGRAY);
 
         TextArea guide = new TextArea();
-        guide.setText("How to use filters:\n" +
-                "1. Select product type\n" +
-                "2. Choose destination country\n" +
-                "3. Set date range\n" +
-                "4. Click 'Apply Filters'\n\n" +
-                "You can save filter combinations\n" +
-                "as presets for later use.");
+        guide.setText("Dashboard Features:\n\n" +
+                "📊 Statistics: View key metrics\n" +
+                "📈 Charts: Interactive visualizations\n" +
+                "🤖 Analytics: AI predictions\n" +
+                "📄 Reports: Generate AI-powered reports\n\n" +
+                "Use filters to refine data\n" +
+                "Export charts and reports\n" +
+                "Save presets for later use");
         guide.setEditable(false);
         guide.setWrapText(true);
-        guide.setPrefHeight(120);
+        guide.setPrefHeight(150);
         guide.setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
 
         infoPanel.getChildren().addAll(title, guide);
@@ -269,16 +304,16 @@ public class DashboardView {
     private HBox createFooter() {
         HBox footer = new HBox(20);
         footer.setPadding(new Insets(10));
-        footer.setStyle("-fx-background-color: #ecf0f1; -fx-border-color: #bdc3c7;");
+        footer.getStyleClass().add("dashboard-footer");
 
-        statusLabel = new Label("Dashboard loaded successfully");
-        statusLabel.setTextFill(Color.DARKSLATEGRAY);
+        statusLabel = new Label("Dashboard loaded successfully - All systems operational");
+        statusLabel.getStyleClass().add("status-label");
 
         refreshButton = new Button("🔄 Refresh Data");
-        refreshButton.setStyle("-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8px 16px;");
+        refreshButton.getStyleClass().addAll("button", "button-success");
 
         backButton = new Button("⬅ Back to Main Menu");
-        backButton.setStyle("-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-padding: 8px 16px;");
+        backButton.getStyleClass().addAll("button", "button-warning");
 
         HBox.setHgrow(statusLabel, Priority.ALWAYS);
         footer.getChildren().addAll(statusLabel, refreshButton, backButton);
@@ -291,25 +326,29 @@ public class DashboardView {
         productPanel.updateProductDistribution(stats.getProductDistribution());
         countryPanel.updateCountryDistribution(stats.getCountryDistribution());
         trendsPanel.updateTrends();
+
+        // Update report dashboard with latest data
+        if (reportDashboard != null) {
+            List<ExportData> historicalData = dataService.loadHistoricalData();
+            reportDashboard.setData(predictions, historicalData);
+        }
+
         statusLabel.setText("Last updated: " + java.time.LocalTime.now().toString() +
                 " | " + predictions.size() + " predictions loaded");
     }
 
     public void updateCharts(List<PricePrediction> predictions, List<ExportData> historicalData) {
         if (priceChartPanel != null) {
-            // Update price distribution chart
             Map<String, Double> priceData = chartDataService.prepareProductPriceChart(predictions);
             priceChartPanel.setChartData(priceData, "Product Price Distribution (TND/tonne)");
         }
 
         if (trendChartPanel != null && historicalData != null) {
-            // Update time series chart
             Map<String, Double> timeSeriesData = chartDataService.prepareTimeSeriesChart(historicalData);
             trendChartPanel.setChartData(timeSeriesData, "Monthly Price Trends");
         }
 
         if (comparisonChartPanel != null) {
-            // Update product comparison chart
             Map<String, Double> comparisonData = chartDataService.prepareProductComparisonChart(predictions);
             comparisonChartPanel.setChartData(comparisonData, "Product Price Comparison");
         }
@@ -317,13 +356,11 @@ public class DashboardView {
 
     private void refreshAllCharts() {
         System.out.println("Refreshing all charts...");
-        // This will be implemented by the controller
+        statusLabel.setText("Refreshing charts...");
     }
 
     private void exportAllCharts() {
-        // Export all three charts
         if (priceChartPanel != null) {
-            // Trigger the export button on the panel
             priceChartPanel.getExportImageButton().fire();
         }
         if (trendChartPanel != null) {
@@ -333,9 +370,15 @@ public class DashboardView {
             comparisonChartPanel.getExportImageButton().fire();
         }
 
-        // Show notification
         statusLabel.setText("✅ Exporting all charts...");
         System.out.println("Exporting all charts...");
+    }
+
+    /**
+     * Apply inline styles as fallback if CSS file is not found
+     */
+    private void applyInlineStyles(BorderPane root) {
+        root.setStyle("-fx-background-color: linear-gradient(to bottom, #2c3e50, #34495e);");
     }
 
     public Button getRefreshButton() {
@@ -351,6 +394,10 @@ public class DashboardView {
     }
 
     public void close() {
+        // Clean up report service
+        if (reportDashboard != null) {
+            reportDashboard.shutdown();
+        }
         stage.close();
     }
 

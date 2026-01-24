@@ -16,6 +16,8 @@ public class LineChartStrategy implements ChartStrategy {
     public void drawChart(GraphicsContext gc, Map<String, Double> data,
                           double width, double height, String title) {
 
+        System.out.println("🔧 LineChartStrategy.drawChart() called");
+
         if (!validateData(data)) {
             drawNoDataMessage(gc, width, height);
             return;
@@ -55,12 +57,14 @@ public class LineChartStrategy implements ChartStrategy {
         double valueRange = maxValue - minValue;
         if (valueRange == 0) valueRange = 1;
 
+        System.out.println("  - Min value: " + minValue + ", Max value: " + maxValue);
+
         // Draw grid lines
         drawGridLines(gc, chartX, chartY, chartWidth, chartHeight, minValue, maxValue);
 
         // Draw line
-        gc.setStroke(Color.BLUE);
-        gc.setLineWidth(2);
+        gc.setStroke(Color.web("#1E88E5")); // Blue color
+        gc.setLineWidth(3);
 
         for (int i = 0; i < entries.size() - 1; i++) {
             Map.Entry<String, Double> current = entries.get(i);
@@ -75,7 +79,7 @@ public class LineChartStrategy implements ChartStrategy {
             gc.strokeLine(x1, y1, x2, y2);
 
             // Draw data point
-            drawDataPoint(gc, x1, y1, Color.RED, 4);
+            drawDataPoint(gc, x1, y1, Color.web("#E53935"), 5); // Red points
         }
 
         // Draw last data point
@@ -83,11 +87,13 @@ public class LineChartStrategy implements ChartStrategy {
             Map.Entry<String, Double> last = entries.get(entries.size() - 1);
             double x = chartX + chartWidth;
             double y = chartY + chartHeight - ((last.getValue() - minValue) / valueRange * chartHeight);
-            drawDataPoint(gc, x, y, Color.RED, 4);
+            drawDataPoint(gc, x, y, Color.web("#E53935"), 5);
         }
 
         // Draw labels
         drawLabels(gc, entries, chartX, chartY, chartWidth, chartHeight);
+
+        System.out.println("✅ Line chart drawn successfully");
     }
 
     private void drawTitle(GraphicsContext gc, String title, double width) {

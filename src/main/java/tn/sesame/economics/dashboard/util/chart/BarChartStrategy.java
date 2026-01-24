@@ -16,7 +16,13 @@ public class BarChartStrategy implements ChartStrategy {
     public void drawChart(GraphicsContext gc, Map<String, Double> data,
                           double width, double height, String title) {
 
+        System.out.println("🔧 BarChartStrategy.drawChart() called");
+        System.out.println("  - Data size: " + (data != null ? data.size() : 0));
+        System.out.println("  - Width: " + width + ", Height: " + height);
+        System.out.println("  - Title: " + title);
+
         if (!validateData(data)) {
+            System.out.println("⚠️ No valid data, drawing placeholder");
             drawNoDataMessage(gc, width, height);
             return;
         }
@@ -49,9 +55,12 @@ public class BarChartStrategy implements ChartStrategy {
                 .max()
                 .orElse(1.0);
 
+        System.out.println("  - Max value: " + maxValue);
+        System.out.println("  - Number of entries: " + entries.size());
+
         // Calculate bar dimensions
-        double barWidth = chartWidth / entries.size() * 0.7;
-        double spacing = chartWidth / entries.size() * 0.3;
+        double barWidth = Math.max(20, chartWidth / entries.size() * 0.7);
+        double spacing = Math.max(5, chartWidth / entries.size() * 0.3);
 
         // Draw bars
         for (int i = 0; i < entries.size(); i++) {
@@ -85,6 +94,8 @@ public class BarChartStrategy implements ChartStrategy {
 
         // Draw legend
         drawLegend(gc, entries, width - 150, 80);
+
+        System.out.println("✅ Bar chart drawn successfully");
     }
 
     private void drawTitle(GraphicsContext gc, String title, double width) {
