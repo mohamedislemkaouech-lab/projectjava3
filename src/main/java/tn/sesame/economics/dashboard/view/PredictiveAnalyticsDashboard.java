@@ -24,7 +24,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
- * Predictive Analytics Dashboard with all required functionalities
+ * FIXED: Predictive Analytics Dashboard with improved multi-selection UI
+ * Changes:
+ * 1. Added visual instructions panel
+ * 2. Added selection counter label
+ * 3. Added Select All / Deselect All buttons
+ * 4. Added real-time selection validation
+ * 5. Enhanced ListCell with visual feedback
+ * 6. Improved error messages
+ * 7. Smart enable/disable of compare button
  */
 public class PredictiveAnalyticsDashboard extends VBox {
 
@@ -33,9 +41,8 @@ public class PredictiveAnalyticsDashboard extends VBox {
     private ExecutorService executorService;
     private List<ExportData> historicalData;
 
-    // FIX 1: Renamed to avoid conflict with ObservableList below
     private Queue<PricePrediction> predictionQueue = new LinkedList<>();
-    private Deque<PricePrediction> predictionHistoryStack = new ArrayDeque<>(); // Renamed
+    private Deque<PricePrediction> predictionHistoryStack = new ArrayDeque<>();
 
     // Real-time Prediction Section
     private ComboBox<ProductType> productCombo;
@@ -57,13 +64,16 @@ public class PredictiveAnalyticsDashboard extends VBox {
     private TextField batchSizeField;
     private TableView<PricePrediction> batchResultsTable;
 
-    // History & Comparison Section
+    // History & Comparison Section - IMPROVED
     private ListView<PricePrediction> predictionHistoryList;
     private TableView<ComparisonItem> comparisonTable;
     private LineChart<String, Number> trendChart;
     private Button compareButton;
     private Button clearHistoryButton;
-    private ObservableList<PricePrediction> predictionHistory; // Keep this as ObservableList for UI
+    private Button selectAllButton;      // NEW
+    private Button deselectAllButton;    // NEW
+    private Label selectionCountLabel;   // NEW
+    private ObservableList<PricePrediction> predictionHistory;
 
     // What-if Scenario Section
     private ComboBox<ProductType> scenarioProductCombo;
@@ -76,7 +86,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
     private Button loadScenarioButton;
     private BarChart<String, Number> scenarioChart;
 
-    // Scenario storage
     private final Map<String, Map<String, Object>> savedScenarios;
 
     public PredictiveAnalyticsDashboard(DataService dataService) {
@@ -85,13 +94,10 @@ public class PredictiveAnalyticsDashboard extends VBox {
         this.predictionHistory = FXCollections.observableArrayList();
         this.savedScenarios = new HashMap<>();
 
-        // Load historical data
         loadHistoricalData();
         initializeServices();
         initializeUI();
         loadSampleHistory();
-
-        // FIX 2: Demonstrate Queue/Deque usage (for project requirement)
         demonstrateQueueDequeUsage();
     }
 
@@ -193,7 +199,7 @@ public class PredictiveAnalyticsDashboard extends VBox {
         tabPane.getTabs().addAll(
                 createRealTimeTab(),
                 createBatchTab(),
-                createHistoryTab(),
+                createHistoryTab(),      // IMPROVED VERSION
                 createScenarioTab()
         );
 
@@ -201,10 +207,8 @@ public class PredictiveAnalyticsDashboard extends VBox {
     }
 
     private void demonstrateQueueDequeUsage() {
-        // QUEUE DEMONSTRATION (FIFO)
         System.out.println("=== QUEUE (FIFO) DEMONSTRATION ===");
 
-        // Add to queue
         PricePrediction pred1 = createSamplePrediction(ProductType.OLIVE_OIL, 4500.0);
         PricePrediction pred2 = createSamplePrediction(ProductType.DATES, 2800.0);
         PricePrediction pred3 = createSamplePrediction(ProductType.CITRUS_FRUITS, 1200.0);
@@ -215,20 +219,15 @@ public class PredictiveAnalyticsDashboard extends VBox {
 
         System.out.println("Queue size after adding 3 items: " + predictionQueue.size());
 
-        // Process queue (FIFO)
         System.out.println("\nProcessing queue (FIFO order):");
         while (!predictionQueue.isEmpty()) {
             PricePrediction current = predictionQueue.poll();
             System.out.println("Processed: " + current.productType() + " - " + current.predictedPrice());
-
-            // Add to history stack (LIFO)
             predictionHistoryStack.push(current);
         }
 
-        // DEQUE DEMONSTRATION
         System.out.println("\n=== DEQUE (Double-ended) DEMONSTRATION ===");
 
-        // Add to both ends
         predictionHistoryStack.addFirst(createSamplePrediction(ProductType.WHEAT, 700.0));
         predictionHistoryStack.addLast(createSamplePrediction(ProductType.TOMATOES, 900.0));
 
@@ -236,7 +235,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
         System.out.println("First: " + predictionHistoryStack.peekFirst().productType());
         System.out.println("Last: " + predictionHistoryStack.peekLast().productType());
 
-        // Remove from both ends
         PricePrediction removedFirst = predictionHistoryStack.removeFirst();
         PricePrediction removedLast = predictionHistoryStack.removeLast();
         System.out.println("Removed first: " + removedFirst.productType());
@@ -268,7 +266,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
         formGrid.setVgap(10);
         formGrid.setPadding(new Insets(10));
 
-        // Product Type
         formGrid.add(new Label("Product Type:"), 0, 0);
         productCombo = new ComboBox<>();
         productCombo.getItems().addAll(ProductType.values());
@@ -276,34 +273,29 @@ public class PredictiveAnalyticsDashboard extends VBox {
         productCombo.setPrefWidth(200);
         formGrid.add(productCombo, 1, 0);
 
-        // Destination Country
         formGrid.add(new Label("Destination Country:"), 0, 1);
         countryCombo = new ComboBox<>();
         countryCombo.getItems().addAll("France", "Germany", "Italy", "Spain", "UK", "USA", "Tunisia");
         countryCombo.setValue("France");
         formGrid.add(countryCombo, 1, 1);
 
-        // Current Price
         formGrid.add(new Label("Current Price (TND/ton):"), 0, 2);
         priceSpinner = new Spinner<>(0.0, 10000.0, 3500.0, 100.0);
         priceSpinner.setEditable(true);
         priceSpinner.setPrefWidth(150);
         formGrid.add(priceSpinner, 1, 2);
 
-        // Volume
         formGrid.add(new Label("Volume (tons):"), 0, 3);
         volumeSpinner = new Spinner<>(1.0, 1000.0, 100.0, 10.0);
         volumeSpinner.setEditable(true);
         formGrid.add(volumeSpinner, 1, 3);
 
-        // Market Indicator
         formGrid.add(new Label("Market Condition:"), 0, 4);
         marketIndicatorCombo = new ComboBox<>();
         marketIndicatorCombo.getItems().addAll(MarketIndicator.values());
         marketIndicatorCombo.setValue(MarketIndicator.STABLE);
         formGrid.add(marketIndicatorCombo, 1, 4);
 
-        // Prediction Button
         predictButton = new Button("🤖 PREDICT FUTURE PRICE");
         predictButton.setStyle("-fx-background-color: #4caf50; -fx-text-fill: white; " +
                 "-fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10px 20px;");
@@ -377,10 +369,7 @@ public class PredictiveAnalyticsDashboard extends VBox {
 
                             realTimeResults.setText(result.toString());
 
-                            // Add to history
                             predictionHistory.add(prediction);
-
-                            // Also add to Queue/Deque for demonstration
                             predictionQueue.offer(prediction);
                             predictionHistoryStack.push(prediction);
 
@@ -494,7 +483,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
 
             List<ExportData> batchData = generateBatchData(batchSize);
 
-            // Add batch items to queue for processing
             for (ExportData data : batchData) {
                 PricePrediction pending = new PricePrediction(
                         LocalDate.now().plusDays(30),
@@ -519,7 +507,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
         List<ExportData> batch = new ArrayList<>();
         Random random = new Random();
 
-        // Use historical data as source if available
         if (!historicalData.isEmpty()) {
             for (int i = 0; i < Math.min(size, historicalData.size()); i++) {
                 ExportData original = historicalData.get(i % historicalData.size());
@@ -541,13 +528,11 @@ public class PredictiveAnalyticsDashboard extends VBox {
                 batch.add(modified);
             }
 
-            // If we need more data than historical, fill with random
             if (size > historicalData.size()) {
                 int remaining = size - historicalData.size();
                 batch.addAll(generateRandomBatchData(remaining, random));
             }
         } else {
-            // Fallback to random generation if no historical data
             batch = generateRandomBatchData(size, random);
         }
 
@@ -635,18 +620,12 @@ public class PredictiveAnalyticsDashboard extends VBox {
                     if (!predictions.isEmpty()) {
                         PricePrediction prediction = predictions.get(0);
 
-                        // Update queue display
                         if (currentIndex < batchQueueList.getItems().size()) {
                             batchQueueList.getItems().set(currentIndex, prediction);
                         }
 
-                        // Add to results table
                         batchResultsTable.getItems().add(prediction);
-
-                        // Add to history
                         predictionHistory.add(prediction);
-
-                        // Add to history stack
                         predictionHistoryStack.push(prediction);
                     }
 
@@ -676,7 +655,6 @@ public class PredictiveAnalyticsDashboard extends VBox {
     }
 
     private boolean cancelButtonActive() {
-        // Check if cancel button is enabled (processing is active)
         return cancelBatchButton.isDisabled();
     }
 
@@ -697,11 +675,12 @@ public class PredictiveAnalyticsDashboard extends VBox {
         batchProgressLabel.setText("⏹ Processing cancelled");
         batchProgressBar.setProgress(0);
         batchQueueList.getItems().clear();
-
-        // Clear the processing queue
         predictionQueue.clear();
     }
 
+    /**
+     * IMPROVED: History Tab with better multi-selection UI
+     */
     private Tab createHistoryTab() {
         VBox tabContent = new VBox(15);
         tabContent.setPadding(new Insets(20));
@@ -710,16 +689,66 @@ public class PredictiveAnalyticsDashboard extends VBox {
         Label title = new Label("📊 PREDICTION HISTORY & COMPARISON");
         title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #ef6c00;");
 
+        // NEW: Instructions panel
+        VBox instructionsPanel = createInstructionsPanel();
+
         HBox mainContent = new HBox(20);
 
+        // LEFT SIDE: History List with improved controls
         VBox historyBox = new VBox(10);
-        historyBox.setPrefWidth(300);
+        historyBox.setPrefWidth(350);
 
         Label historyLabel = new Label("Prediction History:");
+        historyLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
+
+        // NEW: Selection status label
+        selectionCountLabel = new Label("Selected: 0 items (Select 2 to compare)");
+        selectionCountLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #666;");
+
         predictionHistoryList = new ListView<>(predictionHistory);
         predictionHistoryList.setPrefHeight(300);
         predictionHistoryList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
+        // NEW: Customize cell factory for better visual feedback
+        predictionHistoryList.setCellFactory(lv -> new ListCell<PricePrediction>() {
+            @Override
+            protected void updateItem(PricePrediction item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setGraphic(null);
+                    setStyle("");
+                } else {
+                    setText(String.format("%s - %.2f TND (%.0f%% conf.)",
+                            item.productType().getFrenchName(),
+                            item.predictedPrice(),
+                            item.confidence() * 100));
+
+                    // Visual feedback for selected items
+                    if (isSelected()) {
+                        setStyle("-fx-background-color: #b3e5fc; -fx-font-weight: bold;");
+                    } else {
+                        setStyle("");
+                    }
+                }
+            }
+        });
+
+        // NEW: Listen to selection changes and update the counter
+        predictionHistoryList.getSelectionModel().getSelectedItems().addListener(
+                (javafx.collections.ListChangeListener<PricePrediction>) change -> updateSelectionStatus());
+
+        // NEW: Selection control buttons
+        HBox selectionButtons = new HBox(10);
+        selectAllButton = createControlButton("☑ Select All", "#4caf50");
+        deselectAllButton = createControlButton("☐ Deselect All", "#9e9e9e");
+
+        selectAllButton.setOnAction(e -> predictionHistoryList.getSelectionModel().selectAll());
+        deselectAllButton.setOnAction(e -> predictionHistoryList.getSelectionModel().clearSelection());
+
+        selectionButtons.getChildren().addAll(selectAllButton, deselectAllButton);
+
+        // Action buttons
         HBox historyButtons = new HBox(10);
         compareButton = createControlButton("📊 Compare Selected", "#2196f3");
         clearHistoryButton = createControlButton("🗑 Clear History", "#f44336");
@@ -727,24 +756,41 @@ public class PredictiveAnalyticsDashboard extends VBox {
         compareButton.setOnAction(e -> compareSelectedPredictions());
         clearHistoryButton.setOnAction(e -> clearHistory());
 
-        historyButtons.getChildren().addAll(compareButton, clearHistoryButton);
-        historyBox.getChildren().addAll(historyLabel, predictionHistoryList, historyButtons);
+        // NEW: Initially disable compare button
+        compareButton.setDisable(true);
 
+        historyButtons.getChildren().addAll(compareButton, clearHistoryButton);
+
+        // NEW: Updated layout with all new components
+        historyBox.getChildren().addAll(
+                historyLabel,
+                selectionCountLabel,
+                selectionButtons,
+                predictionHistoryList,
+                historyButtons
+        );
+
+        // RIGHT SIDE: Comparison results
         VBox comparisonBox = new VBox(10);
-        comparisonBox.setPrefWidth(400);
+        comparisonBox.setPrefWidth(450);
 
         Label comparisonLabel = new Label("Comparison Table:");
+        comparisonLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
+
         comparisonTable = new TableView<>();
         comparisonTable.setPrefHeight(150);
 
         TableColumn<ComparisonItem, String> itemCol = new TableColumn<>("Metric");
         itemCol.setCellValueFactory(cell -> cell.getValue().metricProperty());
+        itemCol.setPrefWidth(150);
 
         TableColumn<ComparisonItem, String> value1Col = new TableColumn<>("Prediction 1");
         value1Col.setCellValueFactory(cell -> cell.getValue().value1Property());
+        value1Col.setPrefWidth(140);
 
         TableColumn<ComparisonItem, String> value2Col = new TableColumn<>("Prediction 2");
         value2Col.setCellValueFactory(cell -> cell.getValue().value2Property());
+        value2Col.setPrefWidth(140);
 
         comparisonTable.getColumns().addAll(itemCol, value1Col, value2Col);
 
@@ -754,18 +800,72 @@ public class PredictiveAnalyticsDashboard extends VBox {
 
         comparisonBox.getChildren().addAll(comparisonLabel, comparisonTable, trendLabel, trendChart);
         mainContent.getChildren().addAll(historyBox, comparisonBox);
-        tabContent.getChildren().addAll(title, mainContent);
 
         Tab tab = new Tab("📊 History & Comparison", tabContent);
         tab.setTooltip(new Tooltip("View and compare historical predictions"));
+        tab.setContent(new VBox(10, title, instructionsPanel, mainContent));
+
         return tab;
+    }
+
+    /**
+     * NEW: Create instructions panel to help users understand multi-selection
+     */
+    private VBox createInstructionsPanel() {
+        VBox instructionsBox = new VBox(5);
+        instructionsBox.setStyle("-fx-background-color: #e3f2fd; -fx-padding: 10; -fx-border-color: #2196f3; -fx-border-radius: 5;");
+
+        Label instructionsTitle = new Label("💡 How to Compare Predictions:");
+        instructionsTitle.setStyle("-fx-font-weight: bold; -fx-font-size: 12px;");
+
+        Label step1 = new Label("1️⃣ Hold CTRL (Windows/Linux) or CMD (Mac) while clicking to select multiple predictions");
+        Label step2 = new Label("2️⃣ Or use 'Select All' button and then CTRL+Click to deselect unwanted items");
+        Label step3 = new Label("3️⃣ Once you have exactly 2 predictions selected, click 'Compare Selected'");
+        Label tip = new Label("💡 Tip: The selection counter shows how many items you've selected");
+
+        step1.setStyle("-fx-font-size: 11px;");
+        step2.setStyle("-fx-font-size: 11px;");
+        step3.setStyle("-fx-font-size: 11px;");
+        tip.setStyle("-fx-font-size: 11px; -fx-font-style: italic; -fx-text-fill: #1976d2;");
+
+        instructionsBox.getChildren().addAll(instructionsTitle, step1, step2, step3, tip);
+
+        return instructionsBox;
+    }
+
+    /**
+     * NEW: Update selection status and enable/disable compare button
+     */
+    private void updateSelectionStatus() {
+        int selectedCount = predictionHistoryList.getSelectionModel().getSelectedItems().size();
+
+        selectionCountLabel.setText(String.format("Selected: %d items %s",
+                selectedCount,
+                selectedCount == 2 ? "✅ Ready to compare!" : "(Select 2 to compare)"));
+
+        // Update label style based on selection
+        if (selectedCount == 2) {
+            selectionCountLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #4caf50; -fx-font-weight: bold;");
+            compareButton.setDisable(false);
+        } else if (selectedCount > 2) {
+            selectionCountLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #ff9800; -fx-font-weight: bold;");
+            compareButton.setDisable(true);
+        } else {
+            selectionCountLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #666;");
+            compareButton.setDisable(true);
+        }
     }
 
     private void compareSelectedPredictions() {
         List<PricePrediction> selected = predictionHistoryList.getSelectionModel().getSelectedItems();
 
         if (selected.size() != 2) {
-            showAlert("Comparison Error", "Please select exactly 2 predictions to compare");
+            showAlert("Comparison Error",
+                    "Please select exactly 2 predictions to compare.\n\n" +
+                            "Current selection: " + selected.size() + " items\n\n" +
+                            "How to select:\n" +
+                            "• Hold CTRL (or CMD on Mac) while clicking items\n" +
+                            "• Or use 'Select All' and deselect unwanted items");
             return;
         }
 
@@ -794,6 +894,13 @@ public class PredictiveAnalyticsDashboard extends VBox {
                 p1.status().toString(),
                 p2.status().toString()));
 
+        // NEW: Add price difference calculation
+        double priceDiff = Math.abs(p1.predictedPrice() - p2.predictedPrice());
+        double priceDiffPercent = (priceDiff / Math.min(p1.predictedPrice(), p2.predictedPrice())) * 100;
+        comparisonData.add(new ComparisonItem("Price Difference",
+                String.format("%.2f TND", priceDiff),
+                String.format("%.1f%%", priceDiffPercent)));
+
         comparisonTable.setItems(comparisonData);
         updateComparisonChart(p1, p2);
     }
@@ -802,9 +909,8 @@ public class PredictiveAnalyticsDashboard extends VBox {
         predictionHistory.clear();
         comparisonTable.getItems().clear();
         trendChart.getData().clear();
-
-        // Also clear the stack
         predictionHistoryStack.clear();
+        updateSelectionStatus();  // NEW: Reset the counter
     }
 
     private Tab createScenarioTab() {

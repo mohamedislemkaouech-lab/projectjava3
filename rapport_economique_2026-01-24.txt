@@ -1,0 +1,19 @@
+# Rapport d'Intelligence Marché - TinyLlama
+
+## Résumé des Prédictions
+Nombre total de prédictions analysées: 50
+
+## Statistiques Clés
+- Prix moyen prédit: 1693,59 TND/tonne
+- Confiance moyenne: 86,5%
+
+## Analyse par Produit
+- Agrumes: 952,50 TND (moyenne sur 6 prédictions)
+- Huile d'olive: 3415,55 TND (moyenne sur 10 prédictions)
+- Dattes: 2390,87 TND (moyenne sur 11 prédictions)
+- Piments: 1115,74 TND (moyenne sur 8 prédictions)
+- Tomates: 797,65 TND (moyenne sur 7 prédictions)
+- Blé: 500,00 TND (moyenne sur 8 prédictions)
+
+---
+*Rapport généré par TinyLlama Service*

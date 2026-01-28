@@ -1,0 +1,905 @@
+{
+  "data" : [ {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 882.0670127920004,
+    "product_type" : "CITRUS_FRUITS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Agrumes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 4181.493792807316,
+    "product_type" : "OLIVE_OIL",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Huile d'olive",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 500.0,
+    "product_type" : "WHEAT",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Blé",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 701.7175128319708,
+    "product_type" : "TOMATOES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Tomates",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 884.4250004671572,
+    "product_type" : "TOMATOES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Tomates",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 3778.2532232526173,
+    "product_type" : "OLIVE_OIL",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Huile d'olive",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 853.4150868202219,
+    "product_type" : "TOMATOES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Tomates",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 500.0,
+    "product_type" : "WHEAT",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Blé",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 1020.0742828351995,
+    "product_type" : "CITRUS_FRUITS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "88,0%",
+    "confidence" : 0.87971553524083,
+    "product_french_name" : "Agrumes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 1291.063884158573,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "88,0%",
+    "confidence" : 0.87971553524083,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2026.1035963330905,
+    "product_type" : "DATES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Dattes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2336.724059435445,
+    "product_type" : "DATES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Dattes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 834.3043072261314,
+    "product_type" : "CITRUS_FRUITS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Agrumes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 3050.3232599377293,
+    "product_type" : "OLIVE_OIL",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Huile d'olive",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 800.4554824076068,
+    "product_type" : "TOMATOES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Tomates",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 672.9776077416345,
+    "product_type" : "TOMATOES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Tomates",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 1123.7781641003712,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "88,0%",
+    "confidence" : 0.87971553524083,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 500.0,
+    "product_type" : "WHEAT",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Blé",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2088.442628254869,
+    "product_type" : "DATES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Dattes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 791.9942356820933,
+    "product_type" : "TOMATOES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Tomates",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 500.0,
+    "product_type" : "WHEAT",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Blé",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 878.5510061192476,
+    "product_type" : "TOMATOES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Tomates",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 500.0,
+    "product_type" : "WHEAT",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Blé",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2721.594827303151,
+    "product_type" : "DATES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Dattes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2913.044659798008,
+    "product_type" : "OLIVE_OIL",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Huile d'olive",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 1017.9295097295552,
+    "product_type" : "CITRUS_FRUITS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "88,0%",
+    "confidence" : 0.87971553524083,
+    "product_french_name" : "Agrumes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 500.0,
+    "product_type" : "WHEAT",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Blé",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 500.0,
+    "product_type" : "WHEAT",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Blé",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2993.190883723296,
+    "product_type" : "OLIVE_OIL",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Huile d'olive",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 500.0,
+    "product_type" : "WHEAT",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Blé",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2536.6059884436313,
+    "product_type" : "DATES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Dattes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2288.3999058018453,
+    "product_type" : "DATES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Dattes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 1122.2990358584602,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "88,0%",
+    "confidence" : 0.87971553524083,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 986.1526433573408,
+    "product_type" : "CITRUS_FRUITS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Agrumes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2043.8320196108157,
+    "product_type" : "DATES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Dattes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 892.2583549973342,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 1203.842882905907,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "88,0%",
+    "confidence" : 0.87971553524083,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 3603.7631075606337,
+    "product_type" : "OLIVE_OIL",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Huile d'olive",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 1324.5496283343582,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "88,0%",
+    "confidence" : 0.87971553524083,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 1010.6402542661513,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "88,0%",
+    "confidence" : 0.87971553524083,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2642.9827385300378,
+    "product_type" : "DATES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Dattes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 3526.113525340159,
+    "product_type" : "OLIVE_OIL",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Huile d'olive",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2609.704375535055,
+    "product_type" : "DATES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Dattes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 957.5075289736004,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2319.9737731828327,
+    "product_type" : "DATES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Dattes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2685.1975284435794,
+    "product_type" : "DATES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Dattes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 4503.734017698561,
+    "product_type" : "OLIVE_OIL",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Huile d'olive",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 974.5021897181592,
+    "product_type" : "CITRUS_FRUITS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Agrumes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 3083.2161155256385,
+    "product_type" : "OLIVE_OIL",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Huile d'olive",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2522.3421249596213,
+    "product_type" : "OLIVE_OIL",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Huile d'olive",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 698.4226229317093,
+    "product_type" : "TOMATOES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Tomates",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 832.5608324951186,
+    "product_type" : "TOMATOES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Tomates",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 1091.0075501989882,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "88,0%",
+    "confidence" : 0.87971553524083,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 955.5620105152816,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 3510.353239668745,
+    "product_type" : "OLIVE_OIL",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Huile d'olive",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2496.372636308553,
+    "product_type" : "OLIVE_OIL",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Huile d'olive",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 500.0,
+    "product_type" : "WHEAT",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Blé",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 1140.4977157930289,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "88,0%",
+    "confidence" : 0.87971553524083,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 820.5772700355666,
+    "product_type" : "TOMATOES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Tomates",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2465.6151364895477,
+    "product_type" : "DATES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Dattes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 637.2569268618164,
+    "product_type" : "TOMATOES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Tomates",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 500.0,
+    "product_type" : "WHEAT",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Blé",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 958.4372012865331,
+    "product_type" : "CITRUS_FRUITS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Agrumes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 1372.595025584109,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "88,0%",
+    "confidence" : 0.87971553524083,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 500.0,
+    "product_type" : "WHEAT",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Blé",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 3119.93291911,
+    "product_type" : "DATES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Dattes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 800.5310143514209,
+    "product_type" : "TOMATOES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Tomates",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 500.0,
+    "product_type" : "WHEAT",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Blé",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 825.0096198334097,
+    "product_type" : "CITRUS_FRUITS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Agrumes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 1427.8750381155228,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "88,0%",
+    "confidence" : 0.87971553524083,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2159.2258869585344,
+    "product_type" : "DATES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Dattes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 3704.344419441997,
+    "product_type" : "OLIVE_OIL",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Huile d'olive",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 884.8939480887268,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 719.9349657394042,
+    "product_type" : "TOMATOES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Tomates",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 1119.2514938263512,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "88,0%",
+    "confidence" : 0.87971553524083,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2375.747302919869,
+    "product_type" : "DATES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Dattes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 3057.281428805553,
+    "product_type" : "OLIVE_OIL",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Huile d'olive",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 965.3195662441194,
+    "product_type" : "CITRUS_FRUITS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Agrumes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2684.302475797531,
+    "product_type" : "OLIVE_OIL",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Huile d'olive",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 3095.374969529918,
+    "product_type" : "OLIVE_OIL",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Huile d'olive",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 785.6273092796837,
+    "product_type" : "TOMATOES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Tomates",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 500.0,
+    "product_type" : "WHEAT",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Blé",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 660.8698383243211,
+    "product_type" : "TOMATOES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Tomates",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 3334.1666719227237,
+    "product_type" : "OLIVE_OIL",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Huile d'olive",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 1363.8405546218726,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "88,0%",
+    "confidence" : 0.87971553524083,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 3653.2500505514995,
+    "product_type" : "OLIVE_OIL",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Huile d'olive",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 2538.218308535687,
+    "product_type" : "DATES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Dattes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 855.9528628401692,
+    "product_type" : "CITRUS_FRUITS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Agrumes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 500.0,
+    "product_type" : "WHEAT",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Blé",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 1166.5458377103191,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "88,0%",
+    "confidence" : 0.87971553524083,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 3376.9130914258844,
+    "product_type" : "DATES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "92,4%",
+    "confidence" : 0.9237013120028715,
+    "product_french_name" : "Dattes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 500.0,
+    "product_type" : "WHEAT",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Blé",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 1497.7491140820032,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "88,0%",
+    "confidence" : 0.87971553524083,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 1037.7576279499226,
+    "product_type" : "CITRUS_FRUITS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "88,0%",
+    "confidence" : 0.87971553524083,
+    "product_french_name" : "Agrumes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 814.5742380926998,
+    "product_type" : "TOMATOES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Tomates",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 863.0724142406917,
+    "product_type" : "CITRUS_FRUITS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Agrumes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 1072.086867712734,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "88,0%",
+    "confidence" : 0.87971553524083,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 965.3614758007398,
+    "product_type" : "CITRUS_FRUITS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Agrumes",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 1061.555079777423,
+    "product_type" : "PEPPERS",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "88,0%",
+    "confidence" : 0.87971553524083,
+    "product_french_name" : "Piments",
+    "status" : "COMPLETED"
+  }, {
+    "prediction_date" : "2026-02-23",
+    "predicted_price" : 614.0267490827541,
+    "product_type" : "TOMATOES",
+    "model_name" : "DJL-Real-DeepLearning",
+    "confidence_percentage" : "80,0%",
+    "confidence" : 0.7997413956734818,
+    "product_french_name" : "Tomates",
+    "status" : "COMPLETED"
+  } ],
+  "total_records" : 100,
+  "export_timestamp" : "2026-01-24T18:34:49.402431800"
+}
